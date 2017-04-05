@@ -4,6 +4,7 @@
 *.tmp
 *.db
 *- Copy*
+*.lock
 
 
 # jekyll
