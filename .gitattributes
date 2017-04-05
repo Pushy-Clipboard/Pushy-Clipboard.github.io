@@ -1,0 +1,11 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.png binary
+*.PNG binary
+*.zip binary
+*.ZIP binary
+*.7z binary
+*.7z binary
+*.xcf binary
+*.XCF binary
