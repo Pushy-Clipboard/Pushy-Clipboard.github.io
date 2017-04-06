@@ -1,3 +1,1 @@
-## Home
-
-In progress
+## Github Pages for Pushy Clipboard
