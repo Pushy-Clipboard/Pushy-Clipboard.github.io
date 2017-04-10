@@ -2,4 +2,5 @@ title: Pushy Clipboard
 description: A cross platform clipboard manager with push notifications
 theme: jekyll-theme-cayman
 google_analytics: UA-61314754-2
+markdown: kramdown
 repository: Pushy-Clipboard/Pushy-Clipboard.github.io
