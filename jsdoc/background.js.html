@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: background.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: background.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+(function() {
+	'use strict';
+
+	new ExceptionHandler();
+
+	/**
+	 * The background script for the extension.&lt;br>
+	 * Note: We can't be an Event Page because we use
+	 * the chrome.webRequest API
+	 * @namespace Background
+	 */
+
+	/**
+	 * Version of localStorage - update when items are added, removed, changed
+	 * @type {int}
+	 * @default
+	 * @const
+	 * @private
+	 * @memberOf Background
+	 */
+	const DATA_VERSION = 2;
+
+	/**
+	 * Default values in localStorage
+	 * @type {{version: int, monitorClipboard: boolean, allowPush: boolean,
+	 * autoSend: boolean, permissions: string, allowReceive: boolean,
+	 * deviceSN: string, deviceNickname: string, storageDuration: number,
+	 * notify: boolean, notifyOnSend: boolean, notifyOnReceive: boolean,
+	 * highPriority: boolean, devices: {}, signedIn: boolean,
+	 * needsCleanup: boolean, email: string, uid: string, photoURL: string,
+	 * registered: boolean}}
+	 * @const
+	 * @private
+	 * @memberOf Background
+	 */
+	const DEF_VALUES = {
+		'version': DATA_VERSION,
+		'monitorClipboard': true,
+		'allowPush': true,
+		'autoSend': true,
+		'permissions': 'notSet', // enum: notSet allowed denied
+		'allowReceive': true,
+		'deviceSN': app.Utils.randomString(8),
+		'deviceNickname': '',
+		'storageDuration': 2,
+		'notify': true,
+		'notifyOnSend': false,
+		'notifyOnReceive': true,
+		'highPriority': true,
+		'devices': {},
+		'signedIn': false,
+		'needsCleanup': false,
+		'email': '',
+		'uid': '',
+		'photoURL': '',
+		'registered': false,
+	};
+
+	/**
+	 * Initial {@link ClipItem}
+	 * @type {string}
+	 * @default
+	 * @const
+	 * @private
+	 * @memberOf Background
+	 */
+	const INTRO_TEXT =
+		`A clipboard manager with push notifications.
+
+Please signin from the "Manage Account" page to share with your \
+other devices.
+
+You can click on the toolbar icon at any time to send the current \
+contents of the clipboard to all your other devices.
+
+Information you copy in most Chrome pages will \
+automatically be sent if you have enabled that in "Settings".
+
+You can display this page by right clicking on the toolbar icon and \
+selecting "Options".
+
+It is a good idea to go to the "Settings" page and enter a nickname \
+for this device.`;
+
+	/**
+	 * Event: Fired when the extension is first installed,&lt;br />
+	 * when the extension is updated to a new version,&lt;br />
+	 * and when Chrome is updated to a new version.
+	 * @see https://developer.chrome.com/extensions/runtime#event-onInstalled
+	 * @param {Object} details - type of event
+	 * @private
+	 * @memberOf Background
+	 */
+	function _onInstalled(details) {
+		if (details.reason === 'install') {
+			// extension installed
+			app.GA.event(app.GA.EVENT.INSTALLED);
+			// save OS
+			app.Utils.getPlatformOS().then((os) => {
+				app.Utils.set('os', os);
+				return null;
+			}).catch(() => {});
+			_initializeData();
+			app.Notify.showMainTab();
+		} else if (details.reason === 'update') {
+			_updateData();
+			_initializeFirebase().then(() => {
+				return app.SW.update();
+			}).catch((error) => {});
+		}
+		app.Utils.setBadgeText();
+		app.Alarm.updateAlarms();
+		app.Permissions.injectContentScripts();
+	}
+
+	/**
+	 * Event: Fired when a profile that has this extension installed first
+	 * starts up
+	 * @see https://developer.chrome.com/extensions/runtime#event-onStartup
+	 * @private
+	 * @memberOf Background
+	 */
+	function _onStartup() {
+		app.GA.page('/background.html');
+		app.Alarm.updateAlarms();
+		app.Alarm.deleteOldClipItems();
+		_initializeFirebase().catch((error) => {});
+		app.Utils.setBadgeText();
+	}
+
+	/**
+	 * Event: Fired when a browser action icon is clicked.
+	 * @see https://goo.gl/abVwKu
+	 * @private
+	 * @memberOf Background
+	 */
+	function _onIconClicked() {
+		// get the clipboard contents
+		const text = app.CB.getTextFromClipboard();
+		if (app.Utils.isWhiteSpace(text)) {
+			return;
+		}
+
+		// Persist
+		app.ClipItem.add(text, Date.now(), false,
+			false, app.Device.myName()).then((clipItem) => {
+			// eslint-disable-next-line promise/no-nesting
+			return app.Msg.sendClipItem(clipItem).catch((error) => {
+				app.Gae.sendMessageFailed(error);
+			});
+		}).catch((err) => {});
+	}
+
+	/**
+	 * Event: Fired when a tab is updated.
+	 * @see https://developer.chrome.com/extensions/tabs#event-onUpdated
+	 * @param {int} tabId - id of tab
+	 * @private
+	 * @memberOf Background
+	 */
+	function _onTabUpdated(tabId) {
+		app.Permissions.injectContentScript(tabId);
+	}
+
+	/**
+	 * Event: Fired when item in localStorage changes
+	 * @see https://developer.mozilla.org/en-US/docs/Web/Events/storage
+	 * @param {Event} event - storage event
+	 * @param {string} event.key - storage item that changed
+	 * @private
+	 * @memberOf Background
+	 */
+	function _onStorageChanged(event) {
+		if ((event.key === 'allowPush') || (event.key === 'signedIn')) {
+			app.Utils.setBadgeText();
+		}
+	}
+
+	/**
+	 * Save the {@link Background.DEF_VALUES} array to localStorage
+	 * @private
+	 * @memberOf Background
+	 */
+	function _saveDefaults() {
+		Object.keys(DEF_VALUES).forEach(function(key) {
+			if (app.Utils.get(key) === null) {
+				app.Utils.set(key, DEF_VALUES[key]);
+			}
+		});
+	}
+
+	/**
+	 * Initialize the data saved in localStorage
+	 * @private
+	 * @memberOf Background
+	 */
+	function _initializeData() {
+		_saveDefaults();
+
+		const introClip =
+			new app.ClipItem(INTRO_TEXT, Date.now(), true,
+				false, app.Device.myName());
+		introClip.save().catch((error) => {});
+
+		app.User.setInfo().catch((error) => {});
+	}
+
+	/**
+	 * Update the data saved in localStorage
+	 * @private
+	 * @memberOf Background
+	 */
+	function _updateData() {
+		// New items and removal of unused items can take place here
+		// when the version changes
+		const oldVersion = app.Utils.getInt('version');
+
+		if (DATA_VERSION > oldVersion) {
+			// update version number
+			app.Utils.set('version', DATA_VERSION);
+		}
+
+		if (oldVersion &lt; 2) {
+			// remove unused variables
+			localStorage.removeItem('lastEmail');
+			localStorage.removeItem('lastUid');
+		}
+
+		_saveDefaults();
+	}
+
+	/**
+	 * Initialize firebase and Service Worker if signed in
+	 * @returns {Promise&lt;void>} void
+	 * @private
+	 * @memberOf Background
+	 */
+	function _initializeFirebase() {
+		if (app.Utils.isSignedIn()) {
+			return app.SW.initialize().catch((error) => {});
+		} else {
+			return Promise.resolve();
+		}
+	}
+
+	// Listen for extension install or update
+	chrome.runtime.onInstalled.addListener(_onInstalled);
+
+	// Listen for Chrome starting
+	chrome.runtime.onStartup.addListener(_onStartup);
+
+	// Listen for click on the icon
+	chrome.browserAction.onClicked.addListener(_onIconClicked);
+
+	// Listen for tab updates
+	chrome.tabs.onUpdated.addListener(_onTabUpdated);
+
+	// Listen for changes to localStorage
+	addEventListener('storage', _onStorageChanged, false);
+})();
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on May 21st 2017, 6:20:24 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

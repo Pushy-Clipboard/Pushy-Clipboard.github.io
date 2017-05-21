@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: main.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: main.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+window.app = window.app || {};
+
+(function() {
+	'use strict';
+
+	/**
+	 * Script for the main.html page
+	 *  @namespace Main
+	 */
+	new ExceptionHandler();
+
+	/**
+	 * Path to the extension in the Web Store
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	const EXT_URI =
+		`https://chrome.google.com/webstore/detail/${chrome.runtime.id}/`;
+
+	/**
+	 * Path to the android app in the Play Store
+	 * @type {string}
+	 * @default
+	 * @memberOf Main
+	 */
+	const ANDROID_URI =
+		'https://play.google.com/store/apps/details' +
+		'?id=com.weebly.opus1269.clipman';
+
+	/**
+	 * Path to my screen saver extension
+	 * @type {string}
+	 * @default
+	 * @memberOf Main
+	 */
+	const SCREEN_SAVER_URI =
+		'https://chrome.google.com/webstore/detail/photo-screen-saver/' +
+		'kohpcmlfdjfdggcjmjhhbcbankgmppgc';
+
+	/**
+	 * Auto-binding template
+	 * @type {Object}
+	 * @memberOf Main
+	 */
+	const t = document.querySelector('#t');
+
+	/**
+	 * Manage an html page that is inserted on demand&lt;br>
+	 * May also be a url link to external site
+	 * @typedef page
+	 * @type {Object}
+	 * @property {string} label - label for Nav menu
+	 * @property {string} route - element name route to page
+	 * @property {string} icon - icon for Nav Menu
+	 * @property {object|null} obj - something to be done when selected
+	 * @property {boolean} ready - true if html is inserted
+	 * @property {boolean} disabled - disabled state of Nav menu
+	 * @property {boolean} divider - true for divider before item
+	 * @memberOf Main
+	 */
+
+	/**
+	 * Array of {@link Main.page} objects
+	 * @type {Main.page[]}
+	 * @memberOf Main
+	 * @alias Main.pages
+	 */
+	t.pages = [
+		{label: 'Main', route: 'page-main',
+			icon: 'myicons:list', obj: null,
+			ready: true, disabled: false, divider: false},
+		{label: 'Manage account', route: 'page-signin',
+			icon: 'myicons:account-circle', obj: _showSignInPage,
+			ready: false, disabled: false, divider: false},
+		{label: 'Manage devices', route: 'page-devices',
+			icon: 'myicons:phonelink', obj: _showDevicesPage,
+			ready: false, disabled: false, divider: false},
+		{label: 'Settings', route: 'page-settings',
+			icon: 'myicons:settings', obj: _showSettingsPage,
+			ready: false, disabled: false, divider: false},
+		{label: 'Manage optional permissions', route: 'page-permissions',
+			icon: 'myicons:perm-data-setting', obj: _showPermissionsDialog,
+			ready: true, disabled: false, divider: false},
+		{label: 'Help &amp; feedback', route: 'page-help',
+			icon: 'myicons:help', obj: _showHelpPage,
+			ready: false, disabled: false, divider: false},
+		{label: 'Get android app', route: 'page-android',
+			icon: 'myicons:android', obj: ANDROID_URI,
+			ready: true, disabled: false, divider: true},
+		{label: 'Rate extension', route: 'page-rate',
+			icon: 'myicons:grade', obj: `${EXT_URI}reviews`,
+			ready: true, disabled: false, divider: false},
+		{label: 'Try Photo Screen Saver', route: 'page-screensaver',
+			icon: 'myicons:extension', obj: SCREEN_SAVER_URI,
+			ready: true, disabled: false, divider: true},
+	];
+
+	/**
+	 * Error dialog title
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	t.dialogTitle = '';
+
+	/**
+	 * Error dialog text
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	t.dialogText = '';
+
+	/**
+	 * Current route
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	t.route = 'page-main';
+
+	/**
+	 * User photo
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	t.avatar = app.Utils.get('photoURL');
+
+	/**
+	 * Previous route
+	 * @type {string}
+	 * @memberOf Main
+	 */
+	let prevRoute = 'page-main';
+
+	/**
+	 * signin-page element
+	 * @type {element}
+	 * @memberOf Main
+	 */
+	let signInPage;
+
+	/**
+	 * devices-page element
+	 * @type {element}
+	 * @memberOf Main
+	 */
+	let devicesPage;
+
+	/**
+	 * Is the mainPage being displayed
+	 * @type {boolean}
+	 * @memberOf Main
+	 */
+	let isMainPage = true;
+
+	/**
+	 * 	Listen for template bound event to know when bindings
+	 * 	have resolved and content has been stamped to the page
+	 */
+	t.addEventListener('dom-change', () => {
+		// track usage
+		app.GA.page('/main.html');
+		// disable devices-page if not signed in
+		const idx = _getPageIdx('page-devices');
+		t.pages[idx].disabled = !app.Utils.isSignedIn();
+		// listen for Chrome messages
+		chrome.runtime.onMessage.addListener(_onChromeMessage);
+		// check for permissions
+		_checkPermissions();
+	});
+
+	/**
+	 * Event: navigation menu selected
+	 * @param {Event} event - event
+	 * @memberOf Main
+	 */
+	t.onNavMenuItemTapped = function(event) {
+		// Close drawer after menu item is selected
+		_closeDrawer();
+
+		prevRoute = t.route;
+
+		const idx = _getPageIdx(event.currentTarget.id);
+		if (!t.pages[idx].obj) {
+			// some pages are just pages
+			t.route = t.pages[idx].route;
+			_scrollPageToTop();
+		} else if (typeof t.pages[idx].obj === 'string') {
+			// some pages are url links
+			t.$.mainMenu.select(prevRoute);
+			chrome.tabs.create({url: t.pages[idx].obj});
+		} else {
+			// some pages have functions to view them
+			t.pages[idx].obj(idx);
+		}
+
+		isMainPage = (t.route === 'page-main');
+	};
+
+	/**
+	 * Event: display error dialog
+	 * @param {Event} event - event
+	 * @memberOf Main
+	 */
+	t.onShowErrorDialog = function(event) {
+		t.dialogTitle = event.detail.title;
+		t.dialogText = event.detail.text;
+		t.$.errorDialog.open();
+	};
+
+	/**
+	 * Event: {@link Main.page} finished animating in
+	 * @memberOf Main
+	 */
+	t.onPageAnimation = function() {
+		if (t.route === 'page-main') {
+			t.$.mainPage.onCurrentPage();
+		} else if (t.route === 'page-signin') {
+			signInPage.onCurrentPage();
+		} else if (t.route === 'page-devices') {
+			devicesPage.onCurrentPage();
+		}
+	};
+
+	/**
+	 * Event: Clicked on accept permissions dialog button
+	 * @memberOf Main
+	 */
+	t.onAcceptPermissionsClicked = function() {
+		app.Permissions.request().then((granted) => {
+			if (granted) {
+				app.Permissions.injectContentScripts();
+			}
+			return Promise.resolve();
+		}).catch(() => {});
+	};
+
+	/**
+	 * Event: Clicked on deny permissions dialog button
+	 * @memberOf Main
+	 */
+	t.onDenyPermissionsClicked = function() {
+		app.Permissions.remove().catch(() => {});
+	};
+
+	/**
+	 * Computed Binding: Determine if avatar should be visible
+	 * @param {string} avatar - photo url
+	 * @returns {string} display type
+	 * @memberOf Main
+	 */
+	t.computeAvatarDisplay = function(avatar) {
+		let ret = 'inline';
+		if (app.Utils.isWhiteSpace(avatar)) {
+			ret = 'none';
+		}
+		return ret;
+	};
+
+	// noinspection JSUnusedLocalSymbols
+	/**
+	 * Event: Fired when a message is sent from either an extension process&lt;br>
+	 * (by runtime.sendMessage) or a content script (by tabs.sendMessage).
+	 * @see https://developer.chrome.com/extensions/runtime#event-onMessage
+	 * @param {Object} request - details for the message
+	 * @param {Object} sender - MessageSender object
+	 * @param {function} response - function to call once after processing
+	 * @private
+	 * @memberOf Main
+	 */
+	function _onChromeMessage(request, sender, response) {
+		if (request.message === 'highlightTab') {
+			// highlight ourselves and tell the sender we are here
+			// noinspection JSCheckFunctionSignatures
+			chrome.tabs.getCurrent((tab) => {
+				chrome.tabs.update(tab.id, {'highlighted': true});
+			});
+			response({message: 'OK'});
+		} else if (request.message === 'sendMessageFailed') {
+			t.dialogTitle = 'Failed to send push notification';
+			t.dialogText = request.error;
+			t.$.errorDialog.open();
+		}
+	}
+
+	/**
+	 * Event: Fired when item in localStorage changes
+	 * @see https://developer.mozilla.org/en-US/docs/Web/Events/storage
+	 * @param {Event} event - storage event
+	 * @param {string} event.key - value that changed
+	 * @private
+	 * @memberOf Main
+	 */
+	function _onStorageChanged(event) {
+		if(event.key === 'signedIn') {
+			_setDevicesState();
+		} else if(event.key === 'photoURL') {
+			t.avatar = app.Utils.get('photoURL');
+		}
+	}
+
+	/**
+	 * Event: Fired when the highlighted or selected tabs in a window changes.
+	 * @see https://developer.chrome.com/extensions/tabs#event-onHighlighted
+	 * @param {Object} highlightInfo - info
+	 * @private
+	 * @memberOf Main
+	 */
+	function _onHighlighted(highlightInfo) {
+		const tabIds = highlightInfo.tabIds;
+		chrome.tabs.getCurrent(function(myTab) {
+			for (let i = 0; i &lt; tabIds.length; i++) {
+				const tabId = tabIds[i];
+				if (tabId === myTab.id) {
+					// our tab
+					if (!isMainPage) {
+						// focus main page
+						prevRoute = t.route;
+						t.route = 'page-main';
+						isMainPage = true;
+						t.$.mainMenu.select(t.route);
+					} else {
+						t.$.mainPage.updateDates();
+					}
+					break;
+				}
+			}
+		});
+	}
+
+	/**
+	 * Display dialog to prompt for accepting optional permissions
+	 * if it has not been set yet
+	 * @memberOf Main
+	 * @private
+	 */
+	function _checkPermissions() {
+		if (app.Utils.get('permissions') === app.Permissions.NOT_SET) {
+			_showPermissionsDialog();
+		}
+	}
+
+	/**
+	 * Get the index into the {@link Main.pages} array
+	 * @param {string} name - {@link Main.page} route
+	 * @returns {int} index into array
+	 * @private
+	 * @memberOf Main
+	 */
+	function _getPageIdx(name) {
+		return t.pages.map(function(e) {
+			return e.route;
+		}).indexOf(name);
+	}
+
+	/**
+	 * Show the signin page
+	 * @param {int} index - index into {@link Main.pages}
+	 * @private
+	 * @memberOf Main
+	 */
+	function _showSignInPage(index) {
+		if (!t.pages[index].ready) {
+			// insert the page the first time
+			t.pages[index].ready = true;
+			signInPage = new app.SignInPageFactory();
+			Polymer.dom(t.$.signInInsertion).appendChild(signInPage);
+		}
+		t.route = t.pages[index].route;
+		_scrollPageToTop();
+	}
+
+	/**
+	 * Show the devices page
+	 * @param {int} index -  - index into {@link Main.pages}
+	 * @private
+	 * @memberOf Main
+	 */
+	function _showDevicesPage(index) {
+		if (!t.pages[index].ready) {
+			// insert the page the first time
+			t.pages[index].ready = true;
+			devicesPage = new app.DevicesPageFactory();
+			Polymer.dom(t.$.devicesInsertion).appendChild(devicesPage);
+		}
+		t.route = t.pages[index].route;
+		_scrollPageToTop();
+	}
+
+	/**
+	 * Show the settings page
+	 * @param {int} index - index into {@link Main.pages}
+	 * @private
+	 * @memberOf Main
+	 */
+	function _showSettingsPage(index) {
+		if (!t.pages[index].ready) {
+			// insert the page the first time
+			t.pages[index].ready = true;
+			const el = new app.SettingsPageFactory();
+			Polymer.dom(t.$.settingsInsertion).appendChild(el);
+		}
+		t.route = t.pages[index].route;
+		_scrollPageToTop();
+	}
+
+	/**
+	 * Show the help page
+	 * @param {int} index - index into {@link Main.pages}
+	 * @private
+	 * @memberOf Main
+	 */
+	function _showHelpPage(index) {
+		if (!t.pages[index].ready) {
+			// insert the page the first time
+			t.pages[index].ready = true;
+			const el = new app.HelpPageFactory();
+			Polymer.dom(t.$.helpInsertion).appendChild(el);
+		}
+		t.route = t.pages[index].route;
+		_scrollPageToTop();
+	}
+
+	/**
+	 * Show the permissions dialog
+	 * @private
+	 * @memberOf Main
+	 */
+	function _showPermissionsDialog() {
+		t.$.permissionsDialog.open();
+	}
+
+	/**
+	 * Scroll Main Panel to top
+	 * @private
+	 * @memberOf Main
+	 */
+	function _scrollPageToTop() {
+		t.$.mainPanel.scroller.scrollTop = 0;
+	}
+
+	/**
+	 * Close drawer if drawerPanel is narrow
+	 * @private
+	 * @memberOf Main
+	 */
+	function _closeDrawer() {
+		const drawerPanel = document.querySelector('#paperDrawerPanel');
+		if (drawerPanel.narrow) {
+			drawerPanel.closeDrawer();
+		}
+	}
+
+	/**
+	 * Set enabled state of Devices menu item
+	 * @private
+	 * @memberOf Main
+	 */
+	function _setDevicesState() {
+		// disable devices-page if not signed in
+		const idx = _getPageIdx('page-devices');
+		const el = document.getElementById(t.pages[idx].route);
+		if (el &amp;&amp; app.Utils.isSignedIn()) {
+			el.removeAttribute('disabled');
+		} else if (el) {
+			el.setAttribute('disabled', 'true');
+		}
+	}
+
+	// listen for changes to localStorage
+	addEventListener('storage', _onStorageChanged, false);
+
+	// listen for changes to highlighted tabs
+	chrome.tabs.onHighlighted.addListener(_onHighlighted);
+})();
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on May 21st 2017, 6:20:24 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

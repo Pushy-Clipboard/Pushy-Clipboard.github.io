@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: user.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: user.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+window.app = window.app || {};
+
+/**
+ * Manage the current user
+ * @namespace
+ */
+app.User = (function() {
+	'use strict';
+
+	new ExceptionHandler();
+
+	const ERROR_ALREADY_SIGNED_IN = 'Already signed in';
+
+	/**
+	 * Event: Fired when signin state changes for an account on the user's
+	 *     profile.
+	 * @see https://developer.chrome.com/apps/identity#event-onSignInChanged
+	 * @param {Object} account - chrome AccountInfo
+	 * @param {boolean} signedIn - true if signedIn
+	 * @private
+	 * @memberOf app.User
+	 */
+	function _onSignInChanged(account, signedIn) {
+		const uid = app.Utils.get('uid');
+		if (app.Utils.isSignedIn() &amp;&amp; !signedIn &amp;&amp; (account.id === uid)) {
+			// our user signed out of Chrome while we were signed in
+			app.Utils.set('needsCleanup', true);
+			_setSignIn(false);
+			app.Utils.set('registered', false);
+			app.Fb.signOut();
+
+		}
+		app.User.setInfo().catch((error) => {});
+	}
+
+	// noinspection JSUnusedLocalSymbols
+	/**
+	 * Event: Fired when a message is sent from either an extension process&lt;br>
+	 * (by runtime.sendMessage) or a content script (by tabs.sendMessage).
+	 * @see https://developer.chrome.com/extensions/runtime#event-onMessage
+	 * @param {Object} request - details for the message
+	 * @param {Object} sender - MessageSender object
+	 * @param {function} response - function to call once after processing
+	 * @returns {boolean} true if asynchronous
+	 * @private
+	 * @memberOf app.User
+	 */
+	function _onChromeMessage(request, sender, response) {
+		let ret = false;
+
+		if (request.message === 'signIn') {
+			// try to signIn a user
+			ret = true; // async
+			app.User.addAccess().then(() => {
+				response({message: 'ok'});
+				return Promise.resolve();
+			}).catch((error) => {
+				app.User.removeAccess().then(() => {
+					return Promise.resolve();
+				}).catch(() => {
+					_setSignIn(false);
+					app.Utils.set('registered', false);
+				});
+				response({message: 'error', error: error.toString()});
+			});
+		} else if (request.message === 'signOut') {
+			// try to signOut a user
+			ret = true;  // async
+			app.User.removeAccess().then(() => {
+				response({message: 'ok'});
+				return Promise.resolve();
+			}).catch((error) => {
+				response({message: 'error', error: error.toString()});
+			});
+		}
+		return ret;
+	}
+
+	/**
+	 * Set signIn state
+	 * @param {boolean} val - true if signed in
+	 * @private
+	 */
+	function _setSignIn(val) {
+		app.Utils.set('signedIn', val);
+		app.Utils.setBadgeText();
+		if (!val) {
+			app.Utils.set('photoURL', '');
+		}
+	}
+
+	/**
+	 * Listen for changes to Browser sign-in
+	 */
+	chrome.identity.onSignInChanged.addListener(_onSignInChanged);
+
+	/**
+	 * Listen for Chrome messages
+	 */
+	chrome.runtime.onMessage.addListener(_onChromeMessage);
+
+	return {
+		/**
+		 * SignIn with OAuth 2.0 and firebase
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		signIn: function() {
+			if (app.Utils.isSignedIn()) {
+				return Promise.reject(new Error(ERROR_ALREADY_SIGNED_IN));
+			}
+
+			return app.User.getAuthToken(true).then((token) => {
+				return app.Fb.signIn(token);
+			}).then((user) => {
+				_setSignIn(true);
+				if (!app.Utils.isWhiteSpace(user.photoURL)) {
+					app.Utils.set('photoURL', user.photoURL);
+				}
+				return Promise.resolve();
+			});
+		},
+
+		/**
+		 * Sign-out of firebase
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		signOut: function() {
+			if (!app.Utils.isSignedIn()) {
+				return Promise.resolve();
+			}
+
+			return app.Fb.signOut().then(() => {
+				_setSignIn(false);
+				return Promise.resolve();
+			});
+		},
+
+
+		/**
+		 * Sign in and register {@link Device}
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		addAccess: function() {
+
+			/**
+			 * Cleanup if user signed-out of Browser
+			 * @returns {Promise&lt;void>} void
+			 * @memberOf app.User
+			 */
+			function ifCleanup() {
+				if (app.Utils.get('needsCleanup')) {
+					app.Utils.set('needsCleanup', false);
+					return app.User.cleanup();
+				} else {
+					return Promise.resolve();
+				}
+			}
+
+			return ifCleanup().then(() => {
+				return app.User.signIn();
+			}).then(() => {
+				return app.Reg.register();
+			}).then(() => {
+				return app.Msg.sendDeviceAdded();
+			});
+		},
+
+		/**
+		 * Unregister {@link Device} and sign out
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		removeAccess: function() {
+			return app.Msg.sendDeviceRemoved().then(() => {
+				return app.Reg.unregister();
+			}).then(() => {
+				return app.User.signOut();
+			}).then(() => {
+				app.Devices.clear();
+				return Promise.resolve();
+			});
+		},
+
+		/**
+		 * Get an OAuth2.0 token
+		 * @see https://developer.chrome.com/apps/identity#method-getAuthToken
+		 * @param {boolean} retry - if true, retry with new token on error
+		 * @returns {Promise&lt;token>} An access token
+		 * @memberOf app.User
+		 */
+		getAuthToken: function(retry) {
+			// If signed in, first try to get token non-interactively.
+			// If it fails, probably means token has expired or is invalid.
+			const interactive = !app.Utils.isSignedIn();
+
+			const chromep = new ChromePromise();
+			return chromep.identity.getAuthToken({
+				'interactive': interactive,
+			}).then((token) => {
+				if (chrome.runtime.lastError) {
+					const error = chrome.runtime.lastError.message;
+					if (retry &amp;&amp; error &amp;&amp; token) {
+						// cached token may be expired or invalid.
+						// remove it and try again
+						return app.User.removeCachedAuthToken(token)
+							.then(() => {
+								return app.User.getAuthToken(false);
+							});
+					} else {
+						throw new Error(error);
+					}
+				} else {
+					return Promise.resolve(token);
+				}
+			});
+		},
+
+		/**
+		 * Cleanup after user signs out of Browser
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		cleanup: function() {
+			return app.User.getAuthToken(false).then((token) => {
+				return app.User.removeCachedAuthToken(token);
+			});
+		},
+
+		/**
+		 * Remove Auth token from cache
+		 * @param {string} token - Auth token
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		removeCachedAuthToken: function(token) {
+			const chromep = new ChromePromise();
+			return chromep.identity.removeCachedAuthToken({'token': token});
+		},
+
+		/**
+		 * Persist info on current Browser user (may be no-one)
+		 * @returns {Promise&lt;void>} void
+		 * @memberOf app.User
+		 */
+		setInfo: function() {
+			const chromep = new ChromePromise();
+			return chromep.identity.getProfileUserInfo().then((user) => {
+				app.Utils.set('email', user.email);
+				app.Utils.set('uid', user.id);
+				return Promise.resolve();
+			});
+		},
+	};
+})();
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on May 21st 2017, 6:20:24 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
