@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="BG.html">BG</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -112,13 +112,15 @@ app.GA = (function() {
 	/**
 	 * Google Analytics Event
 	 * @typedef {Object} GAEvent
-	 * @property {string} cat - category
-	 * @property {string} act - action
+	 * @property {string} eventCategory - category
+	 * @property {string} eventAction - action
+	 * @property {string} eventLabel - label
+	 * @property {boolean} noInteraction - direct user interaction?
 	 */
 
 	/**
 	 * Event types
-	 * @type {Object}
+	 * @type {{}}
 	 * @property {GAEvent} INSTALLED - extension installed
 	 * @property {GAEvent} UPDATED - extension updated
 	 * @property {GAEvent} SENT - message sent
@@ -129,12 +131,72 @@ app.GA = (function() {
 	 * @memberOf app.GA
 	 */
 	const EVENT = {
-		INSTALLED: {cat: 'extension', act: 'installed'},
-		UPDATED: {cat: 'extension', act: 'updated'},
-		SENT: {cat: 'message', act: 'sent'},
-		RECEIVED: {cat: 'message', act: 'received'},
-		REGISTERED: {cat: 'register', act: 'registered'},
-		UNREGISTERED: {cat: 'register', act: 'unregistered'},
+		INSTALLED: {
+			eventCategory: 'extension',
+			eventAction: 'installed',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		UPDATED: {
+			eventCategory: 'extension',
+			eventAction: 'updated',
+			eventLabel: '',
+			noInteraction: true,
+		},
+		MENU: {
+			eventCategory: 'ui',
+			eventAction: 'menuSelect',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		TOGGLE: {
+			eventCategory: 'ui',
+			eventAction: 'toggle',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		LINK: {
+			eventCategory: 'ui',
+			eventAction: 'linkSelect',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		TEXT: {
+			eventCategory: 'ui',
+			eventAction: 'textChanged',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		BUTTON: {
+			eventCategory: 'ui',
+			eventAction: 'buttonClicked',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		SENT: {
+			eventCategory: 'message',
+			eventAction: 'sent',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		RECEIVED: {
+			eventCategory: 'message',
+			eventAction: 'received',
+			eventLabel: '',
+			noInteraction: true,
+		},
+		REGISTERED: {
+			eventCategory: 'register',
+			eventAction: 'registered',
+			eventLabel: '',
+			noInteraction: false,
+		},
+		UNREGISTERED: {
+			eventCategory: 'register',
+			eventAction: 'unregistered',
+			eventLabel: '',
+			noInteraction: false,
+		},
 	};
 
 	/**
@@ -164,6 +226,9 @@ app.GA = (function() {
 		ga('create', TRACKING_ID, 'auto');
 		// see: http://stackoverflow.com/a/22152353/1958200
 		ga('set', 'checkProtocolTask', function() { });
+		ga('set', 'appName', 'Pushy');
+		ga('set', 'appId', 'pushy-chrome-extension');
+		ga('set', 'appVersion', app.Utils.getVersion());
 		ga('require', 'displayfeatures');
 	}
 
@@ -175,8 +240,8 @@ app.GA = (function() {
 
 		/**
 		 * Send a page
-		 * @memberOf app.GA
 		 * @param {string} page - page path
+		 * @memberOf app.GA
 		 */
 		page: function(page) {
 			if (page) {
@@ -187,36 +252,38 @@ app.GA = (function() {
 		/**
 		 * Send an event
 		 * @param {GAEvent} event - the event type
+		 * @param {?string} [label=null] - override label
 		 * @param {?string} [action=null] - override action
 		 * @memberOf app.GA
 		 */
-		event: function(event, action=null) {
+		event: function(event, label=null, action=null) {
 			if (event) {
-				const act = action ? action : event.act;
-				ga('send', 'event', event.cat, act);
+				// shallow copy
+				const ev = JSON.parse(JSON.stringify(event));
+				ev.hitType = 'event';
+				ev.eventLabel = label ? label : ev.eventLabel;
+				ev.eventAction = action ? action : ev.eventAction;
+				ga('send', ev);
 			}
 		},
 
 		/**
 		 * Send an error
-		 * @param {string} message - the error message
-		 * @param {?string} [method=null] - the method name
-		 * @param {boolean} [fatal=false] - is error fatal
+		 * @param {?string} [label=null] - override label
+		 * @param {?string} [action=null] - override action
 		 * @memberOf app.GA
 		 */
-		error: function(message, method=null, fatal=false) {
-			let msg = 'ERROR ';
-			if (method) {
-				msg+= `Method: ${method} `;
-			}
-			if (message) {
-				msg += `Message: ${message}`;
-			}
-			ga('send', 'exception', {
-				'exDescription': msg,
-				'exFatal': fatal,
-			});
-			console.error(message);
+		error: function(label=null, action=null) {
+			const ev = {
+				eventCategory: 'error',
+				eventAction: 'unknownMethod',
+				eventLabel: '',
+				noInteraction: true,
+			};
+			ev.hitType = 'event';
+			ev.eventLabel = label ? label : ev.eventLabel;
+			ev.eventAction = action ? action : ev.eventAction;
+			ga('send', ev);
 		},
 
 		/**
@@ -226,7 +293,7 @@ app.GA = (function() {
 		 * @memberOf app.GA
 		 */
 		exception: function(message, stack = null) {
-			let msg = 'EXCEPTION ';
+			let msg = '';
 			if (message) {
 				msg += message;
 			}
@@ -288,7 +355,7 @@ app.GA = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on May 21st 2017, 6:20:24 pm
+		on May 22nd 2017, 12:43:11 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
