@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: scripts/clip_item.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: scripts/clip_item.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+(function(window) {
+  'use strict';
+
+  new ExceptionHandler();
+
+  /**
+   * Create a new {@link ClipItem}
+   * @constructor
+   * @alias ClipItem
+   * @param {string} text - The text of the clip
+   * @param {int} date - Time in milliSecs from epoch
+   * @param {boolean} fav - true if this has been marked as a favorite
+   * @param {boolean} remote - true if this came from a device other than ours
+   * @param {string} device - A String representing the source device
+   */
+  const ClipItem = function(text, date, fav, remote, device) {
+    this.text = text;
+    this.date = date;
+    this.fav = fav;
+    this.remote = remote;
+    this.device = device;
+  };
+
+  /**
+   * The Dexie database
+   * @see http://dexie.org/
+   * @type {Object}
+   * @private
+   * @memberOf ClipItem
+   */
+  let _db;
+
+  /**
+   * The Dexie database version
+   * @const
+   * @type {int}
+   * @private
+   * @memberOf ClipItem
+   */
+  const VERSION = 1;
+
+  /**
+   * Error indicating that {@link ClipItem} text is null or all whitespace
+   * @const
+   * @default
+   * @type {string}
+   */
+  ClipItem.ERROR_EMPTY_TEXT = 'Empty text';
+
+  /**
+   * Set date
+   * @param {int} date - millis from epoch
+   */
+  ClipItem.prototype.setDate = function(date) {
+    this.date = date;
+  };
+
+  /**
+   * Get fav
+   * @returns {boolean} fav
+   */
+  ClipItem.prototype.getFav = function() {
+    return this.fav;
+  };
+
+  /**
+   * Set favorite
+   * @param {boolean} fav - is item a favorite
+   */
+  ClipItem.prototype.setFav = function(fav) {
+    this.fav = fav;
+  };
+
+  /**
+   * Set remote
+   * @param {boolean} remote - true if not from our {@link Device}
+   */
+  ClipItem.prototype.setRemote = function(remote) {
+    this.remote = remote;
+  };
+
+  /**
+   * Save ourselves to storage
+   * @returns {Promise&lt;string>} primary key it was stored under
+   */
+  ClipItem.prototype.save = function() {
+    if (app.Utils.isWhiteSpace(this.text)) {
+      return Promise.reject(new Error(ClipItem.ERROR_EMPTY_TEXT));
+    }
+    return _db.clipItems.put(this);
+  };
+
+  /**
+   * Determine if {@link ClipItem} text exists in storage
+   * @returns {Promise&lt;boolean>} true if text exists
+   */
+  ClipItem.prototype.exists = function() {
+    return _db.clipItems.get(this.text).then((item) => {
+      return Promise.resolve((item !== undefined));
+    });
+  };
+
+  /**
+   * Add new {@link ClipItem} to storage
+   * @param {string} text - The text of the clip
+   * @param {int} date - Time in milliSecs from epoch
+   * @param {boolean} fav - true if this has been marked as a favorite
+   * @param {boolean} remote - true if this came from a device other than ours
+   * @param {string} device - A String representing the source device
+   * @returns {Promise&lt;ClipItem>} A new {@link ClipItem}
+   */
+  ClipItem.add = function(text, date, fav, remote, device) {
+    let updated;
+    const clipItem = new ClipItem(text, date, fav, remote, device);
+    return clipItem.exists().then((isTrue) => {
+      updated = isTrue;
+      return clipItem.save();
+    }).then(() => {
+      // let listeners know a ClipItem was added or updated
+      const msg = app.ChromeMsg.CLIP_ADDED;
+      msg.item = clipItem;
+      msg.updated = updated;
+      // eslint-disable-next-line promise/no-nesting
+      Chrome.Msg.send(msg).catch(() => {});
+      return Promise.resolve(clipItem);
+    });
+  };
+
+  /**
+   * Remove the given keys from storage
+   * @param {string[]} keys - array of keys to delete
+   * @returns {Promise&lt;void>} void
+   */
+  ClipItem.remove = function(keys) {
+    return _db.clipItems.bulkDelete(keys);
+  };
+
+  /**
+   * Return true is there are no stored {@link ClipItem} objects
+   * @returns {Promise&lt;boolean>} true if no {@link ClipItem} objects
+   */
+  ClipItem.isEmpty = function() {
+    return _db.clipItems.count().then((count) => {
+      return Promise.resolve(!count);
+    });
+  };
+
+  /**
+   * Return all the {@link ClipItem} objects from storage
+   * @returns {Promise&lt;Array>} Array of {@link ClipItem} objects
+   */
+  ClipItem.loadAll = function() {
+    return _db.clipItems.toArray();
+  };
+
+  /**
+   * Delete items older than the storageDuration setting
+   * @returns {Promise&lt;boolean>} true if items were deleted
+   */
+  ClipItem.deleteOld = function() {
+    const durIndex = Chrome.Storage.getInt('storageDuration', 2);
+    const durations = [
+      app.Utils.MILLIS_IN_DAY,
+      app.Utils.MILLIS_IN_DAY * 7,
+      app.Utils.MILLIS_IN_DAY * 30,
+      app.Utils.MILLIS_IN_DAY * 365,
+    ];
+
+    if (durIndex === 4) {
+      // store forever
+      return Promise.resolve(false);
+    } else {
+      const olderThanTime = Date.now() - durations[durIndex];
+      return ClipItem._deleteOlderThan(olderThanTime);
+    }
+  };
+
+  /**
+   * Delete non-favorite {@link ClipItem} objects older than the given time
+   * @param {int} time - time in millis since epoch
+   * @returns {Promise&lt;boolean>} true if items were deleted
+   * @private
+   */
+  ClipItem._deleteOlderThan = function(time) {
+    return _db.clipItems.where('date').below(time).filter(function(clipItem) {
+      return !clipItem.fav;
+    }).delete().then((deleteCount) => {
+      return Promise.resolve(!!deleteCount);
+    });
+  };
+
+  /**
+   * Event: called when document and resources are loaded&lt;br />
+   * Initialize Dexie
+   * @private
+   * @memberOf ClipItem
+   */
+  function _onLoad() {
+    _db = new Dexie('ClipItemsDB');
+
+    // define database
+    _db.version(VERSION).stores({
+      clipItems: '&amp;text,date',
+    });
+
+    _db.clipItems.mapToClass(ClipItem);
+  }
+
+  // listen for document and resources loaded
+  window.addEventListener('load', _onLoad);
+
+  window.app = window.app || {};
+  window.app.ClipItem = ClipItem;
+})(window);
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on June 5th 2017, 7:32:05 am
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

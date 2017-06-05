@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: scripts/background/gae.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: scripts/background/gae.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+window.app = window.app || {};
+
+/**
+ * Handle communication with Google App Engine server using Endpoints
+ * @see https://cloud.google.com/appengine/docs/standard/java/endpoints/
+ * @namespace
+ */
+app.Gae = (function() {
+  'use strict';
+
+  new ExceptionHandler();
+
+  /**
+   * Base path of real gae server
+   * @const
+   * @default
+   * @private
+   * @memberOf app.Gae
+   */
+  const GAE_ROOT_REMOTE = 'https://clip-man.appspot.com/_ah/api';
+
+  // noinspection Eslint,JSUnusedLocalSymbols
+  /**
+   * Base path of local testing server
+   * @const
+   * @default
+   * @private
+   * @memberOf app.Gae
+   */
+      // eslint-disable-next-line no-unused-vars
+  const GAE_ROOT_LOCAL = 'http://localhost:8080/_ah/api';
+
+  // Set to GAE_ROOT_LOCAL for local testing
+  const GAE_ROOT = GAE_ROOT_REMOTE;
+
+  /**
+   * Max retries on 500 errors
+   * @const
+   * @default
+   * @private
+   * @memberOf app.Gae
+   */
+  const MAX_ATTEMPTS = 4;
+
+  /**
+   * Delay multiplier for exponential back-off
+   * @const
+   * @default
+   * @private
+   * @memberOf app.Gae
+   */
+  const DELAY_TIME = 1000;
+
+  const HEADER_AUTHORIZATION = 'Authorization';
+  const HEADER_CONTENT_TYPE = 'Content-Type';
+  const HEADER_ACCEPT = 'Accept';
+  const CONTENT_TYPE_JSON = 'application/json';
+
+  const ERROR_UNAUTHORIZED_USER = 'Unauthorized user';
+
+  /**
+   * Retry call to Endpoint with new token
+   * @param {string} url - server Endpoint
+   * @param {string} token - authorization token
+   * @returns {Promise.&lt;void>} void
+   * @private
+   * @memberOf app.Gae
+   */
+  function _retryPost(url, token) {
+    return app.User.removeCachedAuthToken(token).then(() => {
+      return app.User.getAuthToken(false);
+    }).then((token) => {
+      return app.Gae.doPost(url, token, false);
+    });
+  }
+
+  return {
+    /**
+     *  Root path to our gae server
+     * @type {string}
+     * @memberOf app.Gae
+     */
+    GAE_ROOT: GAE_ROOT,
+
+    /**
+     * Perform POST request to server using exponential back-off
+     * @param {string} url - server Endpoint
+     * @param {string} token - authorization token
+     * @param {boolean} retryNewToken - if true,
+     * retry with new token on error
+     * @returns {Promise.&lt;void>} void
+     * @memberOf app.Gae
+     */
+    doPost: function(url, token, retryNewToken = false) {
+      const headers = {
+        [HEADER_AUTHORIZATION]: `Bearer ${token}`,
+        [HEADER_CONTENT_TYPE]: CONTENT_TYPE_JSON,
+        [HEADER_ACCEPT]: CONTENT_TYPE_JSON,
+      };
+
+      const init = {
+        method: 'POST',
+        headers: headers,
+      };
+
+      let attempts = 0;
+      return _fetch(url, init);
+
+      /**
+       * Fetch with exponential back-off
+       * @param {string} url - server Endpoint
+       * @param {Object} init - fetch options
+       * @returns {Promise.&lt;void>} void
+       * @memberOf app.Gae
+       */
+      function _fetch(url, init) {
+        return fetch(url, init).then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else if (retryNewToken &amp;&amp; (response.status === 401)) {
+            // could be bad token. Remove cached one and try again
+            return _retryPost(url, token);
+          } else if ((attempts &lt; MAX_ATTEMPTS) &amp;&amp;
+              ((response.status >= 500) &amp;&amp; (response.status &lt; 600))) {
+            // temporary network issue, retry with back-off
+            attempts++;
+            const delay = (Math.pow(2, attempts) - 1) * DELAY_TIME;
+            // eslint-disable-next-line promise/avoid-new
+            return new Promise(() => {
+              setTimeout(() => {
+                return _fetch(url, init);
+              }, delay);
+            });
+          } else {
+            throw new Error('status: ' + response.status,
+                '\nreason: ' + response.statusText);
+          }
+        }).then((json) => {
+          if (json.success) {
+            return Promise.resolve();
+          } else if (retryNewToken &amp;&amp;
+              (json.reason === ERROR_UNAUTHORIZED_USER)) {
+            // could be bad token. Try with new one
+            return _retryPost(url, token);
+          } else {
+            throw new Error(json.reason);
+          }
+        });
+      }
+    },
+
+    /**
+     * Convert text to JSON
+     * @param {string} text - text to parse
+     * @returns {JSON|null} parsed text, null if not valid JSON
+     * @memberOf app.Gae
+     */
+    getJSON: function(text) {
+      let response;
+      try {
+        response = JSON.parse(text);
+      } catch (ex) {
+        response = null;
+      }
+      return response;
+    },
+
+    /**
+     * Notify listeners that send message failed
+     * @param {Error} err - what caused the failure
+     * @memberOf app.Gae
+     */
+    sendMessageFailed: function(err) {
+      Chrome.GA.error(err, 'GAE.sendMessageFailed');
+      const msg = app.ChromeMsg.MSG_FAILED;
+      msg.error = err.toString();
+      Chrome.Msg.send(msg).catch(() => {});
+    },
+  };
+})();
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on June 5th 2017, 7:32:05 am
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="BG.html">BG</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -134,8 +134,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-13">line 13</a>
+				<a href="scripts_my_analytics.js.html">scripts/my_analytics.js</a>,
+				 <a href="scripts_my_analytics.js.html#sunlight-1-line-19">line 19</a>
 			</li>
 		</ul>
 	</dd>
@@ -169,262 +169,8 @@
         <dl>
             
 <hr>
-<dt class="name" id=".EVENT">
-    <h4 id=".EVENT"><span class="type-signature">&lt;static, constant> </span>EVENT<span class="type-signature"> :Object</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Event types</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>INSTALLED</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>extension installed</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>UPDATED</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>extension updated</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>SENT</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>message sent</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>RECEIVED</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>message received</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>REGISTERED</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p><a href="Device.html">Device</a> registered</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>UNREGISTERED</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p><a href="Device.html">Device</a> unregistered</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-47">line 47</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".TRACKING_ID">
-    <h4 id=".TRACKING_ID"><span class="type-signature">&lt;private, static, constant> </span>TRACKING_ID<span class="type-signature"> :string</span></h4>
+<dt class="name" id="._TRACKING_ID">
+    <h4 id="._TRACKING_ID"><span class="type-signature">&lt;private, static, constant> </span>_TRACKING_ID<span class="type-signature"> :string</span></h4>
 
     
 </dt>
@@ -490,8 +236,334 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-24">line 24</a>
+				<a href="scripts_my_analytics.js.html">scripts/my_analytics.js</a>,
+				 <a href="scripts_my_analytics.js.html#sunlight-1-line-30">line 30</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".EVENT">
+    <h4 id=".EVENT"><span class="type-signature">&lt;static, constant> </span>EVENT<span class="type-signature"> :Object</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Event types</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>INSTALLED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>extension installed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>MENU</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>menu selected</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>TOGGLE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>setting-toggle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LINK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>setting-link</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>BUTTON</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>button click</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SENT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>message sent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>RECEIVED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>message received</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REGISTERED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><a href="Device.html">Device</a> registered</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>UNREGISTERED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.GA.html#.Event">Chrome.GA.Event</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><a href="Device.html">Device</a> unregistered</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_my_analytics.js.html">scripts/my_analytics.js</a>,
+				 <a href="scripts_my_analytics.js.html#sunlight-1-line-47">line 47</a>
 			</li>
 		</ul>
 	</dd>
@@ -573,782 +645,8 @@ Initialize Google Analytics</p>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-122">line 122</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".error"><span class="type-signature">&lt;static> </span>error<span class="signature">( [label] [, action])</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Send an error</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>label</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last"><p>override label</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>action</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last"><p>override action</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-190">line 190</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".event"><span class="type-signature">&lt;static> </span>event<span class="signature">(event [, label] [, action])</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Send an event</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>event</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#GAEvent">GAEvent</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>the event type</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>label</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last"><p>override label</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>action</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last"><p>override action</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-173">line 173</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".exception"><span class="type-signature">&lt;static> </span>exception<span class="signature">(message [, stack])</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Send an exception</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>the error message</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>stack</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last"><p>error stack</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-209">line 209</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".page"><span class="type-signature">&lt;static> </span>page<span class="signature">(page)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Send a page</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>page</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>page path</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="analytics.js.html">analytics.js</a>,
-				 <a href="analytics.js.html#sunlight-1-line-160">line 160</a>
+				<a href="scripts_my_analytics.js.html">scripts/my_analytics.js</a>,
+				 <a href="scripts_my_analytics.js.html#sunlight-1-line-110">line 110</a>
 			</li>
 		</ul>
 	</dd>
@@ -1431,7 +729,7 @@ Initialize Google Analytics</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on May 22nd 2017, 12:43:11 pm
+		on June 5th 2017, 7:32:05 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
