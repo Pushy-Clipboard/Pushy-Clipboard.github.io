@@ -96,7 +96,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Handle communication with Google App Engine server using Endpoints</p></div>
+            <div class="description"><p>Handle calls to the  Google App Engine Endpoints</p></div>
         
 
         
@@ -176,83 +176,6 @@
         <dl>
             
 <hr>
-<dt class="name" id=".DELAY_TIME">
-    <h4 id=".DELAY_TIME"><span class="type-signature">&lt;private, static, constant> </span>DELAY_TIME<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Delay multiplier for exponential back-off</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-default method-doc-label method-doc-details-label">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>1000</li>
-		</ul>
-	</dd>
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-58">line 58</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
 <dt class="name" id=".GAE_ROOT">
     <h4 id=".GAE_ROOT"><span class="type-signature">&lt;static> </span>GAE_ROOT<span class="type-signature"> :string</span></h4>
 
@@ -314,7 +237,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-89">line 89</a>
+				 <a href="scripts_background_gae.js.html#sunlight-1-line-50">line 50</a>
 			</li>
 		</ul>
 	</dd>
@@ -485,83 +408,6 @@
     
 </dd>
 
-        
-            
-<hr>
-<dt class="name" id=".MAX_ATTEMPTS">
-    <h4 id=".MAX_ATTEMPTS"><span class="type-signature">&lt;private, static, constant> </span>MAX_ATTEMPTS<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Max retries on 500 errors</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-default method-doc-label method-doc-details-label">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>4</li>
-		</ul>
-	</dd>
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-49">line 49</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
         </dl>
     
 
@@ -572,7 +418,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="._fetch"><span class="type-signature">&lt;static> </span>_fetch<span class="signature">(url, init)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    <h4 class="name" id=".doPost"><span class="type-signature">&lt;static> </span>doPost<span class="signature">(url, retryToken [, interactive])</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
     
     
 </dt>
@@ -580,7 +426,7 @@
 
     
     <div class="description">
-        <p>Fetch with exponential back-off</p>
+        <p>Perform POST request to endpoint</p>
     </div>
     
 
@@ -603,7 +449,11 @@
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -629,7 +479,19 @@
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>server Endpoint</p></td>
@@ -639,403 +501,7 @@
 
         <tr>
             
-                <td class="name"><code>init</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>fetch options</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-122">line 122</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>void</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;void></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="._retryPost"><span class="type-signature">&lt;private, static> </span>_retryPost<span class="signature">(url, token)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Retry call to Endpoint with new token</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>server Endpoint</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>authorization token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-75">line 75</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>void</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;void></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".doPost"><span class="type-signature">&lt;static> </span>doPost<span class="signature">(url, token, retryNewToken)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Perform POST request to server using exponential back-off</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>server Endpoint</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>authorization token</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>retryNewToken</code></td>
+                <td class="name"><code>retryToken</code></td>
             
 
             <td class="type">
@@ -1049,11 +515,63 @@
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>if true,
 retry with new token on error</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>interactive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>true if user initiated</p></td>
         </tr>
 
     
@@ -1098,7 +616,7 @@ retry with new token on error</p></td>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-100">line 100</a>
+				 <a href="scripts_background_gae.js.html#sunlight-1-line-61">line 61</a>
 			</li>
 		</ul>
 	</dd>
@@ -1139,171 +657,6 @@ retry with new token on error</p></td>
     <dd>
         
 <span class="param-type">Promise.&lt;void></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getJSON"><span class="type-signature">&lt;static> </span>getJSON<span class="signature">(text)</span><span class="type-signature"> &rarr; {JSON|null}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Convert text to JSON</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>text</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>text to parse</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-164">line 164</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>parsed text, null if not valid JSON</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">JSON</span>
-|
-
-<span class="param-type">null</span>
 
 
 
@@ -1425,7 +778,7 @@ retry with new token on error</p></td>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_gae.js.html">scripts/background/gae.js</a>,
-				 <a href="scripts_background_gae.js.html#sunlight-1-line-179">line 179</a>
+				 <a href="scripts_background_gae.js.html#sunlight-1-line-80">line 80</a>
 			</li>
 		</ul>
 	</dd>
@@ -1508,7 +861,7 @@ retry with new token on error</p></td>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on June 5th 2017, 7:36:24 am
+		on June 6th 2017, 8:35:49 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
