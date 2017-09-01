@@ -2,6 +2,8 @@
 
 ## For Users
 
+### [Frequently Asked Questions](faq.html)
+
 ## For Developers
 
 ### [Android App Source](https://github.com/Pushy-Clipboard/pushy-android)
