@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#getEmail">getEmail</a></li>
 				</ul>
 			</li>
 			
@@ -123,25 +123,78 @@ app.Utils = (function() {
     MILLIS_IN_DAY: MILLIS_IN_DAY,
 
     /**
+     * Get our email address
+     * @returns {string} email address
+     */
+    getEmail: function() {
+      return 'pushyclipboard@gmail.com';
+    },
+
+    /**
+     * Get our Github base path
+     * @returns {string} path
+     * @memberOf app.Utils
+     */
+    getGithubPath: function() {
+      return 'https://github.com/Pushy-Clipboard/pushy-chrome-extension/';
+    },
+
+    /**
+     * Get our Github pages base path
+     * @returns {string} path
+     * @memberOf app.Utils
+     */
+    getGithubPagesPath: function() {
+      return 'https://pushy-clipboard.github.io/';
+    },
+
+    /**
+     * Get body for an email with basic extension info
+     * @returns {string} text
+     * @memberOf app.Utils
+     */
+    getEmailBody: function() {
+      return `Extension version: ${Chrome.Utils.getVersion()}\n`
+          + `Chrome version: ${Chrome.Utils.getFullChromeVersion()}\n`
+          + `OS: ${Chrome.Storage.get('os')}\n\n\n`;
+    },
+
+    /**
+     * Get encoded url for an email
+     * @param {string} subject - email subject
+     * @param {string} body - email bosy
+     * @returns {string} encoded url
+     * @memberOf app.Utils
+     */
+    getEmailUrl: function(subject, body) {
+      const email = encodeURIComponent(app.Utils.getEmail());
+      const sub = encodeURIComponent(subject);
+      const bod = encodeURIComponent(body);
+      return `mailto:${email}?subject=${sub}&amp;body=${bod}`;
+    },
+
+    /**
      * Set the badge displayed on the extension icon
      * @memberOf app.Utils
      */
     setBadgeText: function() {
       let text = '';
-      if (app.MyData.isSignedIn() &amp;&amp; app.MyData.allowPush()) {
+      if (app.Utils.isSignedIn() &amp;&amp; app.Utils.allowPush()) {
         text = 'SEND';
       }
       chrome.browserAction.setBadgeText({text: text});
     },
 
     /**
-     * Determine if a String is null or whitespace only
-     * @param {string} str - string to check
-     * @returns {boolean} true if str is whitespace (or null)
+     * Send message to the main tab to focus it. If not found, create it
      * @memberOf app.Utils
      */
-    isWhiteSpace: function(str) {
-      return (!str || str.length === 0 || /^\s*$/.test(str));
+    showMainTab: function() {
+      // send message to the main tab to focus it.
+      Chrome.Msg.send(app.ChromeMsg.HIGHLIGHT).catch(() => {
+        // no one listening, create it
+        chrome.tabs.create({url: '../html/main.html'});
+      });
     },
 
     /**
@@ -156,25 +209,66 @@ app.Utils = (function() {
     },
 
     /**
-     * Get a random string of the given length
-     * @param {int|null} len - length of generated string, 8 if null
-     * @returns {string} a random string
+     * Are we saving clipboard contents
+     * @returns {boolean} true if enabled
      * @memberOf app.Utils
-     *
      */
-    randomString: function(len) {
-      const POSS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-          'abcdefghijklmnopqrstuvwxyz0123456789';
-      !len ? len = 8 : true;
-      if (!len) {
-        len = 8;
-      }
-      let text = '';
-      for (let i = 0; i &lt; len; i++) {
-        text +=
-            POSS.charAt(Math.floor(Math.random() * POSS.length));
-      }
-      return text;
+    isMonitorClipboard: function() {
+      return Chrome.Storage.getBool('monitorClipboard');
+    },
+
+    /**
+     * Has user enabled pushing to {@link app.Devices}
+     * @returns {boolean} true if enabled
+     * @memberOf app.Utils
+     */
+    allowPush: function() {
+      return Chrome.Storage.getBool('allowPush');
+    },
+
+    /**
+     * Has user enabled autoSend option
+     * @returns {boolean} true if enabled
+     * @memberOf app.Utils
+     */
+    isAutoSend: function() {
+      return Chrome.Storage.getBool('autoSend');
+    },
+
+    /**
+     * Has user enabled receiving from {@link app.Devices}
+     * @returns {boolean} true if enabled
+     * @memberOf app.Utils
+     */
+    allowReceive: function() {
+      return Chrome.Storage.getBool('allowReceive');
+    },
+
+    /**
+     * Are we signed in
+     * @returns {boolean} true if signed in
+     * @memberOf app.Utils
+     */
+    isSignedIn: function() {
+      return Chrome.Storage.getBool('signedIn');
+    },
+
+    /**
+     * Are we registered with fcm
+     * @returns {boolean} true if registered
+     * @memberOf app.Utils
+     */
+    isRegistered: function() {
+      return Chrome.Storage.getBool('registered');
+    },
+
+    /**
+     * Are we not registered with fcm
+     * @returns {boolean} true if not registered
+     * @memberOf app.Utils
+     */
+    notRegistered: function() {
+      return !this.isRegistered();
     },
   };
 })();
@@ -223,7 +317,7 @@ app.Utils = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 1st 2017, 1:27:55 pm
+		on September 10th 2017, 3:58:05 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

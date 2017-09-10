@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#getEmail">getEmail</a></li>
 				</ul>
 			</li>
 			
@@ -200,12 +200,13 @@ app.Msg = (function() {
    * Send message to server for delivery to our {@link Devices}
    * @param {GaeMsg} data - data packet
    * @param {boolean} notify - display notification if true
+   * @param {?app.Notify.TYPE} type=null - notification type
    * @returns {Promise&lt;void>} void
    * @private
    * @memberOf app.Msg
    */
-  function _sendMessage(data, notify) {
-    if (!app.MyData.isSignedIn() || !app.MyData.allowPush()) {
+  function _sendMessage(data, notify, type=null) {
+    if (!app.Utils.isSignedIn() || !app.Utils.allowPush()) {
       return Promise.resolve();
     }
 
@@ -216,8 +217,8 @@ app.Msg = (function() {
       url = `${URL_BASE}${regId}/${json}/${highPriority}`;
       return app.Gae.doPost(url, true);
     }).then(() => {
-      if (notify &amp;&amp; app.Notify.onSend()) {
-        app.Notify.create(app.Notify.NOTIFY_SEND, data);
+      if (type &amp;&amp; notify &amp;&amp; app.Notify.onSend()) {
+        app.Notify.create(type, data.m);
       }
       Chrome.GA.event(app.GA.EVENT.SENT, data.act);
       return Promise.resolve();
@@ -234,7 +235,7 @@ app.Msg = (function() {
      * @memberOf app.Msg
      */
     sendClipItem: function(clipItem) {
-      if (app.Utils.isWhiteSpace(clipItem.text)) {
+      if (Chrome.Utils.isWhiteSpace(clipItem.text)) {
         return Promise.resolve();
       }
 
@@ -246,7 +247,7 @@ app.Msg = (function() {
 
       const data = _getData(ACTION.MESSAGE, text);
       data.FAV = clipItem.fav ? '1' : '0';
-      return _sendMessage(data, true);
+      return _sendMessage(data, true, app.Notify.TYPE.MESSAGE_SENT);
     },
 
     /**
@@ -256,7 +257,7 @@ app.Msg = (function() {
      */
     sendDeviceAdded: function() {
       const data = _getData(ACTION.DEVICE_ADDED, BODY.DEVICE_ADDED);
-      return _sendMessage(data, true);
+      return _sendMessage(data, true, app.Notify.TYPE.DEVICE_ADDED);
     },
 
     /**
@@ -266,7 +267,7 @@ app.Msg = (function() {
      */
     sendDeviceRemoved: function() {
       const data = _getData(ACTION.DEVICE_REMOVED, BODY.DEVICE_REMOVED);
-      return _sendMessage(data, true);
+      return _sendMessage(data, true, app.Notify.TYPE.DEVICE_REMOVED);
     },
 
     /**
@@ -289,6 +290,18 @@ app.Msg = (function() {
       const data = _getData(ACTION.PING_RESPONSE, BODY.PING_RESPONSE);
       data.srcRegId = srcRegId;
       return _sendMessage(data, false);
+    },
+
+    /**
+     * Display notification that send message failed
+     * @param {Error} err - what caused the failure
+     * @memberOf app.Msg
+     */
+    sendFailed: function(err) {
+      Chrome.GA.error(err.message, 'GAE.sendMessageFailed');
+      if (app.Notify.onError()) {
+        app.Notify.create(app.Notify.TYPE.ERROR_SEND, err.message);
+      }
     },
   };
 })();
@@ -337,7 +350,7 @@ app.Msg = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 1st 2017, 1:27:55 pm
+		on September 10th 2017, 3:58:05 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

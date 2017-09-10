@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: scripts/my_data.js</title>
+	<title>Documentation Source: scripts/background/data.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Background.html">app.Background</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.MyData.html">app.MyData</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#getEmail">getEmail</a></li>
 				</ul>
 			</li>
 			
@@ -79,7 +79,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: scripts/my_data.js</h1>
+		<h1 class="page-title">Source: scripts/background/data.js</h1>
     
 <section>
     <article>
@@ -96,7 +96,7 @@ window.app = window.app || {};
  * The extension's localStorage data
  * @namespace
  */
-app.MyData = (function() {
+app.Data = (function() {
   'use strict';
 
   new ExceptionHandler();
@@ -107,14 +107,14 @@ app.MyData = (function() {
    * @default
    * @const
    * @private
-   * @memberOf app.MyData
+   * @memberOf app.Data
    */
-  const _VERSION = 2;
+  const _VERSION = 3;
 
   /**
    * The data items saved to localStorage
    *
-   * @typedef {Object} app.MyData.MyData
+   * @typedef {Object} app.Data.Items
    * @property {int} version - version of data
    * @property {boolean} monitorClipboard - save clipboard contents
    * @property {boolean} allowPush - send push notifications
@@ -123,9 +123,8 @@ app.MyData = (function() {
    * @property {int} storageDuration - how long to save clipItems
    * @property {boolean} notify - xxx
    * @property {boolean} notifyOnSend - show notification on send push
-   * @property {boolean} notifyOnReceive - show notification on receive push
+   * @property {boolean} notifyOnError - show notification on errors
    * @property {boolean} highPriority - send high priority messages
-   * @property {string} deviceSN - serial number of our device
    * @property {string} deviceNickname - nickname of our device
    * @property {Object} devices - other devices we know about
    * @property {boolean} signedIn - are we logged in
@@ -135,15 +134,15 @@ app.MyData = (function() {
    * @property {string} uid - our unique id
    * @property {string} photoURL - path to out photo url
    * @property {string} permissions - enum: notSet allowed denied
-   * @memberOf app.MyData
+   * @memberOf app.Data
    */
 
   /**
    * Default values for localStorage items
-   * @type {app.MyData.MyData}
+   * @type {app.Data.Items}
    * @const
    * @private
-   * @memberOf app.MyData
+   * @memberOf app.Data
    */
   const _DEFAULTS = {
     'version': _VERSION,
@@ -154,7 +153,7 @@ app.MyData = (function() {
     'storageDuration': 2,
     'notify': true,
     'notifyOnSend': false,
-    'notifyOnReceive': true,
+    'notifyOnError': true,
     'highPriority': true,
     'deviceNickname': '',
     'devices': {},
@@ -167,103 +166,96 @@ app.MyData = (function() {
     'permissions': 'notSet', // enum: notSet allowed denied
   };
 
+  /**
+   * Initial {@link ClipItem}
+   * @type {string}
+   * @default
+   * @const
+   * @private
+   * @memberOf Background
+   */
+  const INTRO_TEXT =
+      `A clipboard manager with push notifications.
+
+Please signin from the "Manage Account" page to share with your \
+other devices.
+
+You can click on the toolbar icon at any time to send the current \
+contents of the clipboard to all your other devices.
+
+Information you copy in most Chrome pages will \
+automatically be sent if you have enabled that in "Settings".
+
+You can display this page by right clicking on the toolbar icon and \
+selecting "Options".
+
+It is a good idea to go to the "Settings" page and enter a nickname \
+for this device.`;
+
+  /**
+   * Save the [_DEFAULTS]{@link app.Data._DEFAULTS}, if they
+   * do not already exist
+   * @private
+   * @memberOf app.Data
+   */
+  function _addDefaults() {
+    Object.keys(_DEFAULTS).forEach(function(key) {
+      if (Chrome.Storage.get(key) === null) {
+        Chrome.Storage.set(key, _DEFAULTS[key]);
+      }
+    });
+    // and the autogenerated serial number
+    if (Chrome.Storage.get('deviceSN') === null) {
+      Chrome.Storage.set('deviceSN', Chrome.Utils.getRandomString(8));
+    }
+  }
+
   return {
     /**
-     * Get the current data version
-     * @returns {int} the version of our data
-     * @memberOf app.MyData
+     * Initialize the data saved in localStorage
+     * @memberOf app.Data
      */
-    getCurrentVersion: function() {
-      return _VERSION;
-    },
+    initialize: function() {
+      _addDefaults();
 
-    /**
-     * Save the [_DEFAULTS]{@link app.MyData._DEFAULTS}, if they
-     * do not already exist
-     * @memberOf app.MyData
-     */
-    saveDefaults: function() {
-      Object.keys(_DEFAULTS).forEach(function(key) {
-        if (Chrome.Storage.get(key) === null) {
-          Chrome.Storage.set(key, _DEFAULTS[key]);
-        }
+      const introClip =
+          new app.ClipItem(INTRO_TEXT, Date.now(), true,
+              false, app.Device.myName());
+      introClip.save().catch((err) => {
+        Chrome.GA.error(err.message, 'app.Data.initialize');
       });
-      // and the autogenerated serial number
-      if (Chrome.Storage.get('deviceSN') === null) {
-        Chrome.Storage.set('deviceSN', app.Utils.randomString(8));
+
+      app.User.setInfo().catch((err) => {
+        Chrome.GA.error(err.message, 'app.Data.initialize');
+      });
+    },
+
+    /**
+     * Update the data saved in localStorage
+     * @memberOf app.Data
+     */
+    update: function() {
+      // New items and removal of unused items can take place here
+      // when the version changes
+      const oldVersion = Chrome.Storage.getInt('version');
+
+      if ((oldVersion === null) || (_VERSION > oldVersion)) {
+        // update version number
+        Chrome.Storage.set('version', _VERSION);
       }
-    },
 
-    /**
-     * Are we saving clipboard contents
-     * @returns {boolean} true if enabled
-     * @memberOf app.MyData
-     */
-    isMonitorClipboard: function() {
-      return Chrome.Storage.getBool('monitorClipboard');
-    },
+      if (oldVersion &lt; 2) {
+        // remove unused variables
+        localStorage.removeItem('lastEmail');
+        localStorage.removeItem('lastUid');
+      }
 
-    /**
-     * Has user enabled pushing to {@link app.Devices}
-     * @returns {boolean} true if enabled
-     * @memberOf app.MyData
-     */
-    allowPush: function() {
-      return Chrome.Storage.getBool('allowPush');
-    },
+      if (oldVersion &lt; 3) {
+        // remove unused variables
+        localStorage.removeItem('notifyOnReceive');
+      }
 
-    /**
-     * Has user enabled autoSend option
-     * @returns {boolean} true if enabled
-     * @memberOf app.MyData
-     */
-    isAutoSend: function() {
-      return Chrome.Storage.getBool('autoSend');
-    },
-
-    /**
-     * Has user enabled receiving from {@link app.Devices}
-     * @returns {boolean} true if enabled
-     * @memberOf app.MyData
-     */
-    allowReceive: function() {
-      return Chrome.Storage.getBool('allowReceive');
-    },
-
-    /**
-     * Are we signed in
-     * @returns {boolean} true if signed in
-     * @memberOf app.MyData
-     */
-    isSignedIn: function() {
-      return Chrome.Storage.getBool('signedIn');
-    },
-
-    /**
-     * Are we registered with fcm
-     * @returns {boolean} true if registered
-     * @memberOf app.MyData
-     */
-    isRegistered: function() {
-      return Chrome.Storage.getBool('registered');
-    },
-
-    /**
-     * Are we not registered with fcm
-     * @returns {boolean} true if not registered
-     * @memberOf app.MyData
-     */
-    notRegistered: function() {
-      return !this.isRegistered();
-    },
-
-    /**
-     * Get our serial number
-     * @returns {boolean} true if not registered
-     * @memberOf app.MyData
-     */
-    getDeviceSN: function() {
-      return Chrome.Storage.get('deviceSN');
+      _addDefaults();
     },
   };
 })();
@@ -312,7 +304,7 @@ app.MyData = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 1st 2017, 1:27:55 pm
+		on September 10th 2017, 3:58:05 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
