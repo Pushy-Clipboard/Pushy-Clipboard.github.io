@@ -19,6 +19,15 @@
 
   ***
 
+* **How do I copy the text in the URL bar at the top of the browser?**
+
+  This text cannot be automatically added to the extension like text in most Web Pages.
+  You need to copy the text and then click on the extension icon.
+  This will add it to the extension's database and optionally send to
+  your other devices.
+
+  ***
+
 * **I clicked on one of the email links in Help & Feedback, but nothing happened. Why is that?**
 
   You need to have an app defined that handles email links on your computer.
