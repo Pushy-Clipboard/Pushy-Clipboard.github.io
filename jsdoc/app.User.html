@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -162,118 +162,6 @@
         <h3 class="subsection-title">Methods</h3>
 
         <dl>
-            
-<hr>
-<dt>
-    <h4 class="name" id="._addAccess"><span class="type-signature">&lt;private, static> </span>_addAccess<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Sign in and register our <a href="Device.html">Device</a></p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="scripts_background_user.js.html">scripts/background/user.js</a>,
-				 <a href="scripts_background_user.js.html#sunlight-1-line-93">line 93</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>void</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;void></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
             
 <hr>
 <dt>
@@ -895,7 +783,119 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="._removeAccess"><span class="type-signature">&lt;private, static> </span>_removeAccess<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    <h4 class="name" id="._signIn"><span class="type-signature">&lt;private, static> </span>_signIn<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sign in and register our <a href="Device.html">Device</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_user.js.html">scripts/background/user.js</a>,
+				 <a href="scripts_background_user.js.html#sunlight-1-line-93">line 93</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>void</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._signOut"><span class="type-signature">&lt;private, static> </span>_signOut<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
     
     
 </dt>
@@ -1007,6 +1007,228 @@
             
 <hr>
 <dt>
+    <h4 class="name" id=".forceSignOut"><span class="type-signature">&lt;static> </span>forceSignOut<span class="signature">( [notify] [, reason])</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Force signOut without unregister with App Engine</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>notify</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>if true, post error notification</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reason</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'Unknown Error'
+                
+                </td>
+            
+
+            <td class="description last"><p>reason for call</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_user.js.html">scripts/background/user.js</a>,
+				 <a href="scripts_background_user.js.html#sunlight-1-line-223">line 223</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>void</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id=".setInfo"><span class="type-signature">&lt;static> </span>setInfo<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
     
     
@@ -1062,7 +1284,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_user.js.html">scripts/background/user.js</a>,
-				 <a href="scripts_background_user.js.html#sunlight-1-line-191">line 191</a>
+				 <a href="scripts_background_user.js.html#sunlight-1-line-208">line 208</a>
 			</li>
 		</ul>
 	</dd>
@@ -1169,7 +1391,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:53 am
+		on September 19th 2017, 9:12:39 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

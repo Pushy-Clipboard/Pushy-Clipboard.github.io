@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -162,8 +162,78 @@
         <dl>
             
 <hr>
-<dt class="name" id="._swRegistration">
-    <h4 id="._swRegistration"><span class="type-signature">&lt;private, static> </span>_swRegistration<span class="type-signature"></span></h4>
+<dt class="name" id="._PATH">
+    <h4 id="._PATH"><span class="type-signature">&lt;private, static, constant> </span>_PATH<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Path to our <a href="ServiceWorker.html">ServiceWorker</a></p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-30">line 30</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="._reg">
+    <h4 id="._reg"><span class="type-signature">&lt;private, static> </span>_reg<span class="type-signature"></span></h4>
 
     
 </dt>
@@ -232,18 +302,29 @@
         
             
 <hr>
-<dt class="name" id=".SERVICE_WORKER">
-    <h4 id=".SERVICE_WORKER"><span class="type-signature">&lt;private, static, constant> </span>SERVICE_WORKER<span class="type-signature"></span></h4>
+<dt class="name" id=".ERROR_NOT_SUBSCRIBED">
+    <h4 id=".ERROR_NOT_SUBSCRIBED"><span class="type-signature">&lt;static, constant> </span>ERROR_NOT_SUBSCRIBED<span class="type-signature"> :string</span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Path to our <a href="ServiceWorker.html">ServiceWorker</a></p>
+        <p>Not subscribed to push error message</p>
     </div>
     
 
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+
+            </li>
+        </ul>
     
 
     
@@ -273,13 +354,6 @@
 	
 
 	
-	<dt class="tag-default method-doc-label method-doc-details-label">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>../scripts/sw.js</li>
-		</ul>
-	</dd>
-	
 
 
 
@@ -289,7 +363,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
-				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-30">line 30</a>
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-77">line 77</a>
 			</li>
 		</ul>
 	</dd>
@@ -541,6 +615,118 @@ Note: This can be called if already registered</p>
             
 <hr>
 <dt>
+    <h4 class="name" id=".cantReceive"><span class="type-signature">&lt;static> </span>cantReceive<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;?string>}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Check if the ServiceWorker is not in a state for receiving messages</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-148">line 148</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>reason if it can't, or null</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;?string></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id=".initialize"><span class="type-signature">&lt;static> </span>initialize<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
     
     
@@ -596,7 +782,7 @@ Note: This can be called if already registered</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
-				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-77">line 77</a>
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-84">line 84</a>
 			</li>
 		</ul>
 	</dd>
@@ -637,6 +823,118 @@ Note: This can be called if already registered</p>
     <dd>
         
 <span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".isSubscribed"><span class="type-signature">&lt;static> </span>isSubscribed<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Are we subscribed to push notifications</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-133">line 133</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>true if subscribed</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;boolean></span>
 
 
 
@@ -708,7 +1006,7 @@ Note: This can be called if already registered</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
-				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-96">line 96</a>
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-97">line 97</a>
 			</li>
 		</ul>
 	</dd>
@@ -820,7 +1118,7 @@ Note: This can be called if already registered</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_service_worker.js.html">scripts/background/service_worker.js</a>,
-				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-120">line 120</a>
+				 <a href="scripts_background_service_worker.js.html#sunlight-1-line-121">line 121</a>
 			</li>
 		</ul>
 	</dd>
@@ -927,7 +1225,7 @@ Note: This can be called if already registered</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:53 am
+		on September 19th 2017, 9:12:39 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: bower_components/chrome-extension-utils/storage.js</title>
+	<title>Documentation Source: bower_components/chrome-extension-utils/scripts/storage.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -72,7 +72,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: bower_components/chrome-extension-utils/storage.js</h1>
+		<h1 class="page-title">Source: bower_components/chrome-extension-utils/scripts/storage.js</h1>
     
 <section>
     <article>
@@ -191,6 +191,43 @@ Chrome.Storage = (function() {
       }
       return ret;
     },
+    
+    /**
+     * An error that can be persisted
+     * Usage: const err = new LastError(message, title)
+     * @param {?string} [message=''] - the message
+     * @param {?string} [title='An error occurred'] - the title
+     * @property {string} name - Error name
+     * @property {string} stack - stack trace
+     * @memberOf Chrome.Storage
+     */
+    LastError: function(message='', title='An error occurred') {
+      this.name = 'LastError';
+      this.message = message;
+      this.title = title;
+      this.stack = (new Error).stack;
+      Chrome.Storage.LastError.prototype = Object.create(Error.prototype);
+      Chrome.Storage.LastError.prototype.constructor =
+          Chrome.Storage.LastError;
+    },
+    
+    /**
+     * Get the LastError
+     * @returns {Chrome.Storage.LastError} - the LastError
+     * @memberOf Chrome.Storage
+     */
+    getLastError: function() {
+      return Chrome.Storage.get('lastError', new Chrome.Storage.LastError());
+    },
+    
+    /**
+     * Set the LastError
+     * @param {Chrome.Storage.LastError} error - the LastError
+     * @memberOf Chrome.Storage
+     */
+    setLastError: function(error) {
+      Chrome.Storage.set('lastError', error);
+    },
   };
 })();
 </pre>
@@ -238,7 +275,7 @@ Chrome.Storage = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

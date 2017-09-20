@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -85,20 +85,22 @@
  */
 window.app = window.app || {};
 
-(function() {
+/**
+ * Script for the main.html page
+ *  @namespace
+ */
+
+app.Main = (function() {
   'use strict';
 
-  /**
-   * Script for the main.html page
-   *  @namespace Main
-   */
-
   new ExceptionHandler();
+
+  const chromep = new ChromePromise();
 
   /**
    * Path to the extension in the Web Store
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   const EXT_URI =
       `https://chrome.google.com/webstore/detail/${chrome.runtime.id}/`;
@@ -107,7 +109,7 @@ window.app = window.app || {};
    * Path to the android app in the Play Store
    * @type {string}
    * @default
-   * @memberOf Main
+   * @memberOf app.Main
    */
   const ANDROID_URI =
       'https://play.google.com/store/apps/details' +
@@ -117,7 +119,7 @@ window.app = window.app || {};
    * Path to my screen saver extension
    * @type {string}
    * @default
-   * @memberOf Main
+   * @memberOf app.Main
    */
   const SCREEN_SAVER_URI =
       'https://chrome.google.com/webstore/detail/photo-screen-saver/' +
@@ -126,7 +128,7 @@ window.app = window.app || {};
   /**
    * Auto-binding template
    * @type {Object}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   const t = document.querySelector('#t');
 
@@ -142,13 +144,13 @@ window.app = window.app || {};
    * @property {boolean} ready - true if html is inserted
    * @property {boolean} disabled - disabled state of Nav menu
    * @property {boolean} divider - true for divider before item
-   * @memberOf Main
+   * @memberOf app.Main
    */
 
   /**
    * Array of {@link Main.page} objects
    * @type {Main.page[]}
-   * @memberOf Main
+   * @memberOf app.Main
    * @alias Main.pages
    */
   t.pages = [
@@ -178,14 +180,19 @@ window.app = window.app || {};
       ready: true, disabled: false, divider: false,
     },
     {
+      label: 'View last error', route: 'page-error',
+      icon: 'myicons:error', obj: _showErrorPage,
+      ready: false, disabled: false, divider: false,
+    },
+    {
       label: 'Help &amp; feedback', route: 'page-help',
       icon: 'myicons:help', obj: _showHelpPage,
-      ready: false, disabled: false, divider: false,
+      ready: false, disabled: false, divider: true,
     },
     {
       label: 'Get android app', route: 'page-android',
       icon: 'myicons:android', obj: ANDROID_URI,
-      ready: true, disabled: false, divider: true,
+      ready: true, disabled: false, divider: false,
     },
     {
       label: 'Rate extension', route: 'page-rate',
@@ -202,56 +209,63 @@ window.app = window.app || {};
   /**
    * Error dialog title
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.dialogTitle = '';
 
   /**
    * Error dialog text
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.dialogText = '';
 
   /**
    * Current route
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.route = 'page-main';
 
   /**
+   * Content Script permission
+   * @type {string}
+   * @memberOf app.Main
+   */
+  t.permissions = Chrome.Storage.get('permissions');
+
+  /**
    * User photo
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.avatar = Chrome.Storage.get('photoURL');
 
   /**
    * Previous route
    * @type {string}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   let prevRoute = 'page-main';
 
   /**
    * signin-page element
    * @type {element}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   let signInPage;
 
   /**
    * devices-page element
    * @type {element}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   let devicesPage;
 
   /**
    * Is the mainPage being displayed
    * @type {boolean}
-   * @memberOf Main
+   * @memberOf app.Main
    */
   let isMainPage = true;
 
@@ -262,19 +276,26 @@ window.app = window.app || {};
   t.addEventListener('dom-change', () => {
     // track usage
     Chrome.GA.page('/main.html');
-    // disable devices-page if not signed in
-    const idx = _getPageIdx('page-devices');
+
+    // initialize menu states
+    let idx = _getPageIdx('page-devices');
     t.pages[idx].disabled = !app.Utils.isSignedIn();
+    idx = _getPageIdx('page-error');
+    const lastError = Chrome.Storage.getLastError();
+    t.pages[idx].disabled =
+        Chrome.Utils.isWhiteSpace(lastError.message);
+
     // listen for Chrome messages
     Chrome.Msg.listen(_onChromeMessage);
-    // check for permissions
-    _checkPermissions();
+
+    // check for optional permissions
+    _checkOptionalPermissions();
   });
 
   /**
    * Event: navigation menu selected
    * @param {Event} event - event
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.onNavMenuItemTapped = function(event) {
     // Close drawer after menu item is selected
@@ -305,7 +326,7 @@ window.app = window.app || {};
   /**
    * Event: display error dialog
    * @param {Event} event - event
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.onShowErrorDialog = function(event) {
     t.dialogTitle = event.detail.title;
@@ -315,7 +336,7 @@ window.app = window.app || {};
 
   /**
    * Event: {@link Main.page} finished animating in
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.onPageAnimation = function() {
     if (t.route === 'page-main') {
@@ -329,34 +350,48 @@ window.app = window.app || {};
 
   /**
    * Event: Clicked on accept permissions dialog button
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.onAcceptPermissionsClicked = function() {
     app.Permissions.request().then((granted) => {
+      t.permissions = Chrome.Storage.get('permissions');
       if (granted) {
         app.Permissions.injectContentScripts();
       }
       return Promise.resolve();
     }).catch((err) => {
-      Chrome.GA.error(err.message, 'Main.onAcceptPermissionsClicked');
+      Chrome.Log.error(err.message, 'Main.onAcceptPermissionsClicked');
     });
   };
 
   /**
    * Event: Clicked on deny permissions dialog button
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.onDenyPermissionsClicked = function() {
-    app.Permissions.remove().catch((err) => {
-      Chrome.GA.error(err.message, 'Main.onDenyPermissionsClicked');
+    app.Permissions.remove().then(() => {
+      t.permissions = Chrome.Storage.get('permissions');
+      return Promise.resolve();
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'Main.onDenyPermissionsClicked');
     });
+  };
+
+  /**
+   * Computed Binding: Determine content script permission status string
+   * @param {string} permissions - current setting
+   * @returns {string} display type
+   * @memberOf app.Main
+   */
+  t.computePermissionsStatus = function(permissions) {
+    return `Current Status: ${permissions}`;
   };
 
   /**
    * Computed Binding: Determine if avatar should be visible
    * @param {string} avatar - photo url
    * @returns {string} display type
-   * @memberOf Main
+   * @memberOf app.Main
    */
   t.computeAvatarDisplay = function(avatar) {
     let ret = 'inline';
@@ -375,17 +410,17 @@ window.app = window.app || {};
    * @param {Object} sender - MessageSender object
    * @param {function} response - function to call once after processing
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _onChromeMessage(request, sender, response) {
     if (request.message === app.ChromeMsg.HIGHLIGHT.message) {
       // highlight ourselves and let the sender know we are here
-      const chromep = new ChromePromise();
       chromep.tabs.getCurrent().then((t) => {
         chrome.tabs.update(t.id, {'highlighted': true});
         return Promise.resolve();
       }).catch((err) => {
-        Chrome.GA.error(err.message, 'chromep.tabs.getCurrent');
+        Chrome.Log.error(`${request.message} ${err.message}`,
+            'chromep.tabs.getCurrent');
       });
       response(JSON.stringify({message: 'OK'}));
     } else if (request.message === app.ChromeMsg.MSG_FAILED.message) {
@@ -401,11 +436,13 @@ window.app = window.app || {};
    * @param {Event} event - storage event
    * @param {string} event.key - value that changed
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _onStorageChanged(event) {
     if (event.key === 'signedIn') {
-      _setDevicesState();
+      _setDevicesMenuState();
+    } else if (event.key === 'lastError') {
+      app.Main.setErrorMenuState();
     } else if (event.key === 'photoURL') {
       t.avatar = Chrome.Storage.get('photoURL');
     }
@@ -416,14 +453,14 @@ window.app = window.app || {};
    * @see https://developer.chrome.com/extensions/tabs#event-onHighlighted
    * @param {Object} highlightInfo - info
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _onHighlighted(highlightInfo) {
     const tabIds = highlightInfo.tabIds;
-    chrome.tabs.getCurrent(function(myTab) {
+    chromep.tabs.getCurrent().then((tab) => {
       for (let i = 0; i &lt; tabIds.length; i++) {
         const tabId = tabIds[i];
-        if (tabId === myTab.id) {
+        if (tabId === tab.id) {
           // our tab
           if (!isMainPage) {
             // focus main page
@@ -437,16 +474,19 @@ window.app = window.app || {};
           break;
         }
       }
+      return Promise.resolve();
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'Main._onHighlighted');
     });
   }
 
   /**
    * Display dialog to prompt for accepting optional permissions
    * if it has not been set yet
-   * @memberOf Main
+   * @memberOf app.Main
    * @private
    */
-  function _checkPermissions() {
+  function _checkOptionalPermissions() {
     if (Chrome.Storage.get('permissions') === app.Permissions.NOT_SET) {
       _showPermissionsDialog();
     }
@@ -457,7 +497,7 @@ window.app = window.app || {};
    * @param {string} name - {@link Main.page} route
    * @returns {int} index into array
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _getPageIdx(name) {
     return t.pages.map(function(e) {
@@ -469,7 +509,7 @@ window.app = window.app || {};
    * Show the signin page
    * @param {int} index - index into {@link Main.pages}
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _showSignInPage(index) {
     if (!t.pages[index].ready) {
@@ -486,7 +526,7 @@ window.app = window.app || {};
    * Show the devices page
    * @param {int} index -  - index into {@link Main.pages}
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _showDevicesPage(index) {
     if (!t.pages[index].ready) {
@@ -503,7 +543,7 @@ window.app = window.app || {};
    * Show the settings page
    * @param {int} index - index into {@link Main.pages}
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _showSettingsPage(index) {
     if (!t.pages[index].ready) {
@@ -520,7 +560,7 @@ window.app = window.app || {};
    * Show the help page
    * @param {int} index - index into {@link Main.pages}
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _showHelpPage(index) {
     if (!t.pages[index].ready) {
@@ -534,9 +574,26 @@ window.app = window.app || {};
   }
 
   /**
+   * Show the error viewer page
+   * @param {int} index - index into {@link Main.pages}
+   * @private
+   * @memberOf app.Main
+   */
+  function _showErrorPage(index) {
+    if (!t.pages[index].ready) {
+      // insert the page the first time
+      t.pages[index].ready = true;
+      const el = new app.ErrorPageFactory();
+      Polymer.dom(t.$.errorInsertion).appendChild(el);
+    }
+    t.route = t.pages[index].route;
+    _scrollPageToTop();
+  }
+
+  /**
    * Show the permissions dialog
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _showPermissionsDialog() {
     t.$.permissionsDialog.open();
@@ -545,7 +602,7 @@ window.app = window.app || {};
   /**
    * Scroll Main Panel to top
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _scrollPageToTop() {
     t.$.mainPanel.scroller.scrollTop = 0;
@@ -554,7 +611,7 @@ window.app = window.app || {};
   /**
    * Close drawer if drawerPanel is narrow
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
   function _closeDrawer() {
     const drawerPanel = document.querySelector('#paperDrawerPanel');
@@ -566,9 +623,9 @@ window.app = window.app || {};
   /**
    * Set enabled state of Devices menu item
    * @private
-   * @memberOf Main
+   * @memberOf app.Main
    */
-  function _setDevicesState() {
+  function _setDevicesMenuState() {
     // disable devices-page if not signed in
     const idx = _getPageIdx('page-devices');
     const el = document.getElementById(t.pages[idx].route);
@@ -584,7 +641,25 @@ window.app = window.app || {};
 
   // listen for changes to highlighted tabs
   chrome.tabs.onHighlighted.addListener(_onHighlighted);
-})();
+
+  return {
+    /**
+     * Set enabled state of Error Viewer menu item
+     * @memberOf app.Main
+     */
+    setErrorMenuState: function() {
+      // disable error-page if no lastError
+      const idx = _getPageIdx('page-error');
+      const el = document.getElementById(t.pages[idx].route);
+      const lastError = Chrome.Storage.getLastError();
+      if (el &amp;&amp; !Chrome.Utils.isWhiteSpace(lastError.message)) {
+        el.removeAttribute('disabled');
+      } else if (el) {
+        el.setAttribute('disabled', 'true');
+      }
+    },
+  };
+})(window);
 </pre>
     </article>
 </section>
@@ -630,7 +705,7 @@ window.app = window.app || {};
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

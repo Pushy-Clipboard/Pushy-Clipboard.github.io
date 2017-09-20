@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Classes</title>
+	<title>Documentation Source: bower_components/chrome-extension-utils/scripts/msg.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -67,197 +67,93 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Classes</h1>
+		<h1 class="page-title">Source: bower_components/chrome-extension-utils/scripts/msg.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://github.com/opus1269/chrome-extension-utils/blob/master/LICENSE.md
+ */
+window.Chrome = window.Chrome || {};
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
+/**
+ * Wrapper for chrome messages
+ * @see https://developer.chrome.com/extensions/messaging
+ * @namespace
+ */
+Chrome.Msg = (function() {
+  'use strict';
 
+  new ExceptionHandler();
 
-<article>
-    <div class="container-overview">
-    
-        
+  /**
+   * A Chrome message
+   * @typedef {{}} Chrome.Msg.Message
+   * @property {string} message - Unique name
+   * @property {Error} error - an error
+   * @property {string|Object} item - a message specific item
+   * @property {boolean} updated - item is new or updated
+   * @property {string} key - key name
+   * @property {?Object} value - value of key
+   * @memberOf Chrome.Msg
+   */
 
-        
-<dl class="details">
-    
+  /**
+   * A save attempt to localStorage exceeded its capacity
+   * @type {Chrome.Msg.Message}
+   * @memberOf Chrome.Msg
+   */
+  const STORAGE_EXCEEDED = {
+    message: 'storageExceeded',
+  };
 
-	
+  return {
+    STORAGE_EXCEEDED: STORAGE_EXCEEDED,
 
-	
+    /**
+     * Send a chrome message
+     * @param {Chrome.Msg.Message} type - type of message
+     * @returns {Promise&lt;JSON>} response JSON
+     * @memberOf Chrome.Msg
+     */
+    send: function(type) {
+      const chromep = new ChromePromise();
+      return chromep.runtime.sendMessage(type, null).then((response) => {
+        return Promise.resolve(response);
+      }).catch((err) => {
+        if (err.message &amp;&amp;
+            !err.message.includes('port closed') &amp;&amp;
+            !err.message.includes('Receiving end does not exist')) {
+          const msg = `type: ${type.message}, ${err.message}`;
+          Chrome.GA.error(msg, 'Msg.send');
+        }
+        return Promise.reject(err);
+      });
+    },
 
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Chrome.Time.html">Time</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ClipItem.html">ClipItem</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Device.html">Device</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ExceptionHandler.html">ExceptionHandler</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-        <h3 class="subsection-title">Namespaces</h3>
-
-        <dl>
-            <dt><a href="namespaces.html#app.Alarm"><a href="app.Alarm.html">Alarm</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.CB"><a href="app.CB.html">CB</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.ChromeMsg"><a href="app.ChromeMsg.html">ChromeMsg</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Data"><a href="app.Data.html">Data</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Devices"><a href="app.Devices.html">Devices</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Fb"><a href="app.Fb.html">Fb</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.GA"><a href="app.GA.html">GA</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Gae"><a href="app.Gae.html">Gae</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Main"><a href="app.Main.html">Main</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Msg"><a href="app.Msg.html">Msg</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Notify"><a href="app.Notify.html">Notify</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Permissions"><a href="app.Permissions.html">Permissions</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Reg"><a href="app.Reg.html">Reg</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.SW"><a href="app.SW.html">SW</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.User"><a href="app.User.html">User</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#app.Utils"><a href="app.Utils.html">Utils</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Background"><a href="Background.html">Background</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.GA"><a href="Chrome.GA.html">GA</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Http"><a href="Chrome.Http.html">Http</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.JSONUtils"><a href="Chrome.JSONUtils.html">JSONUtils</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Locale"><a href="Chrome.Locale.html">Locale</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Log"><a href="Chrome.Log.html">Log</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Msg"><a href="Chrome.Msg.html">Msg</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Storage"><a href="Chrome.Storage.html">Storage</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#Chrome.Utils"><a href="Chrome.Utils.html">Utils</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ContentScript"><a href="ContentScript.html">ContentScript</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ReceiveMsg"><a href="ReceiveMsg.html">ReceiveMsg</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ServiceWorker"><a href="ServiceWorker.html">ServiceWorker</a></a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+    /**
+     * Add a listener for chrome messages
+     * @param {Function} listener - function to receive messages
+     * @memberOf Chrome.Msg
+     */
+    listen: function(listener) {
+      chrome.runtime.onMessage.addListener(listener);
+    },
+  };
+})();
+</pre>
+    </article>
 </section>
+
 
 
 
@@ -267,10 +163,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>
@@ -303,7 +195,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 19th 2017, 9:12:39 pm
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

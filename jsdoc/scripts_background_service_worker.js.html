@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -96,24 +96,24 @@ app.SW = (function() {
 
   const _ERR_REG = 'Failed to register Service Worker: ';
   const _ERR_UNREG = 'Failed to unregister Service Worker: ';
-  const _ERR_NOT_REG = 'Not registered ';
   const _ERR_UNREG_BOOL = 'returned false';
+  const _ERROR_NOT_SUBSCRIBED =
+      'The extension has lost the subscription to receive push notifications.';
 
   /**
    * Path to our {@link ServiceWorker}
    * @const
-   * @default
    * @private
    * @memberOf app.SW
    */
-  const SERVICE_WORKER = '../scripts/sw.js';
+  const _PATH = '../scripts/sw.js';
 
   /**
    * Our ServiceWorkerRegistration object
    * @private
    * @memberOf app.SW
    */
-  let _swRegistration = null;
+  let _reg = null;
 
   /**
    * Register the Service Worker
@@ -123,9 +123,9 @@ app.SW = (function() {
    * @memberOf app.SW
    */
   function _register() {
-    return navigator.serviceWorker.register(SERVICE_WORKER).then((swReg) => {
-      _swRegistration = swReg;
-      return Promise.resolve(_swRegistration);
+    return navigator.serviceWorker.register(_PATH).then((swReg) => {
+      _reg = swReg;
+      return Promise.resolve(_reg);
     }).catch((err) => {
       throw new Error(_ERR_REG + err.message);
     });
@@ -138,30 +138,31 @@ app.SW = (function() {
    * @memberOf app.SW
    */
   function _unsubscribePush() {
-    return _swRegistration.pushManager.getSubscription().then((sub) => {
+    return _reg.pushManager.getSubscription().then((sub) => {
       if (sub) {
         return sub.unsubscribe();
-      } else {
-        throw new Error('Not subscribed');
       }
+      return Promise.resolve();
     });
   }
 
   return {
+    /**
+     * Not subscribed to push error message
+     * @const
+     * @type {string}
+     * @memberOf app.SW
+     */
+    ERROR_NOT_SUBSCRIBED: _ERROR_NOT_SUBSCRIBED,
+    
     /**
      * Initialize the {@link ServiceWorker} and firebase
      * @returns {Promise&lt;void>} void
      * @memberOf app.SW
      */
     initialize: function() {
-      if (_swRegistration) {
-        return Promise.resolve();
-      }
-
       return _register().then((swReg) => {
         return app.Fb.initialize(swReg);
-      }).then(() => {
-        return Promise.resolve();
       }).catch((err) => {
         throw new Error(_ERR_REG + err.message);
       });
@@ -173,21 +174,21 @@ app.SW = (function() {
      * @memberOf app.SW
      */
     unregister: function() {
-      if (!_swRegistration) {
-        throw new Error(_ERR_UNREG + _ERR_NOT_REG);
+      if (!_reg) {
+        return Promise.resolve();
       }
 
       return _unsubscribePush().then(() => {
-        return _swRegistration.unregister();
+        return _reg.unregister();
       }).then((unregistered) => {
         if (unregistered) {
-          _swRegistration = null;
+          _reg = null;
           return Promise.resolve();
         } else {
-          throw new Error(_ERR_UNREG + _ERR_UNREG_BOOL);
+          return Promise.reject(new Error(_ERR_UNREG + _ERR_UNREG_BOOL));
         }
       }).catch((err) => {
-        throw new Error(_ERR_UNREG + err.message);
+        return Promise.reject(new Error(_ERR_UNREG + err.message));
       });
     },
 
@@ -197,10 +198,46 @@ app.SW = (function() {
      * @memberOf app.SW
      */
     update: function() {
-      if (_swRegistration) {
-        _swRegistration.update();
+      if (_reg) {
+        _reg.update();
       }
       return Promise.resolve();
+    },
+
+    /**
+     * Are we subscribed to push notifications
+     * @returns {Promise&lt;boolean>} true if subscribed
+     * @memberOf app.SW
+     */
+    isSubscribed: function() {
+      if (_reg) {
+        return _reg.pushManager.getSubscription().then((sub) => {
+          // sub null if not subscribed
+          return Promise.resolve(!!sub);
+        });
+      }
+      return Promise.resolve(false);
+    },
+
+    /**
+     * Check if the ServiceWorker is not in a state for receiving messages
+     * @returns {Promise&lt;?string>} reason if it can't, or null
+     * @memberOf app.SW
+     */
+    cantReceive: function() {
+      // Need to be subscribed and have notifications permission
+      let cantMsg = null;
+      return app.Notify.hasNavigatorPermission().then((granted) => {
+        if (!granted) {
+          cantMsg = app.Notify.ERROR_NO_NOTIFICATIONS;
+        }
+        return app.SW.isSubscribed();
+      }).then((subscribed) => {
+        if (!subscribed &amp;&amp; !cantMsg) {
+          cantMsg = app.SW.ERROR_NOT_SUBSCRIBED;
+        }
+        return Promise.resolve(cantMsg);
+      });
     },
   };
 })();
@@ -249,7 +286,7 @@ app.SW = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

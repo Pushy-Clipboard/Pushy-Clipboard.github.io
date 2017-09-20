@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -112,7 +112,7 @@
         Chrome.Storage.set('os', os);
         return Promise.resolve();
       }).catch((err) => {
-        Chrome.GA.error(err.message, 'Background._onInstalled');
+        Chrome.Log.error(err.message, 'Background._onInstalled');
       });
       app.Data.initialize();
       app.Utils.showMainTab();
@@ -121,7 +121,7 @@
       _initializeFirebase().then(() => {
         return app.SW.update();
       }).catch((err) => {
-        Chrome.GA.error(err.message, 'Background._onInstalled');
+        Chrome.Log.error(err.message, 'Background._onInstalled');
       });
     }
     app.Utils.setBadgeText();
@@ -141,7 +141,7 @@
     app.Alarm.updateAlarms();
     app.Alarm.deleteOldClipItems();
     _initializeFirebase().catch((err) => {
-      Chrome.GA.error(err.message, 'Background._onStartup');
+      Chrome.Log.error(err.message, 'Background._onStartup');
     });
     app.Utils.setBadgeText();
   }
@@ -155,9 +155,6 @@
   function _onIconClicked() {
     // get the clipboard contents
     const text = app.CB.getTextFromClipboard();
-    if (Chrome.Utils.isWhiteSpace(text)) {
-      return;
-    }
 
     // Persist
     let addOK = false;
@@ -169,9 +166,13 @@
       if (addOK) {
         app.Msg.sendFailed(err);
       } else {
-        Chrome.GA.error(err.message, 'Background._onIconClicked');
+        const msg = err.message;
+        if (msg !== app.ClipItem.ERROR_EMPTY_TEXT) {
+          Chrome.Log.error(msg, 'Background._onIconClicked');
+        }
         if (app.Notify.onError()) {
-          app.Notify.create(app.Notify.TYPE.ERROR_STORE_CLIP, err.message);
+          app.Notify.create(app.Notify.TYPE.ERROR_STORE_CLIP, msg,
+              new Chrome.Storage.LastError());
         }
       }
     });
@@ -209,13 +210,19 @@
    * @memberOf Background
    */
   function _initializeFirebase() {
-    if (app.Utils.isSignedIn()) {
-      return app.SW.initialize().catch((err) => {
-        Chrome.GA.error(err.message, 'Background._initializeFirebase');
-      });
-    } else {
+    if (!app.Utils.isSignedIn()) {
       return Promise.resolve();
     }
+
+    return app.SW.initialize().then(() => {
+      return app.SW.cantReceive();
+    }).then((cantReceive) => {
+      if (app.Utils.allowReceive() &amp;&amp; cantReceive) {
+        // can't receive messages anymore even though we want to.
+        return app.User.forceSignOut(true, cantReceive);
+      }
+      return Promise.resolve();
+    });
   }
 
   // Listen for extension install or update
@@ -278,7 +285,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

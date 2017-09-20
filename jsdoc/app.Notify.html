@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -169,18 +169,29 @@
         <dl>
             
 <hr>
-<dt class="name" id=".TYPE">
-    <h4 id=".TYPE"><span class="type-signature">&lt;static> </span>TYPE<span class="type-signature"></span></h4>
+<dt class="name" id=".ERROR_NO_NOTIFICATIONS">
+    <h4 id=".ERROR_NO_NOTIFICATIONS"><span class="type-signature">&lt;static, constant> </span>ERROR_NO_NOTIFICATIONS<span class="type-signature"> :string</span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>notification types</p>
+        <p>System Notifications not granted error message</p>
     </div>
     
 
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+
+            </li>
+        </ul>
     
 
     
@@ -219,7 +230,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-213">line 213</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-265">line 265</a>
 			</li>
 		</ul>
 	</dd>
@@ -294,6 +305,30 @@
 
         <tr>
             
+                <td class="name"><code>CLIPBOARD_CHANGED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="app.Notify.html#.TYPE">app.Notify.TYPE</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>detected clipboard change</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>MESSAGE_SENT</code></td>
             
 
@@ -311,7 +346,7 @@
 
             
 
-            <td class="description last"><p>message sent</p></td>
+            <td class="description last"><p>message sent to remote devices</p></td>
         </tr>
 
     
@@ -449,7 +484,77 @@
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-46">line 46</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-53">line 53</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".TYPE">
+    <h4 id=".TYPE"><span class="type-signature">&lt;static> </span>TYPE<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>notification types</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-257">line 257</a>
 			</li>
 		</ul>
 	</dd>
@@ -606,7 +711,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-186">line 186</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-230">line 230</a>
 			</li>
 		</ul>
 	</dd>
@@ -752,7 +857,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-162">line 162</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-206">line 206</a>
 			</li>
 		</ul>
 	</dd>
@@ -792,7 +897,7 @@ of the notification.</p>
             
 <hr>
 <dt>
-    <h4 class="name" id=".create"><span class="type-signature">&lt;static> </span>create<span class="signature">(type, message)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">&lt;static> </span>create<span class="signature">(type, message [, lastError])</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -823,7 +928,11 @@ of the notification.</p>
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -849,7 +958,19 @@ of the notification.</p>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>notification type</p></td>
@@ -873,10 +994,62 @@ of the notification.</p>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>message to display</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lastError</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.Storage.html#.LastError">Chrome.Storage.LastError</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last"><p>lastError</p></td>
         </tr>
 
     
@@ -921,7 +1094,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-221">line 221</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-274">line 274</a>
 			</li>
 		</ul>
 	</dd>
@@ -946,6 +1119,243 @@ of the notification.</p>
     
 
     
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".hasNavigatorPermission"><span class="type-signature">&lt;static> </span>hasNavigatorPermission<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Determine if navigator Notifications permission has been granted
+Note: this will work from the background script of an extension,
+unlike the other solutions</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-350">line 350</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+	<dt class="tag-see method-doc-label method-doc-details-label">See:</dt>
+	<dd class="tag-see">
+		<ul>
+			<li><a href="https://goo.gl/RzekrB">https://goo.gl/RzekrB</a></li>
+			
+			<li><a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a></li>
+			
+			<li><a href="https://www.chromestatus.com/features/6443143280984064">https://www.chromestatus.com/features/6443143280984064</a></li>
+			</ul>
+	</dd>
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>true if granted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;boolean></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onCopy"><span class="type-signature">&lt;static> </span>onCopy<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Determine if copy notifications are enabled</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-315">line 315</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>true if enabled</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
@@ -1009,7 +1419,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-257">line 257</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-335">line 335</a>
 			</li>
 		</ul>
 	</dd>
@@ -1121,7 +1531,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-246">line 246</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-325">line 325</a>
 			</li>
 		</ul>
 	</dd>
@@ -1334,6 +1744,30 @@ of the notification.</p>
 
         <tr>
             
+                <td class="name"><code>isError</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>if true, error notification</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>isClickable</code></td>
             
 
@@ -1513,7 +1947,7 @@ of the notification.</p>
 		<ul class="dummy">
 			<li>
 				<a href="scripts_background_notify.js.html">scripts/background/notify.js</a>,
-				 <a href="scripts_background_notify.js.html#sunlight-1-line-19">line 19</a>
+				 <a href="scripts_background_notify.js.html#sunlight-1-line-24">line 24</a>
 			</li>
 		</ul>
 	</dd>
@@ -1582,7 +2016,7 @@ of the notification.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:53 am
+		on September 19th 2017, 9:12:39 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

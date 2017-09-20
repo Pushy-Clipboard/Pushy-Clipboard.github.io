@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: bower_components/chrome-extension-utils/chrome_analytics.js</title>
+	<title>Documentation Source: bower_components/chrome-extension-utils/scripts/analytics.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -72,7 +72,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: bower_components/chrome-extension-utils/chrome_analytics.js</h1>
+		<h1 class="page-title">Source: bower_components/chrome-extension-utils/scripts/analytics.js</h1>
     
 <section>
     <article>
@@ -244,38 +244,37 @@ Chrome.GA = (function() {
 
     /**
      * Send an error
-     * @param {?string} [label=null] - override label
-     * @param {?string} [action=null] - override action
+     * @param {?string} [label='unknown'] - override label
+     * @param {?string} [action='unknownMethod'] - override action
      * @memberOf Chrome.GA
      */
-    error: function(label = null, action = null) {
+    error: function(label = 'unknown', action = 'unknownMethod') {
       const ev = {
         hitType: 'event',
         eventCategory: 'error',
-        eventAction: 'unknownMethod',
-        eventLabel: 'Err: unknown',
+        eventAction: action,
+        eventLabel: `Err: ${label}`,
       };
-      ev.eventLabel = label ? `Err: ${label}` : ev.eventLabel;
-      ev.eventAction = action ? action : ev.eventAction;
       ga('send', ev);
-      console.error('Error: ', ev);
     },
 
     /**
      * Send an exception
-     * @param {string} message - the error message
-     * @param {?string} [stack=null] - error stack
-     * @param {boolean} [fatal=null] - true if fatal
+     * @param {Object} exception - the exception
+     * @param {?string} [message=null] - the error message
+     * @param {boolean} [fatal=true] - true if fatal
      * @memberOf Chrome.GA
      */
-    exception: function(message, stack = null, fatal = true) {
+    exception: function(exception, message=null, fatal=false) {
       try {
-        let msg = '';
+        let msg = 'Unknown';
         if (message) {
-          msg += message;
+          msg = message;
+        } else if (exception.message) {
+          msg = exception.message;
         }
-        if (stack) {
-          msg += `\n${stack}`;
+        if (exception.stack) {
+          msg += `\n\n${exception.stack}`;
         }
         const ex = {
           hitType: 'exception',
@@ -283,16 +282,12 @@ Chrome.GA = (function() {
           exFatal: fatal,
         };
         ga('send', ex);
-        console.error('Exception caught: ', ex);
       } catch (err) {
-        // noinspection BadExpressionStatementJS
-        Function.prototype;
+        Chrome.Utils.noop();
       }
     },
   };
 })();
-
-
 </pre>
     </article>
 </section>
@@ -338,7 +333,7 @@ Chrome.GA = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

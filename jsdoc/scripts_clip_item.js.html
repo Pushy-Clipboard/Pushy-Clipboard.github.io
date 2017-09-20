@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -127,10 +127,23 @@
   /**
    * Error indicating that {@link ClipItem} text is null or all whitespace
    * @const
-   * @default
    * @type {string}
    */
-  ClipItem.ERROR_EMPTY_TEXT = 'Empty text';
+  ClipItem.ERROR_EMPTY_TEXT = 'Text is only whitespace';
+
+  /**
+   * Error indicating that the database is full
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_DB_FULL = 'Database is full. Please delete unused items.';
+
+  /**
+   * Error indicating there were no non favorites to delete
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_REMOVE_FAILED = 'Failed to delete item(s).';
 
   /**
    * Set date
@@ -169,10 +182,75 @@
    * @returns {Promise&lt;string>} primary key it was stored under
    */
   ClipItem.prototype.save = function() {
+    return this._safeSave();
+  };
+
+  /**
+   * Put to the database or delete oldest non favorite if there is no room
+   * @returns {Promise&lt;string>} primary key it was stored under
+   */
+  ClipItem.prototype._putOrDeleteOldest = function() {
+    return _db.clipItems.put(this).then((key) => {
+      return Promise.resolve(key);
+    }).catch((err) => {
+      if (err.name === 'QuotaExceededError') {
+        // failed to save, delete oldest non-fav item
+        return ClipItem._deleteOldest();
+      } else {
+        // some other error
+        throw err;
+      }
+    }).catch((err) => {
+      if (err.message === ClipItem.ERROR_REMOVE_FAILED) {
+        // nothing to delete, give up
+        err.message = ClipItem.ERROR_DB_FULL;
+      }
+      throw err;
+    });
+  };
+
+  /**
+   * Save to storage, deleting old items if needed
+   * @returns {Promise&lt;string>} primary key it was stored under
+   */
+  ClipItem.prototype._safeSave = function() {
     if (Chrome.Utils.isWhiteSpace(this.text)) {
-      return Promise.reject(new Error(ClipItem.ERROR_EMPTY_TEXT));
+      throw new Error(ClipItem.ERROR_EMPTY_TEXT);
     }
-    return _db.clipItems.put(this);
+    const MAX_DELETES = 100;
+    let retKey = '';
+
+    /**
+     * Repeat function call up to count equals 0
+     * @param {int} count - track number of calls
+     * @returns {Promise&lt;void>} void
+     */
+    const repeatFunc = ((count) => {
+      if (count === 0) {
+        throw new Error(ClipItem.ERROR_DB_FULL);
+      }
+      return this._putOrDeleteOldest().then(function(key) {
+        retKey = key;
+        if (retKey) {
+          return Promise.resolve();
+        }
+        return repeatFunc(count - 1);
+      }).catch((err) => {
+        console.error(err);
+        throw err;
+      });
+    });
+
+    // perform the save
+    return _db.transaction('rw', _db.clipItems, () => {
+      return repeatFunc(MAX_DELETES);
+    }).then(() => {
+      return Promise.resolve(retKey);
+    }).catch((err) => {
+      // eslint-disable-next-line promise/no-nesting
+      Chrome.Msg.send(app.ChromeMsg.RELOAD_DB).catch(() => {});
+      throw err;
+    });
   };
 
   /**
@@ -213,11 +291,12 @@
 
   /**
    * Remove the given keys from storage
-   * @param {string[]} keys - array of keys to delete
+   * @param {string|string[]} keys - array of keys to delete
    * @returns {Promise&lt;void>} void
    */
   ClipItem.remove = function(keys) {
-    return _db.clipItems.bulkDelete(keys);
+    const keyArray = Array.isArray(keys) ? keys : [keys];
+    return _db.clipItems.bulkDelete(keyArray);
   };
 
   /**
@@ -271,6 +350,43 @@
       return !clipItem.fav;
     }).delete().then((deleteCount) => {
       return Promise.resolve(!!deleteCount);
+    });
+  };
+
+  /**
+   * Delete the oldest non favorite
+   * @returns {Promise&lt;void>} void
+   */
+  ClipItem._deleteOldest = function() {
+    let clipItem = null;
+    return ClipItem.loadAll().then((clipItems) => {
+      let found = false;
+      if (!clipItems) {
+        throw new Error(ClipItem.ERROR_REMOVE_FAILED);
+      }
+      clipItems.sort((a, b) => {
+        return a.date - b.date;
+      });
+      for (let i = 0; i &lt; clipItems.length; i++) {
+        clipItem = clipItems[i];
+        if (!clipItem.fav) {
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        return ClipItem.remove(clipItem.text);
+      } else {
+        throw new Error(ClipItem.ERROR_REMOVE_FAILED);
+      }
+    }).then(() => {
+      // let listeners know a ClipItem was removed
+      // Note: This will not be called if invoked by other than background.html
+      const msg = app.ChromeMsg.CLIP_REMOVED;
+      msg.item = clipItem;
+      // eslint-disable-next-line promise/no-nesting
+      Chrome.Msg.send(msg).catch(() => {});
+      return Promise.resolve();
     });
   };
 
@@ -342,7 +458,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 10th 2017, 11:24:52 am
+		on September 19th 2017, 9:12:38 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
