@@ -1,0 +1,14 @@
+com.weebly.opus1269.clipman.app
+com.weebly.opus1269.clipman.model
+com.weebly.opus1269.clipman.msg
+com.weebly.opus1269.clipman.services
+com.weebly.opus1269.clipman.ui.base
+com.weebly.opus1269.clipman.ui.clipviewer
+com.weebly.opus1269.clipman.ui.devices
+com.weebly.opus1269.clipman.ui.errorviewer
+com.weebly.opus1269.clipman.ui.help
+com.weebly.opus1269.clipman.ui.helpers
+com.weebly.opus1269.clipman.ui.main
+com.weebly.opus1269.clipman.ui.settings
+com.weebly.opus1269.clipman.ui.signin
+com.weebly.opus1269.clipman.ui.views
