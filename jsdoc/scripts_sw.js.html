@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -94,7 +94,6 @@
   /**
    * Fake fetch base path
    * @const
-   * @default
    * @type {string}
    * @memberOf ServiceWorker
    */
@@ -103,7 +102,6 @@
   /**
    * Google search base path
    * @const
-   * @default
    * @type {string}
    * @memberOf ServiceWorker
    */
@@ -112,7 +110,6 @@
   /**
    * Path to extension's main page
    * @const
-   * @default
    * @type {string}
    * @memberOf ServiceWorker
    */
@@ -138,12 +135,17 @@
   /** @memberOf ServiceWorker */
   const IC_SEARCH = '../images/search-web.png';
 
-  // temporary variable to help get all messages at Chrome start-up
-  // normally, can't use globals in service worker, but this is
-  // only used when Chrome first starts up. Pretty sure it won't be
-  // stopped during this time
-  // could use indexedDB if we really have to
   /** @memberOf ServiceWorker */
+  const FAKE_FETCH_DONE = 'Fake fetch done';
+
+  /**
+   * Temporary variable to help get all messages at Chrome start-up
+   * Normally, can't use globals in service worker, but this is
+   * only used when Chrome first starts up. Pretty sure it won't be
+   * stopped during this time
+   * could use indexedDB if we really have to
+   * @memberOf ServiceWorker
+   */
   let msgArr = [];
 
   /**
@@ -157,7 +159,7 @@
 
   /**
    * Get the name of the Device who sent the message
-   * @param {app.Msg.GaeMsg} data  - message object
+   * @param {app.Msg.GaeMsg} data - message object
    * @returns {string} device name
    * @memberOf ServiceWorker
    */
@@ -202,12 +204,41 @@
   }
 
   /**
-   * Send any data attached to a notification to the extension
-   * @param {GaeMsg[]} dataArray - possible array of {@link app.Msg.GaeMsg}
-   * objects
-   * @returns {Promise&lt;void>} always resolves
+   * Post a message about the page route to display
+   * @param {Object} client - our client window
+   * @param {string} icon - notification icon
+   * @returns {Promise&lt;void>} void
+   * @memberOf ServiceWorker
    */
-  function processNotificationData(dataArray) {
+  function postRouteMessage(client, icon) {
+    return client.postMessage({
+      message: 'route',
+      route: getPageRoute(icon),
+    });
+  }
+
+  /**
+   * Get the page route from the icon
+   * @param {string} icon - notification icon
+   * @returns {string} path to icon
+   * @memberOf ServiceWorker
+   */
+  function getPageRoute(icon) {
+    let page = 'page-devices';
+    if (icon.includes('ic_remote_copy.png')) {
+      page = 'page-main';
+    }
+    return page;
+  }
+
+  /**
+   * Send any data attached to a notification to the extension
+   * @param {app.Msg.GaeMsg[]} dataArray
+   * - possible array of {@link app.Msg.GaeMsg} objects
+   * @returns {Promise&lt;void>} always resolves
+   * @memberOf ServiceWorker
+   */
+  function sendNotificationData(dataArray) {
     if (dataArray instanceof Array) {
       return doFakeFetch(dataArray).catch(() => {});
     } else {
@@ -218,7 +249,7 @@
   /**
    * Send fake GET request so extension can intercept it and get the payload
    * @see https://bugs.chromium.org/p/chromium/issues/detail?id=452942
-   * @param {GaeMsg[]} dataArray Array of {@link app.Msg.GaeMsg} objects
+   * @param {app.Msg.GaeMsg[]} dataArray Array of {@link app.Msg.GaeMsg} objects
    * @returns {Promise&lt;void>} fails if extension successfully canceled request
    * @memberOf ServiceWorker
    */
@@ -226,7 +257,9 @@
     msgArr = [];
     let URL_FETCH = URL_FETCH_BASE + JSON.stringify(dataArray);
     URL_FETCH = encodeURI(URL_FETCH);
-    return fetch(URL_FETCH, {method: 'GET'});
+    return fetch(URL_FETCH, {method: 'GET'}).catch(() => {
+      return Promise.reject(new Error(FAKE_FETCH_DONE));
+    });
   }
 
   /**
@@ -234,7 +267,7 @@
    * @param {SWEvent} event - the event
    * @memberOf ServiceWorker
    */
-  function onPush(event) {
+  function onPushReceived(event) {
     const payload = event.data.json();
     const data = payload.data;
     let body;
@@ -254,7 +287,7 @@
       data: null,
     };
     if ((tag === TAG_MESSAGE)) {
-      // add web search action
+      // add web search action for regular messages
       noteOpt.actions = [
         {
           action: 'search',
@@ -262,27 +295,12 @@
           icon: IC_SEARCH,
         }];
     }
-    let title = `From ${getDeviceName(data)}`;
+    let title = `From: ${getDeviceName(data)}`;
 
-    const promiseChain = clients.matchAll({
-      includeUncontrolled: true,
-      type: 'window',
-    }).then((clients) => {
-      for (let i = 0; i &lt; clients.length; i++) {
-        if (clients[i].focused === true) {
-          // we have focus, don't display notification
-          // send data to extension
-          // eslint-disable-next-line promise/no-nesting
-          return doFakeFetch([data]).catch(() => {});
-        }
-      }
-
-      // eslint-disable-next-line promise/no-nesting
-      return self.registration.getNotifications({
-        tag: tag,
-      }).then((notifications) => {
+    const promiseChain =
+      self.registration.getNotifications({tag: tag}).then((notifications) => {
         if ((notifications.length > 0)) {
-          // append to existing notification
+          // append to existing displayed notification
           noteOpt.renotify = true;
           const noteData = notifications[0].data;
           if (noteData instanceof Array) {
@@ -290,17 +308,17 @@
             // add current and send all to extension
             noteData.push(data);
             // eslint-disable-next-line promise/no-nesting
-            return processNotificationData(noteData).then(() => {
-              title += `\n${noteData.length} new items`;
+            return sendNotificationData(noteData).then(() => {
+              title = `\n${noteData.length} new items`;
               // set data back to item count
               noteOpt.data = noteData.length;
               // simulate doFakeFetch cancel error
-              throw new Error('fetch failed');
+              throw new Error(FAKE_FETCH_DONE);
             });
           } else {
             // count of notifications
             noteOpt.data = notifications[0].data + 1;
-            title = `${noteOpt.data} new items\n${title}`;
+            title = `${noteOpt.data} new items`;
           }
         } else {
           // new notification
@@ -321,12 +339,15 @@
           noteOpt.data = JSON.parse(JSON.stringify(msgArr));
         }
         return self.registration.showNotification(title, noteOpt);
-      }).catch(() => {
-        // This is the normal outcome of the extension canceling
-        // the fake fetch
-        return self.registration.showNotification(title, noteOpt);
+      }).catch((err) => {
+        if (err.message === FAKE_FETCH_DONE) {
+          // This is the normal outcome of the extension canceling
+          // the fake fetch
+          return self.registration.showNotification(title, noteOpt);
+        }
+        console.error('Unexpected error in push event: ', err);
+        return Promise.reject(err);
       });
-    });
 
     event.waitUntil(promiseChain);
   }
@@ -337,34 +358,41 @@
    * @memberOf ServiceWorker
    */
   function onNotificationClick(event) {
-    let url = URL_EXT;
-    if (event.action === 'search') {
-      // clicked on search action
-      url = URL_SEARCH_BASE + encodeURIComponent(event.notification.body);
-    }
-
     event.notification.close();
 
+    if (event.action === 'search') {
+      // clicked on search action
+      if (clients.openWindow) {
+        const searchUrl =
+            URL_SEARCH_BASE + encodeURIComponent(event.notification.body);
+        clients.openWindow(searchUrl);
+      }
+      return;
+    }
+
+    let wClients;
     const promiseChain = clients.matchAll({
       includeUncontrolled: true,
       type: 'window',
     }).then((windowClients) => {
-      // eslint-disable-next-line promise/no-nesting
-      return processNotificationData(event.notification.data).then(() => {
-        for (let i = 0; i &lt; windowClients.length; i++) {
-          const client = windowClients[i];
-          if ((client.url === url) &amp;&amp; 'focus' in client) {
-            // tab exists, focus it
-            return client.focus();
-          }
+      wClients = windowClients;
+      return sendNotificationData(event.notification.data);
+    }).then(() => {
+      for (let i = 0; i &lt; wClients.length; i++) {
+        const client = wClients[i];
+        if ((client.url === URL_EXT) &amp;&amp; 'focus' in client) {
+          // tab exists
+          // Send a message to the client to route to correct page
+          return postRouteMessage(client, event.notification.icon);
         }
-        if (clients.openWindow) {
-          // create new tab
-          return clients.openWindow(url);
-        }
-        return Promise.resolve();
-      }).catch(() => {});
-    });
+      }
+
+      if (clients.openWindow) {
+        // create our main page
+        return clients.openWindow(URL_EXT);
+      }
+      return Promise.resolve();
+    }).catch(() => {});
 
     event.waitUntil(promiseChain);
   }
@@ -376,8 +404,7 @@
    */
   function onNotificationClose(event) {
     event.waitUntil(
-        processNotificationData(event.notification.data).catch(() => {})
-    );
+        sendNotificationData(event.notification.data).catch(() => {}));
   }
 
   // Listen for install events
@@ -391,7 +418,7 @@
   });
 
   // Listen for push events
-  self.addEventListener('push', onPush);
+  self.addEventListener('push', onPushReceived);
 
   // Listen for notificationclick events
   self.addEventListener('notificationclick', onNotificationClick);
@@ -444,7 +471,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 19th 2017, 9:12:39 pm
+		on September 25th 2017, 2:28:13 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

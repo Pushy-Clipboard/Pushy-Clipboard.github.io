@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -147,6 +147,23 @@ app.User = (function() {
   }
 
   /**
+   * Remove the cached auth token
+   * @returns {Promise.&lt;void>} void
+   * @private
+   */
+  function _removeAuthToken() {
+    return _getAuthToken().then((token) => {
+      if (token) {
+        return chromep.identity.removeCachedAuthToken({'token': token});
+      }
+      return Promise.resolve();
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'User._removeAuthToken');
+      return Promise.resolve();
+    });
+  }
+
+  /**
    * Cleanup if user signed-out of Browser
    * @returns {Promise&lt;void>} void
    * @private
@@ -155,9 +172,7 @@ app.User = (function() {
   function _needsCleanup() {
     if (Chrome.Storage.getBool('needsCleanup')) {
       Chrome.Storage.set('needsCleanup', false);
-      return _getAuthToken().then((token) => {
-        return chromep.identity.removeCachedAuthToken({'token': token});
-      });
+      return _removeAuthToken();
     } else {
       return Promise.resolve();
     }
@@ -199,6 +214,8 @@ app.User = (function() {
     }).then(() => {
       return app.Fb.signOut();
     }).then(() => {
+      return _removeAuthToken();
+    }).then(() => {
       _setSignIn(false);
       app.Devices.clear();
       return Promise.resolve();
@@ -227,13 +244,13 @@ app.User = (function() {
         response({message: 'ok'});
         return Promise.resolve();
       }).catch((err) => {
-        Chrome.Log.error(`${request.message} ${err.message}`,
+        Chrome.Log.error(`${request.message}: ${err.message}`,
             'User._onChromeMessage');
         // eslint-disable-next-line promise/no-nesting
         _signOut().then(() => {
           return Promise.resolve();
         }).catch((err) => {
-          Chrome.Log.error(`${request.message} ${err.message}`,
+          Chrome.Log.error(`${request.message}: ${err.message}`,
               'User._onChromeMessage');
           _setSignIn(false);
           Chrome.Storage.set('registered', false);
@@ -247,12 +264,12 @@ app.User = (function() {
         response({message: 'ok'});
         return Promise.resolve();
       }).catch((err) => {
-        Chrome.Log.error(`${request.message} ${err.message}`,
+        Chrome.Log.error(`${request.message}: ${err.message}`,
             'User._onChromeMessage');
         response({message: 'error', error: err.message});
       });
     } else if (request.message === app.ChromeMsg.FORCE_SIGN_OUT.message) {
-      // try to signOut a user without unregister with App Engine
+      // force sign out
       ret = true; // async
       app.User.forceSignOut().then(() => {
         response({message: 'ok'});
@@ -260,7 +277,7 @@ app.User = (function() {
       }).catch((err) => {
         _setSignIn(false);
         app.Devices.clear();
-        Chrome.Log.error(`${request.message} ${err.message}`,
+        Chrome.Log.error(`${request.message}: ${err.message}`,
             'User._onChromeMessage');
         response({message: 'error', error: err.message});
       });
@@ -293,7 +310,8 @@ app.User = (function() {
     },
 
     /**
-     * Force signOut without unregister with App Engine
+     * Force signOut without unregistering from App Engine and without
+     * needing OAuth
      * @param {boolean} [notify=false] if true, post error notification
      * @param {string} [reason='Unknown Error'] reason for call
      * @returns {Promise&lt;void>} void
@@ -305,18 +323,17 @@ app.User = (function() {
         _setSignIn(false);
         app.Devices.clear();
         Chrome.Log.error(reason, 'User.forceSignOut');
-        if (notify) {
+        if (notify &amp;&amp; app.Notify.onError()) {
           let msg = reason;
           msg += '\n\nTry to sign in again. If the problem persists, please ' +
               'contact support.';
-          if (app.Notify.onError()) {
-            app.Notify.create(app.Notify.TYPE.ERROR_FORCE_SIGN_OUT, msg,
-                new Chrome.Storage.LastError());
-          }
+          app.Notify.create(app.Notify.TYPE.ERROR_FORCE_SIGN_OUT, msg,
+              new Chrome.Storage.LastError());
         }
-        return Promise.resolve();
+        return _removeAuthToken();
       });
     },
+
   };
 })();
 </pre>
@@ -364,7 +381,7 @@ app.User = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 19th 2017, 9:12:38 pm
+		on September 25th 2017, 2:28:13 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

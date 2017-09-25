@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
@@ -169,15 +169,15 @@
         <dl>
             
 <hr>
-<dt class="name" id=".STORAGE_EXCEEDED">
-    <h4 id=".STORAGE_EXCEEDED"><span class="type-signature">&lt;static, constant> </span>STORAGE_EXCEEDED<span class="type-signature"> :<a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span></h4>
+<dt class="name" id="._MSG">
+    <h4 id="._MSG"><span class="type-signature">&lt;private, static, constant> </span>_MSG<span class="type-signature"> :Object</span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>A save attempt to localStorage exceeded its capacity</p>
+        <p>Chrome Messages</p>
     </div>
     
 
@@ -186,7 +186,7 @@
         <ul>
             <li>
                 
-<span class="param-type"><a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span>
+<span class="param-type">Object</span>
 
 
 
@@ -196,6 +196,131 @@
 
     
 <dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>HIGHLIGHT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>highlight a tab</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>RESTORE_DEFAULTS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>restore default settings</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>STORAGE_EXCEEDED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>local storage save failed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>STORE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Chrome.Msg.html#.Message">Chrome.Msg.Message</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>save value to storage</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
     
 
 	
@@ -230,7 +355,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="bower_components_chrome-extension-utils_scripts_msg.js.html">bower_components/chrome-extension-utils/scripts/msg.js</a>,
-				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-36">line 36</a>
+				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-42">line 42</a>
 			</li>
 		</ul>
 	</dd>
@@ -362,7 +487,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="bower_components_chrome-extension-utils_scripts_msg.js.html">bower_components/chrome-extension-utils/scripts/msg.js</a>,
-				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-69">line 69</a>
+				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-91">line 91</a>
 			</li>
 		</ul>
 	</dd>
@@ -500,7 +625,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="bower_components_chrome-extension-utils_scripts_msg.js.html">bower_components/chrome-extension-utils/scripts/msg.js</a>,
-				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-49">line 49</a>
+				 <a href="bower_components_chrome-extension-utils_scripts_msg.js.html#sunlight-1-line-71">line 71</a>
 			</li>
 		</ul>
 	</dd>
@@ -908,7 +1033,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 19th 2017, 9:12:39 pm
+		on September 25th 2017, 2:28:14 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
