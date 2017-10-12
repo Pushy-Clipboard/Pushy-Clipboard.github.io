@@ -33,14 +33,14 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.DB.html">app.DB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="Main.html">Main</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="Chrome.Time.html">Chrome.Time</a></li><li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li>
+					<li><a href="Chrome.Time.html">Chrome.Time</a></li><li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li><li><a href="Label.html">Label</a></li>
 				</ul>
 			</li>
 			
@@ -102,9 +102,9 @@ app.ChromeMsg = (function() {
    * @property {Chrome.Msg.Message} DEVICES_CHANGED - list of {@link
    *     app.Devices} changed
    * @property {Chrome.Msg.Message} PING - ping our {@link app.Devices}
-   * @property {Chrome.Msg.Message} COPY_TO_CLIPBOARD - copy {@link
-   *     app.ClipItem} to clipboard
-   * @property {Chrome.Msg.Message} COPIED_TO_CLIPBOARD - {@link app.ClipItem}
+   * @property {Chrome.Msg.Message} COPY_TO_CLIPBOARD - copy {@link ClipItem}
+   * to clipboard
+   * @property {Chrome.Msg.Message} COPIED_TO_CLIPBOARD - {@link ClipItem}
    *     copied to clipboard
    * @property {Chrome.Msg.Message} SIGN_IN - {@link app.User} sign in
    * @property {Chrome.Msg.Message} SIGN_OUT - {@link app.User} sign out
@@ -115,12 +115,6 @@ app.ChromeMsg = (function() {
    *     failed
    * @property {Chrome.Msg.Message} UNREGISTER_FAILED - unregister with server
    *     failed
-   * @property {Chrome.Msg.Message} CLIP_ADDED - a {@link app.ClipItem} was
-   *     added or updated
-   * @property {Chrome.Msg.Message} CLIP_REMOVED - a {@link app.ClipItem} was
-   *     deleted
-   * @property {Chrome.Msg.Message} RELOAD_DB - reload the {@link app.ClipItem}
-   * database
    * @const
    * @memberOf app.ChromeMsg
    */
@@ -160,18 +154,6 @@ app.ChromeMsg = (function() {
     UNREGISTER_FAILED: {
       message: 'unregisterFailed',
     },
-    CLIP_ADDED: {
-      message: 'clipAdded',
-      item: '',
-      updated: false,
-    },
-    CLIP_REMOVED: {
-      message: 'clipRemoved',
-      item: '',
-    },
-    RELOAD_DB: {
-      message: 'reloadDB',
-    },
   };
 
   return {
@@ -186,9 +168,6 @@ app.ChromeMsg = (function() {
     MSG_FAILED: _MSG.MSG_FAILED,
     REGISTER_FAILED: _MSG.REGISTER_FAILED,
     UNREGISTER_FAILED: _MSG.UNREGISTER_FAILED,
-    CLIP_ADDED: _MSG.CLIP_ADDED,
-    CLIP_REMOVED: _MSG.CLIP_REMOVED,
-    RELOAD_DB: _MSG.RELOAD_DB,
   };
 })();
 </pre>
@@ -236,7 +215,7 @@ app.ChromeMsg = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on September 25th 2017, 2:28:13 am
+		on October 12th 2017, 11:18:10 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

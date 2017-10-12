@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: bower_components/chrome-extension-utils/scripts/analytics.js</title>
+	<title>Documentation Source: scripts/db.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,7 +72,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: bower_components/chrome-extension-utils/scripts/analytics.js</h1>
+		<h1 class="page-title">Source: scripts/db.js</h1>
     
 <section>
     <article>
@@ -81,216 +81,112 @@
  * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
  * Licensed under Apache 2.0
  * https://opensource.org/licenses/Apache-2.0
- * https://github.com/opus1269/chrome-extension-utils/blob/master/LICENSE.md
+ * https://goo.gl/wFvBM1
  */
-window.Chrome = window.Chrome || {};
+window.app = window.app || {};
 
 /**
- * Google Analytics tracking
+ * Manage the Dexie database
+ * @see http://dexie.org/
  * @namespace
  */
-Chrome.GA = (function() {
+app.DB = (function() {
   'use strict';
 
+  new ExceptionHandler();
+
   /**
-   * Google Analytics Event
-   * @typedef {Object} Chrome.GA.Event
-   * @property {string} eventCategory - category
-   * @property {string} eventAction - action
-   * @property {string} eventLabel - label
-   * @memberOf Chrome.GA
+   * The Dexie database
+   * @see http://dexie.org/
+   * @type {Object}
+   * @private
+   * @memberOf app.DB
    */
+  let _db;
 
   /**
    * Event: called when document and resources are loaded&lt;br />
-   * Initialize Google Analytics
+   * Initialize Dexie
    * @private
-   * @memberOf Chrome.GA
+   * @memberOf app.DB
    */
   function _onLoad() {
-    // Standard Google Universal Analytics code
-    // noinspection OverlyComplexFunctionJS
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      // noinspection CommaExpressionJS
-      i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments);
-          }, i[r].l = 1 * new Date();
-      // noinspection CommaExpressionJS
-      a = s.createElement(o),
-          m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m);
-    })(window, document, 'script',
-        'https://www.google-analytics.com/analytics.js', 'ga');
+    _db = new Dexie('ClipItemsDB');
+
+    // define database
+    _db.version(1).stores({
+      clipItems: '&amp;text, date',
+    });
+
+    // add labels table and store current clips to tmp table
+    _db.version(2).stores({
+      clipItems: null,
+      clipItemsTmp: '&amp;text, date',
+      labels: '++_id, &amp;name',
+    }).upgrade(function(t) {
+      let clipItems;
+      return t.db.clipItems.toArray().then((ob) => {
+        clipItems = ob;
+        return t.idbtrans.objectStore('clipItemsTmp');
+      }).then((clipItemsTmp) => {
+        clipItems.forEach((clipItem) => clipItemsTmp.put(clipItem));
+        return Promise.resolve();
+      });
+    });
+
+    // add new clip table, copy in old items and delete tmp table
+    _db.version(3).stores({
+      clipItems: '++_id, &amp;text, date, *labelsId',
+    }).upgrade(function(t) {
+      let clipItems;
+      return t.db.clipItemsTmp.toArray().then((clips) => {
+        clipItems = clips;
+        clips.forEach((clipItem) => {
+          clipItem.labelsId = [];
+        });
+        return t.idbtrans.objectStore('clipItems');
+      }).then((clipItemsTable) => {
+        clipItems.forEach((clipItem) => clipItemsTable.put(clipItem));
+        return Promise.resolve();
+      }).then(() => {
+        t.idbtrans.db.deleteObjectStore('clipItemsTmp');
+        return Promise.resolve();
+      });
+    });
+
+    _db.clipItems.mapToClass(app.ClipItem);
+    _db.labels.mapToClass(app.Label);
   }
 
   // listen for document and resources loaded
   window.addEventListener('load', _onLoad);
 
-  /**
-   * Event types
-   * @type {{}}
-   * @property {Chrome.GA.Event} INSTALLED - extension installed
-   * @property {Chrome.GA.Event} UPDATED - extension updated
-   * @property {Chrome.GA.Event} MENU - menu selected
-   * @property {Chrome.GA.Event} TOGGLE - setting-toggle
-   * @property {Chrome.GA.Event} LINK - setting-link
-   * @property {Chrome.GA.Event} TEXT - setting-text
-   * @property {Chrome.GA.Event} BUTTON - button click
-   * @property {Chrome.GA.Event} ICON - toolbar icon click
-   * @property {Chrome.GA.Event} CHECK - checkbox click
-   * @property {Chrome.GA.Event} KEY_COMMAND - keyboard shortcut
-   * @const
-   * @memberOf Chrome.GA
-   */
-  const _EVENT = {
-    INSTALLED: {
-      eventCategory: 'extension',
-      eventAction: 'installed',
-      eventLabel: '',
-    },
-    UPDATED: {
-      eventCategory: 'extension',
-      eventAction: 'updated',
-      eventLabel: '',
-    },
-    MENU: {
-      eventCategory: 'ui',
-      eventAction: 'menuSelect',
-      eventLabel: '',
-    },
-    TOGGLE: {
-      eventCategory: 'ui',
-      eventAction: 'toggle',
-      eventLabel: '',
-    },
-    LINK: {
-      eventCategory: 'ui',
-      eventAction: 'linkSelect',
-      eventLabel: '',
-    },
-    TEXT: {
-      eventCategory: 'ui',
-      eventAction: 'textChanged',
-      eventLabel: '',
-    },
-    BUTTON: {
-      eventCategory: 'ui',
-      eventAction: 'buttonClicked',
-      eventLabel: '',
-    },
-    ICON: {
-      eventCategory: 'ui',
-      eventAction: 'toolbarIconClicked',
-      eventLabel: '',
-    },
-    CHECK: {
-      eventCategory: 'ui',
-      eventAction: 'checkBoxClicked',
-      eventLabel: '',
-    },
-    KEY_COMMAND: {
-      eventCategory: 'ui',
-      eventAction: 'keyCommand',
-      eventLabel: '',
-    },
-  };
-
   return {
-    EVENT: _EVENT,
-
     /**
-     * Initialize analytics
-     * @param {string} trackingId - tracking id
-     * @param {string} appName - extension name
-     * @param {string} appId - extension Id
-     * @param {string} appVersion - extension version
-     * @memberOf Chrome.GA
+     * Get the database
+     * @returns {Object} the Dexie db object
+     * @memberOf app.DB
      */
-    initialize: function(trackingId, appName, appId, appVersion) {
-      ga('create', trackingId, 'auto');
-      // see: http://stackoverflow.com/a/22152353/1958200
-      ga('set', 'checkProtocolTask', function() {
-      });
-      ga('set', 'appName', appName);
-      ga('set', 'appId', appId);
-      ga('set', 'appVersion', appVersion);
-      ga('require', 'displayfeatures');
+    get: function() {
+      return _db;
     },
 
     /**
-     * Send a page
-     * @param {string} page - page path
-     * @memberOf Chrome.GA
+     * Get the clipItems table
+     * @returns {Object}
+     * @memberOf app.DB
      */
-    page: function(page) {
-      if (page) {
-        ga('send', 'pageview', page);
-      }
+    clips: function() {
+      return _db.clipItems;
     },
 
     /**
-     * Send an event
-     * @param {Chrome.GA.Event} event - the event type
-     * @param {?string} [label=null] - override label
-     * @param {?string} [action=null] - override action
-     * @memberOf Chrome.GA
+     * Get the labels table
+     * @returns {Object}
+     * @memberOf app.DB
      */
-    event: function(event, label = null, action = null) {
-      if (event) {
-        const ev = Chrome.JSONUtils.shallowCopy(event);
-        ev.hitType = 'event';
-        ev.eventLabel = label ? label : ev.eventLabel;
-        ev.eventAction = action ? action : ev.eventAction;
-        ga('send', ev);
-      }
-    },
-
-    /**
-     * Send an error
-     * @param {?string} [label='unknown'] - override label
-     * @param {?string} [action='unknownMethod'] - override action
-     * @memberOf Chrome.GA
-     */
-    error: function(label = 'unknown', action = 'unknownMethod') {
-      const ev = {
-        hitType: 'event',
-        eventCategory: 'error',
-        eventAction: action,
-        eventLabel: `Err: ${label}`,
-      };
-      ga('send', ev);
-    },
-
-    /**
-     * Send an exception
-     * @param {Object} exception - the exception
-     * @param {?string} [message=null] - the error message
-     * @param {boolean} [fatal=true] - true if fatal
-     * @memberOf Chrome.GA
-     */
-    exception: function(exception, message=null, fatal=false) {
-      try {
-        let msg = 'Unknown';
-        if (message) {
-          msg = message;
-        } else if (exception.message) {
-          msg = exception.message;
-        }
-        if (exception.stack) {
-          msg += `\n\n${exception.stack}`;
-        }
-        const ex = {
-          hitType: 'exception',
-          exDescription: msg,
-          exFatal: fatal,
-        };
-        ga('send', ex);
-      } catch (err) {
-        Chrome.Utils.noop();
-      }
+    labels: function() {
+      return _db.labels;
     },
   };
 })();
