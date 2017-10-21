@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: clip_item.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.DB.html">app.DB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="ErrorPage.html">ErrorPage</a></li><li><a href="Main.html">Main</a></li><li><a href="MainPage.html">MainPage</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Chrome.Time.html">Chrome.Time</a></li><li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li><li><a href="Label.html">Label</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#_checkChromeSignIn">_checkChromeSignIn</a></li><li><a href="global.html#_checkPermissions">_checkPermissions</a></li><li><a href="global.html#_computeMailToUrl">_computeMailToUrl</a></li><li><a href="global.html#_computeVersion">_computeVersion</a></li><li><a href="global.html#_forceSignOut">_forceSignOut</a></li><li><a href="global.html#_formatChanged">_formatChanged</a></li><li><a href="global.html#_formatTime">_formatTime</a></li><li><a href="global.html#_init">_init</a></li><li><a href="global.html#_initSignedIn">_initSignedIn</a></li><li><a href="global.html#_initValue">_initValue</a></li><li><a href="global.html#_loadLabels">_loadLabels</a></li><li><a href="global.html#_onChange">_onChange</a></li><li><a href="global.html#_onItemSelected">_onItemSelected</a></li><li><a href="global.html#_onLinkTapped">_onLinkTapped</a></li><li><a href="global.html#_onOK">_onOK</a></li><li><a href="global.html#_onTap">_onTap</a></li><li><a href="global.html#_onTimeSelected">_onTimeSelected</a></li><li><a href="global.html#_setBase">_setBase</a></li><li><a href="global.html#_showDialog">_showDialog</a></li><li><a href="global.html#_signIn">_signIn</a></li><li><a href="global.html#_signOut">_signOut</a></li><li><a href="global.html#_sliderValueChanged">_sliderValueChanged</a></li><li><a href="global.html#_unitChanged">_unitChanged</a></li><li><a href="global.html#_valueChanged">_valueChanged</a></li><li><a href="global.html#setChecked">setChecked</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: clip_item.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+ * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+ * Licensed under Apache 2.0
+ * https://opensource.org/licenses/Apache-2.0
+ * https://goo.gl/wFvBM1
+ */
+(function(window) {
+  'use strict';
+
+  new ExceptionHandler();
+
+  /**
+   * Create a new {@link ClipItem}
+   * @constructor
+   * @alias ClipItem
+   * @param {string} text - The text of the clip
+   * @param {int} date - Time in milliSecs from epoch
+   * @param {boolean} fav - true if this has been marked as a favorite
+   * @param {boolean} remote - true if this came from a device other than ours
+   * @param {string} device - A String representing the source device
+   * @property {int} _id - database PK
+   * @property {labelsId} labelsId- Array of {@Label} PK's
+   * @property {Label[]} labels- Array of {@Label} objects
+   */
+  const ClipItem = function(text, date, fav, remote, device) {
+    this.text = text;
+    this.date = date;
+    this.fav = fav;
+    this.remote = remote;
+    this.device = device;
+    this.labelsId = [];
+    this.labels = [];
+  };
+
+  /**
+   * Error indicating that {@link ClipItem} text is null or all whitespace
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_EMPTY_TEXT = 'Text is only whitespace';
+
+  /**
+   * Error indicating that the database is full
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_DB_FULL = 'Database is full. Please delete unused items.';
+
+  /**
+   * Error indicating there were no non favorites to delete
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_REMOVE_FAILED = 'Failed to delete item(s).';
+
+  /**
+   * Error indicating Label add failed
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_ADD_LABEL = 'Failed to add Label.';
+
+  /**
+   * Error indicating Label remove failed
+   * @const
+   * @type {string}
+   */
+  ClipItem.ERROR_REMOVE_LABEL = 'Failed to remove Label.';
+
+  /**
+   * Error indicating Label id doesn't exist
+   * @const
+   * @type {string}
+   */
+  ClipItem._ERROR_NO_LABEL = 'Label not found.';
+
+  /**
+   * Set our {@link Label} objects
+   * @param {string[]} labelNames - names of labels
+   * @returns {Promise&lt;int>} our database PK
+   */
+  ClipItem.prototype.setLabels = function(labelNames) {
+    labelNames = labelNames || [];
+    return app.Label.loadAll().then((labels) => {
+      labels = labels || [];
+      this._clearLabels();
+      labels.forEach((label) => {
+        if (labelNames.includes(label.name)) {
+          this._addLabel(label);
+        }
+      });
+      return this.save();
+    });
+  };
+
+  /**
+   * Set our {@link Label} objects
+   * @param {int[]} labelIds - PK of labels
+   * @returns {Promise&lt;int>} our database PK
+   */
+  ClipItem.prototype.setLabelsById = function(labelIds) {
+    labelIds = labelIds || [];
+    return app.Label.loadAll().then((labels) => {
+      labels = labels || [];
+      this._clearLabels();
+      labels.forEach((label) => {
+        if (labelIds.includes(label._id)) {
+          this._addLabel(label);
+        }
+      });
+      return this.save();
+    });
+  };
+
+  /**
+   * Get our label names
+   * @returns {string[]}
+   */
+  ClipItem.prototype.getLabelNames = function() {
+    const names = [];
+    this.labels.forEach((label) => {
+      names.push(label.name);
+    });
+    return names;
+  };
+
+  /**
+   * Do we contain a {@link Label} with the given name
+   * @param {?string} name
+   * @returns {boolean}
+   */
+  ClipItem.prototype.hasLabel = function(name) {
+    if (Chrome.Utils.isWhiteSpace(name)) {
+      return false;
+    }
+
+    const index = this.labels.findIndex((label) => {
+      return label.name === name;
+    });
+    return (index !== -1);
+  };
+
+  /**
+   * Add a label
+   * @param {Label} label
+   */
+  ClipItem.prototype.addLabel = function(label) {
+    label.getId().then((id) => {
+      if (id) {
+        this._addLabel(label);
+        return this.save();
+      }
+      return Promise.reject(new Error(ClipItem._ERROR_NO_LABEL));
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'ClipItem.addLabel',
+          ClipItem.ERROR_ADD_LABEL);
+    });
+  };
+
+  /**
+   * Remove a label
+   * @param {Label} label
+   */
+  ClipItem.prototype.removeLabel = function(label) {
+    label.getId().then((id) => {
+      if (id) {
+        if (this._removeLabel(label)) {
+          return this.save();
+        }
+      }
+      return Promise.reject(new Error(ClipItem._ERROR_NO_LABEL));
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'ClipItem.removeLabel',
+          ClipItem.ERROR_REMOVE_LABEL);
+    });
+  };
+
+  /**
+   * Save to the database
+   * @returns {Promise&lt;void>}
+   */
+  ClipItem.prototype.save = function() {
+    return this._safeSave();
+  };
+
+  /**
+   * Update the database
+   * @param {Object} changes - properties to change
+   * @returns {Promise&lt;int>} number of properties changed
+   */
+  ClipItem.prototype.update = function(changes) {
+    return app.DB.clips().update(this._id, changes);
+  };
+
+  /**
+   * Clear labels - don't save
+   */
+  ClipItem.prototype._clearLabels = function() {
+    this.labels = [];
+    this.labelsId = [];
+  };
+
+  /**
+   * Add a {@label} - don't save
+   * @param {Label} label
+   */
+  ClipItem.prototype._addLabel = function(label) {
+    const newLabel = new app.Label(label.name);
+    newLabel._id = label._id;
+    this.labels.push(newLabel);
+    this.labelsId.push(newLabel._id);
+  };
+
+  /**
+   * Remove a {@link Label} - don't save
+   * @param {int} id - Label PK
+   * @returns {boolean} true if removed
+   */
+  ClipItem.prototype._removeLabel = function(id) {
+    const index = this.labels.findIndex((lbl) => {
+      return lbl._id === id;
+    });
+    if (index !== -1) {
+      const idx = this.labelsId.indexOf(id);
+      if (idx !== -1) {
+        this.labelsId.splice(idx, 1);
+      } else {
+        Chrome.GA.error('Did not find labelsId', 'ClipItem._removeLabel');
+      }
+      this.labels.splice(index, 1);
+      return true;
+    }
+    return false;
+  };
+
+  /**
+   * Add if new or update if existing
+   * @returns {Promise&lt;int>} database PK
+   */
+  ClipItem.prototype._addOrUpdate = function() {
+    let updated = false;
+    return this._getId().then((id) => {
+      if (id) {
+        updated = true;
+        this._id = id;
+        return app.DB.clips().update(id, this);
+      } else {
+        return app.DB.clips().add(this);
+      }
+    }).then((id) => {
+      if (!updated) {
+        this._id = id;
+      }
+      return Promise.resolve(this._id);
+    });
+  };
+
+  /**
+   * Save to the database or delete oldest non favorite if there is no room
+   * @returns {Promise&lt;int>} database PK if saved, nothing otherwise
+   */
+  ClipItem.prototype._saveOrDeleteOldest = function() {
+    return this._addOrUpdate().catch((err) => {
+      if (err.name === 'QuotaExceededError') {
+        // failed to save, delete oldest non-fav item
+        return ClipItem._deleteOldest();
+      } else {
+        // some other error
+        throw err;
+      }
+    }).catch((err) => {
+      if (err.message === ClipItem.ERROR_REMOVE_FAILED) {
+        // nothing to delete, give up
+        err.message = ClipItem.ERROR_DB_FULL;
+      }
+      throw err;
+    });
+  };
+
+  /**
+   * Save to database, deleting old items if needed
+   * @returns {Promise&lt;void>}
+   */
+  ClipItem.prototype._safeSave = function() {
+    if (Chrome.Utils.isWhiteSpace(this.text)) {
+      throw new Error(ClipItem.ERROR_EMPTY_TEXT);
+    }
+    const MAX_DELETES = 100;
+
+    /**
+     * Repeat function call up to count equals 0
+     * @param {int} count - track number of calls
+     * @returns {Promise&lt;void>}
+     */
+    const repeatFunc = ((count) => {
+      if (count === 0) {
+        throw new Error(ClipItem.ERROR_DB_FULL);
+      }
+      return this._saveOrDeleteOldest().then(function(key) {
+        if (key) {
+          return Promise.resolve();
+        }
+        return repeatFunc(count - 1);
+      }).catch((err) => {
+        console.error(err);
+        throw err;
+      });
+    });
+
+    // perform the save
+    return app.DB.get().transaction('rw', app.DB.clips(), () => {
+      return repeatFunc(MAX_DELETES);
+    }).then(() => {
+      return Promise.resolve();
+    });
+  };
+
+  /**
+   * Get our PK
+   * @returns {Promise&lt;int|null>} database PK or null if text not found
+   */
+  ClipItem.prototype._getId = function() {
+    return app.DB.clips().where('text').equals(this.text).first((clipItem) => {
+      if (clipItem !== undefined) {
+        return Promise.resolve(clipItem._id);
+      }
+      return Promise.resolve(null);
+    });
+  };
+
+  /**
+   * Get a {@link ClipItem} from the database
+   * @param {string} text - The text of the clip
+   * @returns {Promise&lt;ClipItem|undefined>} A new {@link ClipItem},
+   * undefined if not found
+   */
+  ClipItem.get = function(text) {
+    return app.DB.clips().where('text').equals(text).first();
+  };
+
+  /**
+   * Add new {@link ClipItem} to storage
+   * @param {string} text - The text of the clip
+   * @param {int} date - Time in milliSecs from epoch
+   * @param {boolean} fav - true if this has been marked as a favorite
+   * @param {boolean} remote - true if this came from a device other than ours
+   * @param {string} device - A String representing the source device
+   * @param {boolean} [keepFav=false] - if true don't override fav if it is true
+   * @returns {Promise&lt;ClipItem>} A new {@link ClipItem}
+   */
+  ClipItem.add = function(text, date, fav, remote, device, keepFav = false) {
+    const clipItem = new ClipItem(text, date, fav, remote, device);
+    if (keepFav) {
+      // make sure fav stays true
+      return ClipItem.get(text).then((clip) => {
+        if ((clip !== undefined) &amp;&amp; clip.fav) {
+          clipItem.fav = true;
+        }
+        return clipItem.save();
+      }).then((id) => {
+        clipItem._id = id;
+        return Promise.resolve(clipItem);
+      });
+    } else {
+      return clipItem.save().then((id) => {
+        clipItem._id = id;
+        return Promise.resolve(clipItem);
+      });
+    }
+  };
+
+  /**
+   * Add the given {@link ClipItem} objects
+   * @param {ClipItem[]} clipItems
+   * @returns {Promise&lt;void>}
+   */
+  ClipItem.bulkPut = function(clipItems) {
+    const array = Array.isArray(clipItems) ? clipItems : [clipItems];
+    return app.DB.clips().bulkPut(array);
+  };
+
+  /**
+   * Remove the given keys from the database
+   * @param {int|int[]} keys - array of PK's to delete
+   * @returns {Promise&lt;void>}
+   */
+  ClipItem.remove = function(keys) {
+    const keyArray = Array.isArray(keys) ? keys : [keys];
+    return app.DB.clips().bulkDelete(keyArray);
+  };
+
+  /**
+   * Is the database table empty
+   * @returns {Promise&lt;boolean>} true if no {@link ClipItem} objects
+   */
+  ClipItem.isTableEmpty = function() {
+    return app.DB.clips().count().then((count) => {
+      return Promise.resolve(!count);
+    });
+  };
+
+  /**
+   * Get all the {@link ClipItem} objects from storage, sorted from newest to
+   * oldest
+   * @param {?string} [labelName=''] - optional {@link Label} name
+   * to filter on
+   * @returns {Promise&lt;ClipItem[]>}
+   */
+  ClipItem.loadAll = function(labelName = '') {
+    if (labelName) {
+      const label = new app.Label(labelName);
+      return label.getId().then((id) => {
+        if (id) {
+          // filter by label
+          return app.DB.clips().where('labelsId').equals(id).reverse().
+              sortBy('date');
+        } else {
+          return app.DB.clips().reverse().sortBy('date');
+        }
+      });
+    } else {
+      return app.DB.clips().reverse().sortBy('date');
+    }
+  };
+
+  /**
+   * Remove the given {@link Label} PK from all {@link ClipItem} objects
+   * @param {int} labelId - Label PK to delete
+   */
+  ClipItem.removeLabel = function(labelId) {
+    app.DB.get().transaction('rw', app.DB.clips(), () => {
+      ClipItem.loadAll().then((clipItems) => {
+        const changedClipItems = [];
+        clipItems.forEach((clipItem) => {
+          if (clipItem._removeLabel(labelId)) {
+            changedClipItems.push(clipItem);
+          }
+        });
+        return Promise.resolve(changedClipItems);
+      }).then((clipItems) => {
+        clipItems.forEach((clipItem) => {
+          clipItem.save();
+        });
+        return Promise.resolve();
+      }).catch((err) => {
+        return Promise.reject(err);
+      });
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'ClipItem.removeLabel',
+          'Failed to remove label from Clip Items.');
+    });
+  };
+
+  /**
+   * Update the given {@link Label} name in all {@link ClipItem} objects
+   * @param {string} newName
+   * @param {string} oldName
+   */
+  ClipItem.updateLabel = function(newName, oldName) {
+    app.DB.get().transaction('rw', app.DB.clips(), () => {
+      ClipItem.loadAll().then((clipItems) => {
+        const changedClipItems = [];
+        clipItems.forEach((clipItem) => {
+          const index = clipItem.labels.findIndex((label) => {
+            return label.name === oldName;
+          });
+          if (index !== -1) {
+            clipItem.labels[index].name = newName;
+            changedClipItems.push(clipItem);
+          }
+        });
+        return Promise.resolve(changedClipItems);
+      }).then((clipItems) => {
+        clipItems.forEach((clipItem) => {
+          clipItem.save();
+        });
+        return Promise.resolve();
+      }).catch((err) => {
+        return Promise.reject(err);
+      });
+    }).catch((err) => {
+      Chrome.Log.error(err.message, 'ClipItem.removeLabel',
+          'Failed to remove label from Clip Items.');
+    });
+  };
+
+  /**
+   * Delete items older than the storageDuration setting
+   * @returns {Promise&lt;boolean>} true if items were deleted
+   */
+  ClipItem.deleteOld = function() {
+    const durIndex = Chrome.Storage.getInt('storageDuration', 2);
+    const durations = [
+      app.Utils.MILLIS_IN_DAY,
+      app.Utils.MILLIS_IN_DAY * 7,
+      app.Utils.MILLIS_IN_DAY * 30,
+      app.Utils.MILLIS_IN_DAY * 365,
+    ];
+
+    if (durIndex === 4) {
+      // store forever
+      return Promise.resolve(false);
+    } else {
+      const olderThanTime = Date.now() - durations[durIndex];
+      return ClipItem._deleteOlderThan(olderThanTime);
+    }
+  };
+
+  /**
+   * Delete non-favorite {@link ClipItem} objects older than the given time
+   * @param {int} time - time in millis since epoch
+   * @returns {Promise&lt;boolean>} true if items were deleted
+   * @private
+   */
+  ClipItem._deleteOlderThan = function(time) {
+    return app.DB.clips().where('date').below(time).filter((clipItem) => {
+      return !clipItem.fav;
+    }).delete().then((deleteCount) => {
+      return Promise.resolve(!!deleteCount);
+    });
+  };
+
+  /**
+   * Delete the oldest non favorite
+   * @returns {Promise&lt;void>}
+   */
+  ClipItem._deleteOldest = function() {
+    let clipItem = null;
+    return ClipItem.loadAll().then((clipItems) => {
+      let found = false;
+      if (!clipItems) {
+        throw new Error(ClipItem.ERROR_REMOVE_FAILED);
+      }
+      clipItems.sort((a, b) => {
+        return a.date - b.date;
+      });
+      for (let i = 0; i &lt; clipItems.length; i++) {
+        clipItem = clipItems[i];
+        if (!clipItem.fav) {
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        return ClipItem.remove(clipItem.text);
+      } else {
+        throw new Error(ClipItem.ERROR_REMOVE_FAILED);
+      }
+    }).then(() => {
+      return Promise.resolve();
+    });
+  };
+
+  window.app = window.app || {};
+  window.app.ClipItem = ClipItem;
+})(window);
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on October 20th 2017, 7:56:20 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
