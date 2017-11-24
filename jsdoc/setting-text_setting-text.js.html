@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: background/devices.js</title>
+	<title>Documentation Source: setting-text/setting-text.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,176 +72,146 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: background/devices.js</h1>
+		<h1 class="page-title">Source: setting-text/setting-text.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">/*
- * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
- * Licensed under Apache 2.0
- * https://opensource.org/licenses/Apache-2.0
- * https://goo.gl/wFvBM1
- */
-window.app = window.app || {};
-
-/**
- * A list of remote {@link Device} objects we know about
- *  @namespace
- */
-app.Devices = (function() {
-  'use strict';
+            class="sunlight-highlight-javascript linenums">'use strict';
 
   new ExceptionHandler();
 
   /**
-   * A Map of {@link Device} objects keyed by their unique names
-   * @type {Map}
-   * @private
-   * @memberOf app.Devices
+   * Polymer element for a text entry
+   * @namespace SettingText
    */
-  let _devices = new Map();
+  Polymer({
+    is: 'setting-text',
 
-  /**
-   * Convert Map to Object
-   * @param {Map} map
-   * @returns {Object} as Object
-   * @private
-   * @memberOf app.Devices
-   */
-  function _mapToObj(map) {
-    let obj = Object.create(null);
-    for (let [k, v] of map) {
-      // We don’t escape the key '__proto__'
-      // which can cause problems on older engines
-      obj[k] = v;
-    }
-    return obj;
-  }
+    hostAttributes: {
+      role: 'group',
+      tabIndex: -1,
+    },
 
-  /**
-   * Get the {@link Device} objects from localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _load() {
-    _devices = new Map();
-    const json = Chrome.Storage.get('devices');
-    if (!json) {
-      return;
-    }
-    for (let k in json) {
-      if (json.hasOwnProperty(k)) {
-        let v = json[k];
-        let device =
-            new app.Device(v.model, v.sn, v.os, v.nickname, v.lastSeen);
-        _devices.set(k, device);
+    properties: {
+      /**
+       * Local storage key
+       * @memberOf SettingText
+       */
+      name: {
+        type: String,
+        value: 'store',
+      },
+
+      /**
+       * Text value
+       * @memberOf SettingText
+       */
+      value: {
+        type: String,
+        value: '',
+        notify: true,
+      },
+
+      /**
+       * Placeholder text when empty
+       * @memberOf SettingText
+       */
+      placeholder: {
+        type: String,
+        value: 'e.g. Text',
+        notify: true,
+      },
+
+      /**
+       * Max length of text entry
+       * @memberOf SettingText
+       */
+      maxLength: {
+        type: Number,
+        value: '16',
+        notify: true,
+      },
+
+      /**
+       * Descriptive label
+       * @memberOf SettingText
+       */
+      mainLabel: {
+        type: String,
+        value: '',
+      },
+
+      /**
+       * Secondary descriptive label
+       * @memberOf SettingText
+       */
+      secondaryLabel: {
+        type: String,
+        value: '',
+      },
+
+      /**
+       * Optional group title
+       * @memberOf SettingText
+       */
+      sectionTitle: {
+        type: String,
+        value: '',
+      },
+
+      /**
+       * Disabled state of element
+       * @memberOf SettingText
+       */
+      disabled: {
+        type: Boolean,
+        value: false,
+      },
+
+      /**
+       * Visibility state of optional divider
+       * @memberOf SettingText
+       */
+      noseparator: {
+        type: Boolean,
+        value: false,
+      },
+    },
+
+    /**
+     * Event: Lost focus - fire setting-text-changed event
+     * @private
+     * @memberOf SettingText
+     */
+    _onBlur: function() {
+      Chrome.GA.event(Chrome.GA.EVENT.TEXT, this.name);
+      this.fire('setting-text-changed', {value: this.value});
+    },
+
+    /**
+     * Event: keyup - fire setting-text-changed event on 'Enter'
+     * @param {Event} event - key event
+     * @private
+     * @memberOf SettingText
+     */
+    _onKeyUp: function(event) {
+      // check if 'Enter' was pressed
+      if (event.keyCode === 13) {
+        Chrome.GA.event(Chrome.GA.EVENT.TEXT, this.name);
+        this.fire('setting-text-changed', {value: this.value});
       }
-    }
-  }
-
-  /**
-   * Save the {@link Device} objects to localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _save() {
-    Chrome.Storage.set('devices', _mapToObj(_devices));
-    // let listeners know we changed
-    Chrome.Msg.send(app.ChromeMsg.DEVICES_CHANGED).catch(() => {});
-  }
-
-  /**
-   * Event: called when document and resources are loaded&lt;br />
-   * Load the {@link Device} objects from localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _onLoad() {
-    _load();
-  }
-
-  // noinspection JSUnusedLocalSymbols
-  /**
-   * Event: Fired when a message is sent from either an extension process&lt;br>
-   * (by runtime.sendMessage) or a content script (by tabs.sendMessage).
-   * @see https://developer.chrome.com/extensions/runtime#event-onMessage
-   * @param {Chrome.Msg.Message} request - details for the message
-   * @param {Object} sender - MessageSender object
-   * @param {function} response - function to call once after processing
-   * @returns {boolean} true if asynchronous
-   * @private
-   * @memberOf app.Devices
-   */
-  function _onChromeMessage(request, sender, response) {
-    let ret = false;
-
-    if (request.message === app.ChromeMsg.REMOVE_DEVICE.message) {
-      app.Devices.removeByName(request.item);
-    } else if (request.message === app.ChromeMsg.PING.message) {
-      app.Msg.sendPing().catch((err) => {
-        app.Msg.sendFailed(err);
-      });
-    }
-    return ret;
-  }
-
-  // listen for document and resources loaded
-  window.addEventListener('load', _onLoad);
-
-  // listen for Chrome messages
-  Chrome.Msg.listen(_onChromeMessage);
-
-  return {
-    /**
-     * Get an {@link Iterator} on the Devices
-     * @returns {Iterator.&lt;Device>}
-     * @memberOf app.Devices
-     */
-    entries: function() {
-      return _devices.entries();
     },
 
     /**
-     * Add a new {@link Device}
-     * @param {Device} device
-     * @memberOf app.Devices
+     * Initialize value if it is not in localstorage
+     * @private
+     * @memberOf SettingText
      */
-    add: function(device) {
-      _devices.set(device.getUniqueName(), device);
-      _save();
+    _init: function() {
+      this.set('value', '');
     },
-
-    /**
-     * Remove a {@link Device}
-     * @param {Device} device
-     * @memberOf app.Devices
-     */
-    remove: function(device) {
-      this.removeByName(device.getUniqueName());
-    },
-
-    /**
-     * Remove a {@link Device} with the given unique name
-     * @param {string} uniqueName
-     * @memberOf app.Devices
-     */
-    removeByName: function(uniqueName) {
-      _devices.delete(uniqueName);
-      _save();
-    },
-
-    /**
-     * Remove all {@link Device} objects
-     * @memberOf app.Devices
-     */
-    clear: function() {
-      _devices.clear();
-      _save();
-    },
-  };
-})();
-</pre>
+  });</pre>
     </article>
 </section>
 

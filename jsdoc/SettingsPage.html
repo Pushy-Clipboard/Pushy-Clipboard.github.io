@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: background/devices.js</title>
+	<title>Documentation Namespace: SettingsPage</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -67,184 +67,359 @@
 <div class="row">
 
 	
-	<div class="col-md-12">
+	<div class="col-md-8">
 	
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: background/devices.js</h1>
-    
+	<h1 class="page-title">Namespace: SettingsPage</h1>
 <section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">/*
- * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
- * Licensed under Apache 2.0
- * https://opensource.org/licenses/Apache-2.0
- * https://goo.gl/wFvBM1
- */
-window.app = window.app || {};
 
-/**
- * A list of remote {@link Device} objects we know about
- *  @namespace
- */
-app.Devices = (function() {
-  'use strict';
+<header>
+    
+        <h2>
+        SettingsPage
+        </h2>
+        
+    
+</header>
 
-  new ExceptionHandler();
 
-  /**
-   * A Map of {@link Device} objects keyed by their unique names
-   * @type {Map}
-   * @private
-   * @memberOf app.Devices
-   */
-  let _devices = new Map();
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Polymer element to manage extension settings</p></div>
+        
 
-  /**
-   * Convert Map to Object
-   * @param {Map} map
-   * @returns {Object} as Object
-   * @private
-   * @memberOf app.Devices
-   */
-  function _mapToObj(map) {
-    let obj = Object.create(null);
-    for (let [k, v] of map) {
-      // We don’t escape the key '__proto__'
-      // which can cause problems on older engines
-      obj[k] = v;
-    }
-    return obj;
-  }
+        
+<dl class="details">
+    
 
-  /**
-   * Get the {@link Device} objects from localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _load() {
-    _devices = new Map();
-    const json = Chrome.Storage.get('devices');
-    if (!json) {
-      return;
-    }
-    for (let k in json) {
-      if (json.hasOwnProperty(k)) {
-        let v = json[k];
-        let device =
-            new app.Device(v.model, v.sn, v.os, v.nickname, v.lastSeen);
-        _devices.set(k, device);
-      }
-    }
-  }
+	
 
-  /**
-   * Save the {@link Device} objects to localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _save() {
-    Chrome.Storage.set('devices', _mapToObj(_devices));
-    // let listeners know we changed
-    Chrome.Msg.send(app.ChromeMsg.DEVICES_CHANGED).catch(() => {});
-  }
+	
 
-  /**
-   * Event: called when document and resources are loaded&lt;br />
-   * Load the {@link Device} objects from localStorage
-   * @private
-   * @memberOf app.Devices
-   */
-  function _onLoad() {
-    _load();
-  }
+	
 
-  // noinspection JSUnusedLocalSymbols
-  /**
-   * Event: Fired when a message is sent from either an extension process&lt;br>
-   * (by runtime.sendMessage) or a content script (by tabs.sendMessage).
-   * @see https://developer.chrome.com/extensions/runtime#event-onMessage
-   * @param {Chrome.Msg.Message} request - details for the message
-   * @param {Object} sender - MessageSender object
-   * @param {function} response - function to call once after processing
-   * @returns {boolean} true if asynchronous
-   * @private
-   * @memberOf app.Devices
-   */
-  function _onChromeMessage(request, sender, response) {
-    let ret = false;
+    
 
-    if (request.message === app.ChromeMsg.REMOVE_DEVICE.message) {
-      app.Devices.removeByName(request.item);
-    } else if (request.message === app.ChromeMsg.PING.message) {
-      app.Msg.sendPing().catch((err) => {
-        app.Msg.sendFailed(err);
-      });
-    }
-    return ret;
-  }
+    
 
-  // listen for document and resources loaded
-  window.addEventListener('load', _onLoad);
+    
 
-  // listen for Chrome messages
-  Chrome.Msg.listen(_onChromeMessage);
+    
 
-  return {
-    /**
-     * Get an {@link Iterator} on the Devices
-     * @returns {Iterator.&lt;Device>}
-     * @memberOf app.Devices
-     */
-    entries: function() {
-      return _devices.entries();
-    },
+	
 
-    /**
-     * Add a new {@link Device}
-     * @param {Device} device
-     * @memberOf app.Devices
-     */
-    add: function(device) {
-      _devices.set(device.getUniqueName(), device);
-      _save();
-    },
+	
 
-    /**
-     * Remove a {@link Device}
-     * @param {Device} device
-     * @memberOf app.Devices
-     */
-    remove: function(device) {
-      this.removeByName(device.getUniqueName());
-    },
+	
 
-    /**
-     * Remove a {@link Device} with the given unique name
-     * @param {string} uniqueName
-     * @memberOf app.Devices
-     */
-    removeByName: function(uniqueName) {
-      _devices.delete(uniqueName);
-      _save();
-    },
+	
 
-    /**
-     * Remove all {@link Device} objects
-     * @memberOf app.Devices
-     */
-    clear: function() {
-      _devices.clear();
-      _save();
-    },
-  };
-})();
-</pre>
-    </article>
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_settings-page.js.html">pages/settings-page.js</a>,
+				 <a href="pages_settings-page.js.html#sunlight-1-line-10">line 10</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="._showDialog"><span class="type-signature">&lt;private, static> </span>_showDialog<span class="signature">(title, text)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Display error dialog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>error title</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>description of error</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_settings-page.js.html">pages/settings-page.js</a>,
+				 <a href="pages_settings-page.js.html#sunlight-1-line-48">line 48</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".ready"><span class="type-signature">&lt;static> </span>ready<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Element is ready</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_settings-page.js.html">pages/settings-page.js</a>,
+				 <a href="pages_settings-page.js.html#sunlight-1-line-21">line 21</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -254,6 +429,10 @@ app.Devices = (function() {
 
 	<div class="clearfix"></div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
 	
 
 </div>
@@ -286,7 +465,7 @@ app.Devices = (function() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on November 24th 2017, 12:15:33 am
+		on November 24th 2017, 12:15:34 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

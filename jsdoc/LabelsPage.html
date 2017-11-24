@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Namespace: Utils</title>
+	<title>Documentation Namespace: LabelsPage</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,13 +72,13 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Namespace: Utils</h1>
+	<h1 class="page-title">Namespace: LabelsPage</h1>
 <section>
 
 <header>
     
         <h2>
-        Utils
+        LabelsPage
         </h2>
         
     
@@ -89,7 +89,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Misc. utility methods</p></div>
+            <div class="description"><p>Polymer element to manage our <a href="Label.html">Label</a> objects</p></div>
         
 
         
@@ -127,8 +127,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-13">line 13</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-8">line 8</a>
 			</li>
 		</ul>
 	</dd>
@@ -162,29 +162,18 @@
         <dl>
             
 <hr>
-<dt class="name" id=".MILLIS_IN_DAY">
-    <h4 id=".MILLIS_IN_DAY"><span class="type-signature">&lt;static, constant> </span>MILLIS_IN_DAY<span class="type-signature"> :int</span></h4>
+<dt class="name" id=".addText">
+    <h4 id=".addText"><span class="type-signature">&lt;static> </span>addText<span class="type-signature"></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Number of milliseconds a in day</p>
+        <p>The text in the Add textInput</p>
     </div>
     
 
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">int</span>
-
-
-
-            </li>
-        </ul>
     
 
     
@@ -222,89 +211,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-37">line 37</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".MIN_IN_DAY">
-    <h4 id=".MIN_IN_DAY"><span class="type-signature">&lt;static, constant> </span>MIN_IN_DAY<span class="type-signature"> :int</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Number of minutes in a day</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">int</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-29">line 29</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-28">line 28</a>
 			</li>
 		</ul>
 	</dd>
@@ -331,7 +239,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".allowPush"><span class="type-signature">&lt;static> </span>allowPush<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="._addLabel"><span class="type-signature">&lt;private, static> </span>_addLabel<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -339,7 +247,7 @@
 
     
     <div class="description">
-        <p>Has user enabled pushing to <a href="app.Devices.html">app.Devices</a></p>
+        <p>Add a new label</p>
     </div>
     
 
@@ -385,8 +293,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-152">line 152</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-178">line 178</a>
 			</li>
 		</ul>
 	</dd>
@@ -411,30 +319,6 @@
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if enabled</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -443,7 +327,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".allowReceive"><span class="type-signature">&lt;static> </span>allowReceive<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="._addTextChanged"><span class="type-signature">&lt;private, static> </span>_addTextChanged<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -451,7 +335,7 @@
 
     
     <div class="description">
-        <p>Has user enabled receiving from <a href="app.Devices.html">app.Devices</a></p>
+        <p>Observer: <a href="LabelsPage.html#.addText">LabelsPage.addText</a> changed</p>
     </div>
     
 
@@ -497,8 +381,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-170">line 170</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-233">line 233</a>
 			</li>
 		</ul>
 	</dd>
@@ -523,30 +407,6 @@
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if enabled</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -555,7 +415,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".canSend"><span class="type-signature">&lt;static> </span>canSend<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="._itemsChanged"><span class="type-signature">&lt;private, static> </span>_itemsChanged<span class="signature">(changeRecord)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -563,339 +423,7 @@
 
     
     <div class="description">
-        <p>Can we send messages to our devices</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-206">line 206</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getEmail"><span class="type-signature">&lt;static> </span>getEmail<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get our email address</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-44">line 44</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>email address</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getEmailBody"><span class="type-signature">&lt;static> </span>getEmailBody<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get body for an email with basic extension info</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-71">line 71</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>text</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getEmailUrl"><span class="type-signature">&lt;static> </span>getEmailUrl<span class="signature">(subject, body)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get encoded url for an email</p>
+        <p>Observer: LabelsPage.items changed</p>
     </div>
     
 
@@ -930,13 +458,13 @@
 
         <tr>
             
-                <td class="name"><code>subject</code></td>
+                <td class="name"><code>changeRecord</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Object</span>
 
 
 
@@ -947,31 +475,7 @@
 
             
 
-            <td class="description last"><p>email subject</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>email body</p></td>
+            <td class="description last"><p>details of change</p></td>
         </tr>
 
     
@@ -1015,8 +519,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-84">line 84</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-247">line 247</a>
 			</li>
 		</ul>
 	</dd>
@@ -1041,30 +545,6 @@
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>encoded url</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -1073,7 +553,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".getGithubPagesPath"><span class="type-signature">&lt;static> </span>getGithubPagesPath<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="._loadLabels"><span class="type-signature">&lt;private, static> </span>_loadLabels<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1081,7 +561,7 @@
 
     
     <div class="description">
-        <p>Get our Github pages base path</p>
+        <p>Load the Labels from the database</p>
     </div>
     
 
@@ -1127,8 +607,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-62">line 62</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-135">line 135</a>
 			</li>
 		</ul>
 	</dd>
@@ -1153,30 +633,6 @@
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>path</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -1185,7 +641,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".getGithubPath"><span class="type-signature">&lt;static> </span>getGithubPath<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="._onAddKeyUp"><span class="type-signature">&lt;private, static> </span>_onAddKeyUp<span class="signature">(event)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1193,119 +649,7 @@
 
     
     <div class="description">
-        <p>Get our Github base path</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-53">line 53</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>path</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getRelativeTime"><span class="type-signature">&lt;static> </span>getRelativeTime<span class="signature">(time)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get a date string in time ago format</p>
+        <p>Event: Add text key up</p>
     </div>
     
 
@@ -1340,112 +684,922 @@
 
         <tr>
             
-                <td class="name"><code>time</code></td>
+                <td class="name"><code>event</code></td>
             
 
             <td class="type">
             
                 
+<span class="param-type">Event</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>key-up event</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-75">line 75</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._onAddTapped"><span class="type-signature">&lt;private, static> </span>_onAddTapped<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Event: Add text button tapped</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-65">line 65</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._onDeleteTapped"><span class="type-signature">&lt;private, static> </span>_onDeleteTapped<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Event: Delete button tapped for a label</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-89">line 89</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._onListItemBlur"><span class="type-signature">&lt;private, static> </span>_onListItemBlur<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Event: Label input lost focus</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-113">line 113</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._onListItemKeyUp"><span class="type-signature">&lt;private, static> </span>_onListItemKeyUp<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Event: Label input key up</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-124">line 124</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="._sortByName"><span class="type-signature">&lt;private, static> </span>_sortByName<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {int}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sort filter for the Labels - alphabetical</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="LabelsPage.html#.Item">LabelsPage.Item</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>first comparator</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="LabelsPage.html#.Item">LabelsPage.Item</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>second comparator</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-161">line 161</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
 <span class="param-type">int</span>
 
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>time since epoch in millis</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-124">line 124</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Relative time format</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
     </dd>
 </dl>
 
@@ -1459,7 +1613,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".isAutoSend"><span class="type-signature">&lt;static> </span>isAutoSend<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="._updateListLabel"><span class="type-signature">&lt;private, static> </span>_updateListLabel<span class="signature">(item)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1467,763 +1621,7 @@
 
     
     <div class="description">
-        <p>Has user enabled autoSend option</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-161">line 161</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if enabled</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".isMonitorClipboard"><span class="type-signature">&lt;static> </span>isMonitorClipboard<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Are we saving clipboard contents</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-143">line 143</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if enabled</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".isPinFavs"><span class="type-signature">&lt;static> </span>isPinFavs<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Should we show the favorites at the top of the list</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-134">line 134</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".isRegistered"><span class="type-signature">&lt;static> </span>isRegistered<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Are we registered with fcm</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-188">line 188</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if registered</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".isSignedIn"><span class="type-signature">&lt;static> </span>isSignedIn<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Are we signed in</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-179">line 179</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if signed in</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".notRegistered"><span class="type-signature">&lt;static> </span>notRegistered<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Are we not registered with fcm</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-197">line 197</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>true if not registered</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".setBadgeText"><span class="type-signature">&lt;static> </span>setBadgeText<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Set the badge displayed on the extension icon</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-95">line 95</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".showMainTab"><span class="type-signature">&lt;static> </span>showMainTab<span class="signature">( [route])</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Send message to the main tab to focus it. If not found, create it</p>
+        <p>Update an exiting label</p>
     </div>
     
 
@@ -2246,11 +1644,7 @@
         <th>Type</th>
 
         
-        <th>Argument</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -2262,13 +1656,13 @@
 
         <tr>
             
-                <td class="name"><code>route</code></td>
+                <td class="name"><code>item</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="LabelsPage.html#.Item">LabelsPage.Item</a></span>
 
 
 
@@ -2276,28 +1670,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    'page-main'
-                
-                </td>
-            
 
-            <td class="description last"><p>the page to route to</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -2341,8 +1717,96 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="utils.js.html">utils.js</a>,
-				 <a href="utils.js.html#sunlight-1-line-108">line 108</a>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-205">line 205</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onCurrentPage"><span class="type-signature">&lt;static> </span>onCurrentPage<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>We have animated in and are now the current page</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-55">line 55</a>
 			</li>
 		</ul>
 	</dd>
@@ -2374,6 +1838,249 @@
         </dl>
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        <dl>
+                
+<hr>
+<dt class="name" id=".Item">
+    <h4 id=".Item">Item</h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>A list item</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Label.html">Label</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-15">line 15</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+            
+                
+<hr>
+<dt class="name" id=".Items">
+    <h4 id=".Items">Items</h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The Array of list objects</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Array.&lt;<a href="LabelsPage.html#.Item">LabelsPage.Item</a>></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="pages_labels-page.js.html">pages/labels-page.js</a>,
+				 <a href="pages_labels-page.js.html#sunlight-1-line-35">line 35</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+            </dl>
     
 
     
