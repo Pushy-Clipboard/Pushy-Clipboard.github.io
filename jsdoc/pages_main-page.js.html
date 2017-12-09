@@ -85,10 +85,8 @@
     const _ERR_LOAD = 'Failed to load Clips';
 
     let self;
-    
-    // temporarily skip sort during bulk operations
-    let skipSort = false;
 
+    // noinspection JSUnusedLocalSymbols
     /**
      * Polymer element to display and manage {@link ClipItem} objects
      * @namespace MainPage
@@ -122,7 +120,7 @@
          * Array of selected {@link ClipItem} objects
          * @memberOf MainPage
          */
-        selectedClips: {
+        selClips: {
           type: Array,
           value: [],
           notify: true,
@@ -134,8 +132,7 @@
          */
         hasSelections: {
           type: Boolean,
-          computed:
-              '_computeHasSelections(selectedClips.splices)',
+          computed: '_computeHasSelections(selClips.splices)',
         },
 
         /**
@@ -224,7 +221,7 @@
          * Array of all selected {@link Label} names in the dialog
          * @memberOf MainPage
          */
-        selectedDialogLabels: {
+        selDialogLabels: {
           type: Array,
           value: [],
           notify: true,
@@ -239,11 +236,21 @@
           value: false,
           notify: true,
         },
+
+        /**
+         * True if we are performing an operation on multiple clips
+         * @memberOf MainPage
+         */
+        isBulkOp: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          observer: '_bulkOpChanged',
+        },
       },
 
       observers: [
-        '_selectedClipsAddedOrRemoved(selectedClips.splices)',
-        '_selectedDialogLabelsAddedOrRemoved(selectedDialogLabels.splices)',
+        '_selDialogLabelsAddedOrRemoved(selDialogLabels.splices)',
       ],
 
       /**
@@ -252,19 +259,19 @@
        */
       ready: function() {
         self = this;
+        this.addEventListener('focus', this._onFocused.bind(this), true);
         this.set('canSend', app.Utils.canSend());
-      },
+        this._loadClipItems(true).then(() => {
+          Chrome.Msg.listen(this._onChromeMessage);
 
-      /**
-       * Element is attached
-       * @memberOf MainPage
-       */
-      attached: function() {
-        Chrome.Msg.listen(this._onChromeMessage);
+          // listen for copy and cut events on document
+          document.addEventListener('cut', this._onCopy, true);
+          document.addEventListener('copy', this._onCopy, true);
 
-        // listen for copy and cut events on document
-        document.addEventListener('cut', this._onCopy, true);
-        document.addEventListener('copy', this._onCopy, true);
+          return Promise.resolve();
+        }).catch((err) => {
+          Chrome.Log.error(err.message, 'MainPage.ready', _ERR_LOAD);
+        });
       },
 
       /**
@@ -272,6 +279,7 @@
        * @memberOf MainPage
        */
       onCurrentPage: function() {
+        this.set('isBulkOp', false);
         this.set('canSend', app.Utils.canSend());
         this._selectFirst(true);
         this.updateDates();
@@ -282,7 +290,9 @@
        * @memberOf MainPage
        */
       onLeavePage: function() {
+        this.set('isBulkOp', false);
         this._closeUndoToast();
+        this._deselectAll();
       },
 
       /**
@@ -290,7 +300,7 @@
        * @memberOf MainPage
        */
       updateDates: function() {
-        if (this.clips === undefined) {
+        if (this.isBulkOp || (this.clips === undefined)) {
           return;
         }
         for (let i = 0; i &lt; this.clips.length; i++) {
@@ -356,26 +366,6 @@
       },
 
       /**
-       * Event: Label icon of clip row tapped
-       * @param {Event} event
-       * @param {{}} event.model
-       * @private
-       * @memberOf MainPage
-       */
-      _onLabelTapped: function(event) {
-        Chrome.GA.event(app.GA.EVENT.IMAGE_BUTTON, 'showLabelList');
-        const clipItem = event.model.clip;
-        if (this._isSelected(clipItem)) {
-          // prevent iron-select from handling
-          event.stopPropagation();
-          // select ourselves only
-          this._deselectAll();
-          this._select(clipItem);
-        }
-        this._showLabelsSelectDialog(false);
-      },
-
-      /**
        * Event: Undo Toast close button tapped
        * @private
        * @memberOf MainPage
@@ -393,20 +383,28 @@
        */
       _onUndoDeleteTapped: function() {
         Chrome.GA.event(Chrome.GA.EVENT.BUTTON, 'UNDO');
-        const addItems = [];
-        this.undoClips.forEach((undoClip) => {
-          addItems.push(undoClip);
-        });
-        // skip sort until done with bulkPut
-        skipSort = true;
-        app.ClipItem.bulkPut(addItems).then(() => {
-          skipSort = false;
-          this._sortClips();
+        this.set('isBulkOp', true);
+        app.ClipItem.bulkPut(this.undoClips).then(() => {
+          this.set('isBulkOp', false);
+          // reset selections
+          const list = this.$.ironList;
+          this.undoClips.forEach((clipItem) => {
+            // need to use new item reference - hashing issue in iron-list?
+            const newClipItem = this._getClip(clipItem.text);
+            if (newClipItem) {
+              list.selectItem(newClipItem);
+            }
+          });
+          this._setCurrentClip();
+          if (this.selClips &amp;&amp; this.selClips.length) {
+            list.scrollToItem(this.selClips[0]);
+          }
           this._closeUndoToast();
           return Promise.resolve();
-        }).catch(() => {
-          skipSort = false;
-          this._sortClips();
+        }).catch((err) => {
+          Chrome.Log.error(err.message, 'MainPage._onUndoDeleteTapped',
+              'Failed to undo delete.');
+          this.set('isBulkOp', false);
           this._closeUndoToast();
         });
       },
@@ -418,12 +416,8 @@
        */
       _onSelectAllTapped: function() {
         Chrome.GA.event(Chrome.GA.EVENT.ICON, 'selectAllClipItems');
-        const t = this.$.clipsTemplate;
         this._deselectAll();
-        for (let i = t.renderedItemCount - 1; i >= 0; i--) {
-          const clipItem = t.itemForElement(this.$$(`#clip${i}`));
-          this.push('selectedClips', clipItem);
-        }
+        this._selectAll();
       },
 
       /**
@@ -443,17 +437,21 @@
        */
       _onDeleteSelectedTapped: function() {
         Chrome.GA.event(Chrome.GA.EVENT.ICON, 'deleteSelectedClipItems');
-        this.splice('undoClips', 0, this.undoClips.length);
 
-        let keys = [];
-        this.selectedClips.forEach((selectedClip) => {
-          keys.push(selectedClip._id);
-          this.push('undoClips', selectedClip);
+        // save items for undo
+        const keys = [];
+        this.splice('undoClips', 0, this.undoClips.length);
+        this.selClips.forEach((clipItem) => {
+          keys.push(clipItem._id);
+          this.push('undoClips', clipItem);
         });
 
         if (keys.length) {
+          // skip updates until bulk operation is complete
+          this.set('isBulkOp', true);
+          this._deselectAll();
           app.ClipItem.remove(keys).then(() => {
-            this._deselectAll();
+            this.set('isBulkOp', false);
             const len = this.undoClips.length;
             let toastText =
                 (len === 1) ? 'Deleted 1 item.' : `Deleted ${len} items.`;
@@ -461,7 +459,8 @@
             this.$.undoToast.show();
             return Promise.resolve();
           }).catch((err) => {
-            Chrome.Log.error(err.message, 'Main._onDeleteSelectedRows',
+            this.set('isBulkOp', false);
+            Chrome.Log.error(err.message, 'MainPage._onDeleteSelectedRows',
                 'Failed to delete clips.');
           });
         }
@@ -486,7 +485,7 @@
         this.set('isPinFavs', !this.isPinFavs);
         Chrome.GA.event(Chrome.GA.EVENT.ICON, `pinFavorites: ${this.isPinFavs}`);
       },
-      
+
       /**
        * Event: Favorite filter menu icon tapped
        * @private
@@ -494,18 +493,24 @@
        */
       _onFavFilterTapped: function() {
         this.set('isFavFilter', !this.isFavFilter);
-        if (this.isFavFilter &amp;&amp; this.hasSelections) {
-          // deselect any selected non-fav rows
-          const len = this.selectedClips.length;
-          for (let i = len - 1; i >= 0; i--) {
-            if (!this.selectedClips[i].fav) {
-              this.splice('selectedClips', i, 1);
-            }
-          }
-        }
-        this.$.clipsTemplate.render();
         Chrome.GA.event(Chrome.GA.EVENT.ICON,
             `filterByFavorites: ${this.isFavFilter}`);
+
+        this._loadClipItems(true).catch((err) => {
+          Chrome.Log.error(err.message, 'MainPage._onFavFilterTapped', _ERR_LOAD);
+        });
+      },
+
+      /**
+       * Event: iron-list got focus
+       * @param {Event} event
+       * @param {ClipItem} event.model.clip
+       * @private
+       * @memberOf MainPage
+       */
+      _onFocused: function(event) {
+        // !Important prevent iron-list from handling
+        event.stopPropagation();
       },
 
       /**
@@ -515,30 +520,36 @@
        * @private
        * @memberOf MainPage
        */
-      _onClipTap: function(event) {
-        Chrome.GA.event(app.GA.EVENT.CLICK, 'clipItemRow');
+      _onClipRowTapped: function(event) {
         const isShift = event.detail.sourceEvent.shiftKey;
         const isCtrl = event.detail.sourceEvent.ctrlKey;
-        const currentClipItem = event.model.clip;
-        const t = this.$.clipsTemplate;
-        const el = this.$$(`#clip${event.model.index}`);
-        const endPos = t.indexForElement(el);
-        const selected = Polymer.dom(el).classList.contains('iron-selected');
+        const endPos = event.model.index;
+        const curClipItem = this.clips[endPos];
+        let selected = event.model.selected;
 
-        // prevent iron-selector from handling
-        event.stopPropagation();
+        Chrome.GA.event(app.GA.EVENT.CLICK, 'clipItemRow');
 
         if (isShift) {
-          // select range
+          // select range of rows
           let startPos = -1;
+
+          // override shitty iron-list scrolling
+          const list = this.$.ironList;
+          const firstIndex = list.firstVisibleIndex;
+          list.scrollToIndex(0);
+
           if (selected) {
             // deselect any contiguous selections after 
-            for (let i = endPos + 1; i &lt; t.renderedItemCount; i++) {
-              const clipItem = t.itemForElement(this.$$(`#clip${i}`));
-              if (!this._deselect(clipItem)) {
+            for (let i = endPos + 1; i &lt; this.clips.length; i++) {
+              const clipItem = this.clips[i];
+              if (this._isSelected(clipItem)) {
+                list.deselectItem(clipItem);
+              } else {
                 break;
               }
             }
+            list.scrollToIndex(firstIndex);
+            this._setCurrentClip();
             return;
           } else if (!this.hasSelections) {
             // select from first to current
@@ -546,7 +557,7 @@
           } else {
             for (let i = endPos - 1; i >= 0; i--) {
               // select from after newer selection to current
-              const clipItem = t.itemForElement(this.$$(`#clip${i}`));
+              const clipItem = this.clips[i];
               if (this._isSelected(clipItem)) {
                 startPos = i;
                 break;
@@ -554,9 +565,9 @@
             }
             if (startPos === -1) {
               // try the other direction
-              for (let i = endPos + 1; i &lt; t.renderedItemCount; i++) {
+              for (let i = endPos + 1; i &lt; this.clips.length; i++) {
                 // select from before older selection to current
-                const clipItem = t.itemForElement(this.$$(`#clip${i}`));
+                const clipItem = this.clips[i];
                 if (this._isSelected(clipItem)) {
                   startPos = i;
                   break;
@@ -566,31 +577,34 @@
           }
           if (startPos !== -1) {
             // found range, select it
+            const items = [];
             if (startPos &lt; endPos) {
               for (let i = startPos + 1; i &lt;= endPos; i++) {
-                const clipItem = t.itemForElement(this.$$(`#clip${i}`));
-                this._select(clipItem);
+                items.push(this.clips[i]);
               }
             } else if (startPos > endPos) {
               for (let i = startPos - 1; i >= endPos; i--) {
-                const clipItem = t.itemForElement(this.$$(`#clip${i}`));
-                this._select(clipItem);
+                items.push(this.clips[i]);
               }
             }
+            this.push('selClips', ...items);
           }
+          list.scrollToIndex(firstIndex);
+          this._setCurrentClip();
         } else if (isCtrl) {
           // toggle selection
           if (selected) {
-            this._deselect(currentClipItem);
+            this._deselect(curClipItem);
           } else {
-            this._select(currentClipItem);
+            this._select(curClipItem);
           }
         } else {
           // single select with toggle
-          const len = this.selectedClips.length;
+          const len = this.selClips.length;
           this._deselectAll();
           if (!selected || (len > 1)) {
-            this._select(currentClipItem);
+            // item not selected or multiple selections before tap
+            this._select(curClipItem);
           }
         }
       },
@@ -602,14 +616,12 @@
        * @private
        * @memberOf MainPage
        */
-      _onCopyTapped: function(event) {
+      _onRowCopyTapped: function(event) {
         Chrome.GA.event(app.GA.EVENT.IMAGE_BUTTON, 'copyClipItem');
         const clipItem = event.model.clip;
         clipItem.date = Date.now();
         clipItem.remote = false;
-        this._deselect(clipItem);
         clipItem.save().then(() => {
-          this._select(clipItem);
           // send message to copy to clipboard
           const msg =
               Chrome.JSONUtils.shallowCopy(app.ChromeMsg.COPY_TO_CLIPBOARD);
@@ -618,7 +630,7 @@
           Chrome.Msg.send(msg).catch(() => {});
           return Promise.resolve();
         }).catch((err) => {
-          Chrome.Log.error(err.message, 'Main._onCopyTapped',
+          Chrome.Log.error(err.message, 'MainPage._onRowCopyTapped',
               'Failed to copy item to clipboard.');
         });
 
@@ -633,17 +645,36 @@
        * @private
        * @memberOf MainPage
        */
-      _onFavTapped: function(event) {
+      _onRowFavTapped: function(event) {
         Chrome.GA.event(app.GA.EVENT.IMAGE_BUTTON, 'toggleFavorite');
         const clipItem = event.model.clip;
         if (clipItem) {
           clipItem.update({fav: !clipItem.fav}).catch((err) => {
-            Chrome.Log.error(err.message, 'Main._onFavTapped');
+            Chrome.Log.error(err.message, 'MainPage._onRowFavTapped');
           });
         }
 
         // prevent row selection
         event.stopPropagation();
+      },
+
+      /**
+       * Event: Label icon of clip row tapped
+       * @param {Event} event
+       * @param {{}} event.model
+       * @private
+       * @memberOf MainPage
+       */
+      _onRowLabelTapped: function(event) {
+        Chrome.GA.event(app.GA.EVENT.IMAGE_BUTTON, 'showLabelList');
+        const clipItem = event.model.clip;
+        this._deselectAll();
+        this._select(clipItem);
+
+        // prevent row deselection
+        event.stopPropagation();
+
+        this._showLabelsSelectDialog(false);
       },
 
       /**
@@ -663,7 +694,7 @@
       _initPinFavs: function() {
         this.set('isPinFavs', 'false');
       },
-      
+
       /**
        * Observer: The current clip changed
        * @private
@@ -719,6 +750,7 @@
        */
       _labelFilterChanged: function(newValue, oldValue) {
         if (typeof(oldValue) !== 'undefined') {
+          this._deselectAll();
           this._loadClipItems().catch((err) => {
             Chrome.Log.error(err.message, 'MainPage.setLabelFilter', _ERR_LOAD);
           });
@@ -734,30 +766,43 @@
        */
       _pinFavsChanged: function(newValue, oldValue) {
         if (typeof(oldValue) !== 'undefined') {
-          this._sortClips();
+          this._deselectAll();
+          this._sortClipItems();
+          this._selectFirst();
         }
       },
 
       /**
-       * Observer: selectedClips Array mutations
-       * @param {{}} changeRecord
+       * Observer: The bulkOp setting changed
+       * @param {boolean} newValue
+       * @param {boolean|undefined} oldValue
        * @private
        * @memberOf MainPage
        */
-      _selectedClipsAddedOrRemoved: function(changeRecord) {
-        if (changeRecord) {
-          this._setCurrentClip();
+      _bulkOpChanged: function(newValue, oldValue) {
+        if (typeof(oldValue) !== 'undefined') {
+          if (!newValue &amp;&amp; oldValue) {
+            // toggling from true to false
+            if (this.clips &amp;&amp; this.clips.length) {
+              this._sortClipItems();
+            } else {
+              // no clips
+              this.set('clips', []);
+              this._updateSelections([], 0);
+            }
+          }
         }
       },
 
       /**
-       * Observer: selectedDialogLabels Array mutations
+       * Observer: selDialogLabels Array mutations
        * @param {{}} changeRecord
        * @private
        * @memberOf MainPage
        */
-      _selectedDialogLabelsAddedOrRemoved: function(changeRecord) {
+      _selDialogLabelsAddedOrRemoved: function(changeRecord) {
         if (changeRecord) {
+          this.set('isBulkOp', true);
           const promises = [];
           if (this.isMultiLabelsEdit) {
             // track each added and removed label change and
@@ -774,29 +819,34 @@
                 removedNames.push(name);
               });
             });
-            this.selectedClips.forEach((clipItem) => {
+            this.selClips.forEach((clipItem) => {
               const names = clipItem.getLabelNames();
+              
               addedNames.forEach((addedName) => {
                 if (!clipItem.hasLabel(addedName)) {
                   names.push(addedName);
                 }
               });
+              
               removedNames.forEach((removedName) => {
                 if (clipItem.hasLabel(removedName)) {
                   const idx = names.indexOf(removedName);
                   names.splice(idx, 1);
                 }
               });
+              
               promises.push(clipItem.setLabels(names));
             });
           } else {
+            // apply to current clip
             const clipItem = this.currentClip;
-            promises.push(clipItem.setLabels(this.selectedDialogLabels));
+            promises.push(clipItem.setLabels(this.selDialogLabels));
           }
 
           Promise.all(promises).then(() => {
+            this.set('isBulkOp', false);
             if (this.labelFilter &amp;&amp;
-                !this.selectedDialogLabels.includes(this.labelFilter)) {
+                !this.selDialogLabels.includes(this.labelFilter)) {
               // deleted current label from item(s) 
               this.$.labelsDialog.close();
               return this._loadClipItems();
@@ -805,6 +855,7 @@
               return Promise.resolve();
             }
           }).catch((err) => {
+            this.set('isBulkOp', false);
             Chrome.Log.error(err.errorMessage,
                 'MainPage._onSelectedLabelsChanged', 'Failed to set label.');
           });
@@ -818,11 +869,7 @@
        * @memberOf MainPage
        */
       _computeHasSelections: function() {
-        let ret = false;
-        if (this.selectedClips &amp;&amp; this.selectedClips.length) {
-          ret = true;
-        }
-        return ret;
+        return !!(this.selClips &amp;&amp; this.selClips.length);
       },
 
       /**
@@ -856,7 +903,7 @@
        * @memberOf MainPage
        */
       _computeLabelsDialogTitle: function(multi) {
-        if (multi &amp;&amp; this.selectedClips &amp;&amp; (this.selectedClips.length > 1)) {
+        if (multi &amp;&amp; this.selClips &amp;&amp; (this.selClips.length > 1)) {
           return 'Change labels for selected clips';
         } else {
           return 'Set labels for the current clip';
@@ -884,7 +931,7 @@
       _computeFavIcon: function(isTrue) {
         return isTrue ? 'myicons:favorite' : 'myicons:favorite-border';
       },
-      
+
       /**
        * Computed Binding
        * @param {boolean} isTrue - true if pinning favorites
@@ -941,23 +988,52 @@
       },
 
       /**
+       * Computed Binding: Clip item classList
+       * @param {boolean} selected - is clip selected
+       * @returns {string} Clip item classList
+       * @private
+       * @memberOf MainPage
+       */
+      _computeClipClass: function(selected) {
+        let classList = 'clip-item';
+        if (selected) {
+          classList += ' selected';
+        }
+        return classList;
+      },
+
+      /**
        * Load the {@link ClipItem} objects
+       * @param {boolean} [selectFirst=true] - if true select first item
        * @returns {Promise&lt;void>}
        * @private
        * @memberOf MainPage
        */
-      _loadClipItems: function() {
+      _loadClipItems: function(selectFirst = true) {
         this._closeUndoToast();
+        this._deleteAllClipItems();
+        this._deselectAll();
         return app.ClipItem.loadAll(this.labelFilter).then((clipItems) => {
-          this.splice('clips', 0, this.clips.length);
-          this._deselectAll();
           // populate list
-          clipItems.forEach((clipItem) => {
-            this.push('clips', clipItem);
-          });
-          this._sortClips();
-          this._selectFirst();
-          this.$.clipList.scrollTop = 0;
+          if (this.isFavFilter) {
+            // favorites only
+            const favClipItems = clipItems.filter((clipItem) => {
+              return clipItem.fav;
+            });
+            this.push('clips', ...favClipItems);
+          } else {
+            this.push('clips', ...clipItems);
+          }
+          this._sortClipItems();
+          if (selectFirst) {
+            this._selectFirst();
+          }
+          // HACK not sure why this is needed but it loses selection
+          // on first opening of UI otherwise
+          this._deselectAll();
+          if (selectFirst) {
+            this._selectFirst();
+          }
           return Promise.resolve();
         });
       },
@@ -967,52 +1043,51 @@
        * @private
        * @memberOf MainPage
        */
-      _sortClips: function() {
-        if (skipSort) {
+      _sortClipItems: function() {
+        if (this.isBulkOp) {
           return;
         }
+
+        /**
+         * Sort by date
+         * @param {ClipItem} a
+         * @param {ClipItem} b
+         * @returns {number}
+         */
+        function byDate(a, b) {
+          return b.date - a.date;
+        }
+
+        // override shitty iron-list scrolling
+        const list = this.$.ironList;
+        const firstIndex = list.firstVisibleIndex;
+        list.scrollToIndex(0);
+
+        // copy of current selections
+        const selClips = this.selClips.slice();
+
         if (this.isPinFavs) {
           // sort favs and non-favs separately and keep favs on top
           const favClips = this.clips.filter((clip) => {
             return clip.fav;
           });
-          favClips.sort((a, b) => {
-            return b.date - a.date;
-          });
+          favClips.sort(byDate);
           const nonFavClips = this.clips.filter((clip) => {
             return !clip.fav;
           });
-          nonFavClips.sort((a, b) => {
-            return b.date - a.date;
-          });
-          this.splice('clips', 0, this.clips.length);
+          nonFavClips.sort(byDate);
+          this._deleteAllClipItems();
           // populate list
-          favClips.forEach((clipItem) => {
-            this.push('clips', clipItem);
-          });
-          nonFavClips.forEach((clipItem) => {
-            this.push('clips', clipItem);
-          });
+          this.push('clips', ...favClips);
+          this.push('clips', ...nonFavClips);
         } else {
-          this.clips.sort((a, b) => {
-            return b.date - a.date;
-          });
+          // sort by date
+          const clips = this.clips.slice();
+          clips.sort(byDate);
+          this._deleteAllClipItems();
+          this.push('clips', ...clips);
         }
-        this._selectionHack();
-      },
-
-      /**
-       * Hack for dom-repeat recycling nodes
-       * @see https://github.com/PolymerElements/iron-selector/issues/154
-       * @private
-       * @memberOf MainPage
-       */
-      _selectionHack: function() {
-        if (this.clips &amp;&amp; this.clips.length &amp;&amp; this.hasSelections) {
-          this.$.clipsTemplate.render();
-          this.$.clipsSelector.select(this.clips[0]);
-          this.$.clipsSelector.select(this.clips[0]);
-        }
+        this._updateSelections(selClips, firstIndex);
       },
 
       /**
@@ -1025,10 +1100,13 @@
         app.ClipItem.getNew(text).then((clipItem) => {
           if (this._getClipPos(clipItem.text) === -1) {
             if (!this.labelFilter || clipItem.hasLabel(this.labelFilter)) {
-              // add to list if not filtering or has our labelFiler
-              this.unshift('clips', clipItem);
-              this._sortClips();
-              this._select(clipItem);
+              // add to list if not filtering or has our labelFilter
+              if (this.isBulkOp) {
+                this.clips.unshift(clipItem);
+              } else {
+                this.unshift('clips', clipItem);
+                this._sortClipItems();
+              }
             }
           }
           return Promise.resolve();
@@ -1048,30 +1126,32 @@
       _updateClipItem: function(text, mods) {
         const pos = this._getClipPos(text);
         if (pos !== -1) {
+          const oldClipItem = this.clips[pos];
           let needsSort = false;
           const str = `clips.${pos}.`;
           for (const key of Object.keys(mods)) {
             // check if props that affect sort changed
             if (key === 'fav') {
-              if (this.isPinFavs &amp;&amp; (mods[key] !== this.clips[pos].fav)) {
+              if (this.isPinFavs &amp;&amp; (mods[key] !== oldClipItem.fav)) {
                 needsSort = true;
               }
             }
             this.set(`${str}${key}`, mods[key]);
           }
-          
+
           if (this.currentClip &amp;&amp;
-              (this.clips[pos].text === this.currentClip.text) &amp;&amp;
+              (oldClipItem.text === this.currentClip.text) &amp;&amp;
               mods.hasOwnProperty('labels')) {
             // update clip if labels changed
             this._setCurrentClip();
           }
-          
+
           if (!needsSort &amp;&amp; mods.hasOwnProperty('date')) {
             needsSort = true;
           }
+
           if (needsSort) {
-            this._sortClips();
+            this._sortClipItems();
           } else {
             this.updateDates();
           }
@@ -1087,8 +1167,23 @@
       _deleteClipItem: function(text) {
         const pos = this._getClipPos(text);
         if (pos !== -1) {
-          this.splice('clips', pos, 1);
-          this.updateDates();
+          if (this.isBulkOp) {
+            this.clips.splice(pos, 1);
+          } else {
+            this.splice('clips', pos, 1);
+            this.updateDates();
+          }
+        }
+      },
+
+      /**
+       * Delete all {@link ClipItem} objects
+       * @private
+       * @memberOf MainPage
+       */
+      _deleteAllClipItems: function() {
+        if (this.clips &amp;&amp; this.clips.length) {
+          this.splice('clips', 0, this.clips.length);
         }
       },
 
@@ -1119,14 +1214,18 @@
       },
 
       /**
-       * Filter list
-       * @param {ClipItem} clip - row to check
-       * @returns {boolean} true if row is visible
+       * Update the selected items
+       * @param {ClipItem[]} selClips - ClipItems to select
+       * @param {int} [scrollIndex = 0]
        * @private
        * @memberOf MainPage
        */
-      _filter: function(clip) {
-        return this.isFavFilter ? clip.fav : true;
+      _updateSelections: function(selClips, scrollIndex = 0) {
+        const list = this.$.ironList;
+        list.clearSelection();
+        this.push('selClips', ...selClips);
+        list.scrollToIndex(scrollIndex);
+        this._setCurrentClip();
       },
 
       /**
@@ -1137,7 +1236,7 @@
        * @memberOf MainPage
        */
       _isSelected: function(clipItem) {
-        const idx = this.selectedClips.findIndex((clip) => {
+        const idx = this.selClips.findIndex((clip) => {
           return (clip.text === clipItem.text);
         });
         return (idx !== -1);
@@ -1151,11 +1250,15 @@
        * @memberOf MainPage
        */
       _select: function(clipItem) {
-        if (!this._isSelected(clipItem)) {
-          this.push('selectedClips', clipItem);
-          return true;
+        let ret = false;
+        if (clipItem &amp;&amp; !this._isSelected(clipItem)) {
+          this.$.ironList.selectItem(clipItem);
+          if (!this.isBulkOp) {
+            this._setCurrentClip();
+          }
+          ret = true;
         }
-        return false;
+        return ret;
       },
 
       /**
@@ -1166,14 +1269,30 @@
        * @memberOf MainPage
        */
       _deselect: function(clipItem) {
-        const idx = this.selectedClips.findIndex((clip) => {
-          return (clip.text === clipItem.text);
-        });
-        if (idx !== -1) {
-          this.splice('selectedClips', idx, 1);
-          return true;
+        let ret = false;
+        if (clipItem &amp;&amp; this._isSelected(clipItem)) {
+          this.$.ironList.deselectItem(clipItem);
+          if (!this.isBulkOp) {
+            this._setCurrentClip();
+          }
+          ret = true;
         }
-        return false;
+        return ret;
+      },
+
+      /**
+       * Select all {@link ClipItem}
+       * @private
+       * @memberOf MainPage
+       */
+      _selectAll: function() {
+        if (this.clips &amp;&amp; this.clips.length) {
+          const list = this.$.ironList;
+          list.clearSelection();
+          this.push('selClips', ...this.clips);
+          list.scrollToIndex(0);
+          this._setCurrentClip();
+        }
       },
 
       /**
@@ -1182,9 +1301,10 @@
        * @memberOf MainPage
        */
       _deselectAll: function() {
-        if (this.selectedClips &amp;&amp; this.selectedClips.length) {
-          this.splice('selectedClips', 0, this.selectedClips.length);
+        if (this.selClips &amp;&amp; this.selClips.length) {
+          this.$.ironList.clearSelection();
         }
+        this._setCurrentClip();
       },
 
       /**
@@ -1196,16 +1316,14 @@
        * @memberOf MainPage
        */
       _selectFirst: function(ifNoSelections = false) {
-        this.$.clipsTemplate.render();
-        if (ifNoSelections &amp;&amp; this.selectedClips.length) {
+        if (!this.clips || !this.clips.length ||
+            (ifNoSelections &amp;&amp; this.selClips.length)) {
           return false;
         }
-        const el = this.$$('#clip0');
-        if (el) {
-          const clipItem = this.$.clipsTemplate.itemForElement(el);
-          return this._select(clipItem);
-        }
-        return false;
+        const clipItem = this.clips[0];
+        const ret = this._select(clipItem);
+        this.$.ironList.scrollToIndex(0);
+        return ret;
       },
 
       /**
@@ -1215,12 +1333,14 @@
        */
       _setCurrentClip: function() {
         let currentItem = null;
-        if (this.selectedClips &amp;&amp; this.selectedClips.length) {
-          currentItem = this.selectedClips[this.selectedClips.length - 1];
+        if (this.selClips &amp;&amp; this.selClips.length) {
+          currentItem = this.selClips[this.selClips.length - 1];
         }
         // override dirty checking
         this.set('currentClip', null);
-        this.set('currentClip', currentItem);
+        if (currentItem) {
+          this.set('currentClip', currentItem);
+        }
       },
 
       /**
@@ -1232,15 +1352,15 @@
       _getCommonLabelsForSelected: function() {
         const labels = [];
         this.labels.forEach((labelName) => {
-          let has = true;
-          for (let i = 0; i &lt; this.selectedClips.length; i++) {
-            const clipItem = this.selectedClips[i];
+          let hasLabel = true;
+          for (let i = 0; i &lt; this.selClips.length; i++) {
+            const clipItem = this.selClips[i];
             if (!clipItem.hasLabel(labelName)) {
-              has = false;
+              hasLabel = false;
               break;
             }
           }
-          if (has) {
+          if (hasLabel) {
             labels.push(labelName);
           }
         });
@@ -1262,10 +1382,10 @@
           });
           return Promise.resolve();
         }).then(() => {
-          if (multi &amp;&amp; (this.selectedClips.length > 1)) {
+          if (multi &amp;&amp; (this.selClips.length > 1)) {
             // for multi mode, will apply to all selectedClips
             const labels = this._getCommonLabelsForSelected();
-            this.set('selectedDialogLabels', labels);
+            this.set('selDialogLabels', labels);
           } else {
             this._setSelectedLabels(this.currentClip);
           }
@@ -1286,14 +1406,13 @@
        * @memberOf MainPage
        */
       _setSelectedLabels: function(clipItem) {
-        this.splice('selectedDialogLabels', 0, this.selectedDialogLabels.length);
-        if (!clipItem) {
-          return;
+        if (this.selDialogLabels &amp;&amp; this.selDialogLabels.length) {
+          this.splice('selDialogLabels', 0, this.selDialogLabels.length);
         }
-        const names = clipItem.getLabelNames();
-        names.forEach((name) => {
-          this.push('selectedDialogLabels', name);
-        });
+        if (clipItem) {
+          const names = clipItem.getLabelNames();
+          this.push('selDialogLabels', ...names);
+        }
       },
 
       /**
@@ -1302,7 +1421,9 @@
        * @memberOf MainPage
        */
       _closeUndoToast: function() {
-        this.splice('undoClips', 0, this.undoClips.length);
+        if (this.undoClips &amp;&amp; this.undoClips.length) {
+          this.splice('undoClips', 0, this.undoClips.length);
+        }
         this.$.undoToast.close();
       },
     });
@@ -1314,6 +1435,11 @@
      */
     function _onLoad() {
       const db = app.DB.get();
+      if (!db) {
+        Chrome.Log.error('Failed to get database reference', 'MainPage._onLoad',
+            'Database not found');
+        return;
+      }
 
       db.clipItems.hook('creating', function(primKey, obj) {
         // eslint-disable-next-line no-invalid-this
@@ -1384,7 +1510,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on November 24th 2017, 12:15:33 am
+		on December 9th 2017, 8:22:46 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
