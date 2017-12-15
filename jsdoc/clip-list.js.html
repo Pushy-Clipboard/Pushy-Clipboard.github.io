@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: clip-list.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.DB.html">app.DB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="Background.html">Background</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ClipList.html">ClipList</a></li><li><a href="ClipRow.html">ClipRow</a></li><li><a href="ClipViewer.html">ClipViewer</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="DevicesPage.html">DevicesPage</a></li><li><a href="ErrorPage.html">ErrorPage</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="LabelsDialog.html">LabelsDialog</a></li><li><a href="LabelsPage.html">LabelsPage</a></li><li><a href="Main.html">Main</a></li><li><a href="MainPage.html">MainPage</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li><li><a href="SettingBackground.html">SettingBackground</a></li><li><a href="SettingDropdown.html">SettingDropdown</a></li><li><a href="SettingLink.html">SettingLink</a></li><li><a href="SettingSlider.html">SettingSlider</a></li><li><a href="SettingsPage.html">SettingsPage</a></li><li><a href="SettingText.html">SettingText</a></li><li><a href="SettingTime.html">SettingTime</a></li><li><a href="SettingToggle.html">SettingToggle</a></li><li><a href="SignInPage.html">SignInPage</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Chrome.Time.html">Chrome.Time</a></li><li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li><li><a href="Label.html">Label</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ClipList.html#.event:row-label-tap">ClipList.event:row-label-tap</a></li><li><a href="ClipList.html#.event:selected-clip-change">ClipList.event:selected-clip-change</a></li><li><a href="ClipRow.html#.event:label-tap">ClipRow.event:label-tap</a></li><li><a href="ClipViewer.html#.event:labels-tapped">ClipViewer.event:labels-tapped</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: clip-list.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">'use strict';
+
+  new ExceptionHandler();
+
+  /**
+   * Polymer element to display a list of {@link ClipItem} objects
+   * @namespace ClipList
+   */
+  Polymer({
+    is: 'clip-list',
+
+    properties: {
+      /**
+       * Fired when the selected clip changes
+       * @event selected-clip-change
+       * @memberOf ClipList
+       */
+
+      /**
+       * Fired when the label button of a row is tapped
+       * @event row-label-tap
+       * @memberOf ClipList
+       */
+
+      /**
+       * Array of {@link ClipItem} objects filtered by {@link labelFilter}
+       * @memberOf ClipList
+       */
+      clips: {
+        type: Array,
+        value: [],
+      },
+
+      /**
+       * Array of selected {@link ClipItem} objects
+       * @memberOf ClipList
+       */
+      selClips: {
+        type: Array,
+        value: [],
+      },
+
+      /**
+       * True if we are showing favorite items at top of list
+       * @memberOf ClipList
+       */
+      isPinFavs: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        observer: '_pinFavsChanged',
+      },
+
+      /**
+       * True if we are only showing favorite items
+       * @memberOf ClipList
+       */
+      isFavFilter: {
+        type: Boolean,
+        value: false,
+        notify: true,
+      },
+
+      /**
+       * {@link Label} name for filtering our items
+       * @type string
+       * @memberOf ClipList
+       */
+      labelFilter: {
+        type: String,
+        value: null,
+        notify: true,
+      },
+      
+      /**
+       * True if we are performing an operation on multiple clips
+       * @memberOf ClipList
+       */
+      isBulkOp: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        observer: '_bulkOpChanged',
+      },
+    },
+
+    /**
+     * Element is ready
+     * @memberOf ClipList
+     */
+    ready: function() {
+      this.addEventListener('focus', this._onFocused.bind(this), true);
+    },
+
+    /**
+     * Event: iron-list got focus
+     * @param {Event} event
+     * @param {ClipItem} event.model.clip
+     * @private
+     * @memberOf ClipList
+     */
+    _onFocused: function(event) {
+      // !?Important prevent iron-list from handling
+      event.stopPropagation();
+    },
+
+    /**
+     * Load the {@link ClipItem} objects
+     * @param {boolean} [isSelectFirst=true] - if true select first item
+     * @returns {Promise&lt;void>}
+     * @memberOf ClipList
+     */
+    loadClipItems: function(isSelectFirst = true) {
+      this._deleteAllClipItems();
+      this.deselectAll();
+      return app.ClipItem.loadAll(this.labelFilter).then((clipItems) => {
+        // populate list
+        if (this.isFavFilter) {
+          // favorites only
+          const favClipItems = clipItems.filter((clipItem) => {
+            return clipItem.fav;
+          });
+          this.push('clips', ...favClipItems);
+        } else {
+          this.push('clips', ...clipItems);
+        }
+        this._sortClipItems();
+        if (isSelectFirst) {
+          this.selectFirst();
+        }
+        return Promise.resolve();
+      });
+    },
+
+    /**
+     * Add a {@link ClipItem} to the list
+     * @param {string} text - ClipItem text
+     * @private
+     * @memberOf ClipList
+     */
+    addClipItem: function(text) {
+      app.ClipItem.getNew(text).then((clipItem) => {
+        if (this._getClipPos(clipItem.text) === -1) {
+          if (!this.labelFilter || clipItem.hasLabel(this.labelFilter)) {
+            // add to list if not filtering or has our labelFilter
+            if (this.isBulkOp) {
+              this.clips.unshift(clipItem);
+            } else {
+              this.unshift('clips', clipItem);
+              this._sortClipItems();
+            }
+          }
+        }
+        return Promise.resolve();
+      }).catch((err) => {
+        Chrome.Log.error(err.message, 'ClipList._addClipItem',
+            'Failed to add clip item');
+      });
+    },
+
+    /**
+     * Update a {@link ClipItem} in the list
+     * @param {string} text - ClipItem text
+     * @param {Object} mods - key/value pairs of changes
+     * @private
+     * @memberOf ClipList
+     */
+    updateClipItem: function(text, mods) {
+      const pos = this._getClipPos(text);
+      if (pos === -1) {
+        return;
+      }
+
+      const clipItem = this.clips[pos];
+      let needsSort = false;
+      for (const key of Object.keys(mods)) {
+        // check if props that affect sort changed
+        if (key === 'fav') {
+          if (this.isPinFavs &amp;&amp; (mods[key] !== clipItem.fav)) {
+            needsSort = true;
+          }
+        }
+        this.set(`clips.${pos}.${key}`, mods[key]);
+      }
+
+      if (!needsSort &amp;&amp; mods.hasOwnProperty('date')) {
+        needsSort = true;
+      }
+
+      if (this.currentClip &amp;&amp; mods.hasOwnProperty('labels') &amp;&amp;
+          (clipItem.text === this.currentClip.text)) {
+        // update current clip if labels changed
+        this.fire('selected-clip-change');
+      }
+
+      if (needsSort) {
+        this._sortClipItems();
+      } else {
+        this.updateDates();
+      }
+    },
+
+    /**
+     * Delete a {@link ClipItem} from the list
+     * @param {string} text - ClipItem text
+     * @private
+     * @memberOf ClipList
+     */
+    deleteClipItem: function(text) {
+      const pos = this._getClipPos(text);
+      if (pos !== -1) {
+        if (this.isBulkOp) {
+          this.clips.splice(pos, 1);
+        } else {
+          this.splice('clips', pos, 1);
+          this.updateDates();
+        }
+      }
+    },
+
+    /**
+     * Update the relative dates
+     * @memberOf ClipList
+     */
+    updateDates: function() {
+      if (this.isBulkOp || !this._hasClipItems()) {
+        return;
+      }
+      for (let i = 0; i &lt; this.clips.length; i++) {
+        const date = this.clips[i].date;
+        this.set(`clips.${i}.date`, date - 1);
+        this.set(`clips.${i}.date`, date);
+      }
+    },
+
+    /**
+     * Get clip from text
+     * @param {string} clipText - text to find
+     * @returns {?ClipItem} null if not found
+     * @memberOf ClipList
+     */
+    getClip: function(clipText) {
+      let ret = null;
+      if (this._hasClipItems()) {
+        ret = this.clips.find((clipItem) => {
+          return (clipText === clipItem.text);
+        });
+      }
+      return ret;
+    },
+
+    /**
+     * Get the number of selected {@link ClipItem} objects
+     * @returns {int}
+     * @private
+     * @memberOf ClipList
+     */
+    getSelectedCount: function() {
+      let ret = 0;
+      if (this._hasSelections()) {
+        ret = this.selClips.length;
+      }
+      return ret;
+    },
+
+    /**
+     * Get the selected {@link ClipItem} objects
+     * @returns {ClipItem[]}
+     * @private
+     * @memberOf ClipList
+     */
+    getSelected: function() {
+      let ret = [];
+      if (this._hasSelections()) {
+        ret = this.selClips;
+      }
+      return ret;
+    },
+
+    /**
+     * Get last selected {@link ClipItem}
+     * @returns {?ClipItem} null if none selected
+     * @private
+     * @memberOf ClipList
+     */
+    getLastSelected: function() {
+      let clipItem = null;
+      if (this._hasSelections()) {
+        clipItem = this.selClips[this.selClips.length - 1];
+      }
+      return clipItem;
+    },
+
+    /**
+     * Select all {@link ClipItem}
+     * @memberOf ClipList
+     */
+    selectAll: function() {
+      if (this._hasClipItems()) {
+        const list = this.$.ironList;
+        list.clearSelection();
+        this.push('selClips', ...this.clips);
+        list.scrollToIndex(0);
+        this.fire('selected-clip-change');
+      }
+    },
+
+    /**
+     * Deselect all {@link ClipItem}
+     * @memberOf ClipList
+     */
+    deselectAll: function() {
+      if (this._hasSelections()) {
+        this.$.ironList.clearSelection();
+      }
+      this.fire('selected-clip-change');
+    },
+
+    /**
+     * Select the given array of {@link ClipItem} objects
+     * @param {ClipItem[]} clipItems
+     * @memberOf ClipList
+     */
+    selectClipItems: function(clipItems) {
+      clipItems = clipItems || [];
+
+      const list = this.$.ironList;
+
+      clipItems.forEach((clipItem) => {
+        list.selectItem(clipItem);
+      });
+
+      if (this._hasSelections()) {
+        list.scrollToItem(this.selClips[0]);
+      }
+    },
+
+    /**
+     * Select first item in list, if it is not already
+     * @param {boolean} [ifNoSelections=false] - if true,
+     * only do if no selections
+     * @returns {boolean} true if selected
+     * @memberOf ClipList
+     */
+    selectFirst: function(ifNoSelections = false) {
+      if (!this._hasClipItems() || (ifNoSelections &amp;&amp; this._hasSelections())) {
+        return false;
+      }
+      this.$.ironList.scrollToIndex(0);
+      return this._select(this.clips[0]);
+    },
+
+    /**
+     * Event: Tap on clip row - handle selections like a tree select
+     * @param {Event} event
+     * @param {ClipItem} event.model.clip
+     * @private
+     * @memberOf ClipList
+     */
+    _onClipRowTapped: function(event) {
+      const isShift = event.detail.sourceEvent.shiftKey;
+      const isCtrl = event.detail.sourceEvent.ctrlKey;
+      const endPos = event.model.index;
+      const curClipItem = this.clips[endPos];
+      let selected = event.model.selected;
+
+      Chrome.GA.event(app.GA.EVENT.CLICK, 'clipItemRow');
+
+      if (isShift) {
+        // select range of rows
+        let startPos = -1;
+
+        // override shitty iron-list scrolling
+        const list = this.$.ironList;
+        const firstIndex = list.firstVisibleIndex;
+        list.scrollToIndex(0);
+
+        if (selected) {
+          // deselect any contiguous selections after 
+          for (let i = endPos + 1; i &lt; this.clips.length; i++) {
+            const clipItem = this.clips[i];
+            if (this._isSelected(clipItem)) {
+              list.deselectItem(clipItem);
+            } else {
+              break;
+            }
+          }
+          list.scrollToIndex(firstIndex);
+          this.fire('selected-clip-change');
+          return;
+        } else if (!this._hasSelections()) {
+          // select from first to current
+          startPos = 0;
+        } else {
+          for (let i = endPos - 1; i >= 0; i--) {
+            // select from after newer selection to current
+            const clipItem = this.clips[i];
+            if (this._isSelected(clipItem)) {
+              startPos = i;
+              break;
+            }
+          }
+          if (startPos === -1) {
+            // try the other direction
+            for (let i = endPos + 1; i &lt; this.clips.length; i++) {
+              // select from before older selection to current
+              const clipItem = this.clips[i];
+              if (this._isSelected(clipItem)) {
+                startPos = i;
+                break;
+              }
+            }
+          }
+        }
+        if (startPos !== -1) {
+          // found range, select it
+          const items = [];
+          if (startPos &lt; endPos) {
+            for (let i = startPos + 1; i &lt;= endPos; i++) {
+              items.push(this.clips[i]);
+            }
+          } else if (startPos > endPos) {
+            for (let i = startPos - 1; i >= endPos; i--) {
+              items.push(this.clips[i]);
+            }
+          }
+          this.push('selClips', ...items);
+        }
+        list.scrollToIndex(firstIndex);
+        this.fire('selected-clip-change');
+      } else if (isCtrl) {
+        // toggle selection
+        if (selected) {
+          this._deselect(curClipItem);
+        } else {
+          this._select(curClipItem);
+        }
+      } else {
+        // single select with toggle
+        const len = this.selClips.length;
+        this.deselectAll();
+        if (!selected || (len > 1)) {
+          // item not selected or multiple selections before tap
+          this._select(curClipItem);
+        }
+      }
+    },
+
+    /**
+     * Event: Label icon of clip row tapped
+     * @param {Event} event
+     * @param {{}} event.model
+     * @private
+     * @memberOf ClipList
+     */
+    _onRowLabelTapped: function(event) {
+      Chrome.GA.event(app.GA.EVENT.IMAGE_BUTTON, 'rowLabelTapped');
+      this.deselectAll();
+      this._select(event.model.clip);
+      this.fire('row-label-tap');
+    },
+
+    /**
+     * Observer: The pinFavs setting changed
+     * @param {boolean} newValue
+     * @param {boolean|undefined} oldValue
+     * @private
+     * @memberOf ClipList
+     */
+    _pinFavsChanged: function(newValue, oldValue) {
+      if (typeof(oldValue) !== 'undefined') {
+        this.deselectAll();
+        this._sortClipItems();
+        this.selectFirst();
+      }
+    },
+
+    /**
+     * Do we have any {@link ClipItem} objects in the list
+     * @returns {boolean} true if we have at least one clip
+     * @private
+     * @memberOf ClipList
+     */
+    _hasClipItems: function() {
+      return !!(this.clips &amp;&amp; this.clips.length);
+    },
+
+    /**
+     * Get position of row with given text
+     * @param {string} clipText - text to find
+     * @returns {int} position in array, -1 if not found
+     * @private
+     * @memberOf ClipList
+     */
+    _getClipPos: function(clipText) {
+      let ret = -1;
+      if (this._hasClipItems()) {
+        ret = this.clips.findIndex((clipItem) => {
+          return (clipText === clipItem.text);
+        });
+      }
+      return ret;
+    },
+
+    /**
+     * Delete all {@link ClipItem} objects
+     * @private
+     * @memberOf ClipList
+     */
+    _deleteAllClipItems: function() {
+      if (this._hasClipItems()) {
+        this.splice('clips', 0, this.clips.length);
+      }
+    },
+
+    /**
+     * Sort the {@link ClipItem} list
+     * @private
+     * @memberOf ClipList
+     */
+    _sortClipItems: function() {
+      if (this.isBulkOp) {
+        return;
+      }
+
+      /**
+       * Sort by date
+       * @param {ClipItem} a
+       * @param {ClipItem} b
+       * @returns {number}
+       */
+      function byDate(a, b) {
+        return b.date - a.date;
+      }
+
+      // override shitty iron-list scrolling
+      const list = this.$.ironList;
+      const firstIndex = list.firstVisibleIndex;
+      list.scrollToIndex(0);
+
+      // copy of current selections
+      const selClips = this.selClips.slice();
+
+      if (this.isPinFavs) {
+        // sort favs and non-favs separately and keep favs on top
+        const favClips = this.clips.filter((clip) => {
+          return clip.fav;
+        });
+        favClips.sort(byDate);
+        const nonFavClips = this.clips.filter((clip) => {
+          return !clip.fav;
+        });
+        nonFavClips.sort(byDate);
+        this._deleteAllClipItems();
+        // populate list
+        this.push('clips', ...favClips);
+        this.push('clips', ...nonFavClips);
+      } else {
+        // sort by date
+        const clips = this.clips.slice();
+        clips.sort(byDate);
+        this._deleteAllClipItems();
+        this.push('clips', ...clips);
+      }
+      this._updateSelections(selClips, firstIndex);
+    },
+
+    /**
+     * Update the selected items
+     * @param {ClipItem[]} selClips - ClipItems to select
+     * @param {int} [scrollIndex = 0]
+     * @private
+     * @memberOf ClipList
+     */
+    _updateSelections: function(selClips, scrollIndex = 0) {
+      selClips = selClips || [];
+      const list = this.$.ironList;
+      list.clearSelection();
+      this.push('selClips', ...selClips);
+      list.scrollToIndex(scrollIndex);
+      this.fire('selected-clip-change');
+    },
+
+    /**
+     * Do we have selected items
+     * @returns {boolean}
+     * @private
+     * @memberOf ClipList
+     */
+    _hasSelections: function() {
+      return !!(this.selClips &amp;&amp; this.selClips.length);
+    },
+
+    /**
+     * Is a {@link ClipItem} selected
+     * @param {ClipItem} clipItem
+     * @returns {boolean}
+     * @private
+     * @memberOf ClipList
+     */
+    _isSelected: function(clipItem) {
+      const idx = this.selClips.findIndex((clip) => {
+        return (clip.text === clipItem.text);
+      });
+      return (idx !== -1);
+    },
+
+    /**
+     * Select {@link ClipItem} if not already
+     * @param {ClipItem} clipItem
+     * @returns {boolean} true if selected
+     * @private
+     * @memberOf ClipList
+     */
+    _select: function(clipItem) {
+      let ret = false;
+      if (clipItem &amp;&amp; !this._isSelected(clipItem)) {
+        this.$.ironList.selectItem(clipItem);
+        if (!this.isBulkOp) {
+          this.fire('selected-clip-change');
+        }
+        ret = true;
+      }
+      return ret;
+    },
+
+    /**
+     * Deselect {@link ClipItem} if not already
+     * @param {ClipItem} clipItem
+     * @returns {boolean} true if deselected
+     * @private
+     * @memberOf ClipList
+     */
+    _deselect: function(clipItem) {
+      let ret = false;
+      if (clipItem &amp;&amp; this._isSelected(clipItem)) {
+        this.$.ironList.deselectItem(clipItem);
+        if (!this.isBulkOp) {
+          this.fire('selected-clip-change');
+        }
+        ret = true;
+      }
+      return ret;
+    },
+
+    /**
+     * Observer: The bulkOp setting changed
+     * @param {boolean} newValue
+     * @param {boolean|undefined} oldValue
+     * @private
+     * @memberOf ClipList
+     */
+    _bulkOpChanged: function(newValue, oldValue) {
+      if (typeof(oldValue) !== 'undefined') {
+        if (!newValue &amp;&amp; oldValue) {
+          // toggling from true to false
+          if (this._hasClipItems()) {
+            this._sortClipItems();
+            this.updateDates();
+          } else {
+            // no clips
+            this.set('clips', []);
+            this._updateSelections([], 0);
+          }
+        }
+      }
+    },
+  });</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on December 15th 2017, 9:43:13 am
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
