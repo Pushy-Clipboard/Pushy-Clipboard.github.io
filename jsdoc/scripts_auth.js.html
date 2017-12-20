@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Source: device.js</title>
+	<title>Documentation Source: scripts/auth.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -86,7 +86,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: device.js</h1>
+		<h1 class="page-title">Source: scripts/auth.js</h1>
     
 <section>
     <article>
@@ -95,154 +95,62 @@
  * Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
  * Licensed under Apache 2.0
  * https://opensource.org/licenses/Apache-2.0
- * https://goo.gl/wFvBM1
+ * https://github.com/opus1269/chrome-extension-utils/blob/master/LICENSE.md
  */
-(function(window) {
+window.Chrome = window.Chrome || {};
+
+/**
+ * Google authorization utilities
+ * @see https://developer.chrome.com/apps/identity
+ * @namespace
+ */
+Chrome.Auth = (function() {
   'use strict';
 
   new ExceptionHandler();
 
-  /**
-   * Creates a new Device instance.
-   * @constructor
-   * @alias Device
-   * @param {string} model - The model name of a device
-   * @param {string} sn - The serial number (or other descriptor) of a device
-   * @param {string} os - The operating system of a device
-   * @param {string} nickname - The nickname of a device
-   * @param {int} lastSeen - A date in millis from the epoch
-   */
-  const Device = function(model, sn, os, nickname, lastSeen) {
-    this.model = model;
-    this.sn = sn;
-    this.os = os;
-    this.nickname = nickname;
-    if (lastSeen) {
-      this.lastSeen = lastSeen;
-    } else {
-      this.lastSeen = Date.now();
-    }
+  const chromep = new ChromePromise();
+
+  return {
+    /**
+     * Get our OAuth2.0 token
+     * @param {boolean} interactive - if true may block
+     * @returns {Promise&lt;string>} An access token
+     * @memberOf Chrome.Auth
+     */
+    getToken: function(interactive = false) {
+      return chromep.identity.getAuthToken({
+        'interactive': interactive,
+      }).then((token) => {
+        return Promise.resolve(token);
+      });
+    },
+
+    /**
+     * Remove our cached auth token
+     * @param {string|null} [curToken=null] token to remove
+     * @returns {Promise.&lt;string>} the old token
+     */
+    removeCachedToken: function(curToken = null) {
+      let oldToken = null;
+      if (curToken === null) {
+        return this.getToken(false).then((token) => {
+          oldToken = token;
+          return chromep.identity.removeCachedAuthToken({'token': token});
+        }).then(() => {
+          return Promise.resolve(oldToken);
+        });
+      } else {
+        oldToken = curToken;
+        return chromep.identity.removeCachedAuthToken({
+          'token': curToken,
+        }).then(() => {
+          return Promise.resolve(oldToken);
+        });
+      }
+    },
   };
-
-  /**
-   * Model key
-   * @const
-   * @default
-   */
-  Device.MODEL = 'dM';
-
-  /**
-   * Serial Number key
-   * @const
-   * @default
-   */
-  Device.SN = 'dSN';
-
-  /**
-   * Operating system key
-   * @const
-   * @default
-   */
-  Device.OS = 'dOS';
-
-  /**
-   * Nickname key
-   * @const
-   * @default
-   */
-  Device.NICKNAME = 'dN';
-
-  /**
-   * Get a String that uniquely (hopefully) determines this {@link Device}
-   * @returns {string} unique name
-   */
-  Device.prototype.getUniqueName = function() {
-    return `${this.model} - ${this.sn} - ${this.os}`;
-  };
-
-  /**
-   * Get name suitable for display
-   * @returns {string} descriptive name of {@link Device}
-   */
-  Device.prototype.getName = function() {
-    let name = this.nickname;
-    if (Chrome.Utils.isWhiteSpace(name)) {
-      name = this.getUniqueName();
-    }
-    return name;
-  };
-
-  /**
-   * Determine if this is our {@link Device}
-   * @returns {boolean} true if this is our {@link Device}
-   */
-  Device.prototype.isMe = function() {
-    return (this.getUniqueName() === Device.myUniqueName());
-  };
-
-  /**
-   * Get unique name of our {@link Device}
-   * @returns {string} unique name
-   */
-  Device.myUniqueName = function() {
-    return `${Device.myModel()} - ${Device.mySN()} - ${Device.myOS()}`;
-  };
-
-  /**
-   * Get display name of our {@link Device}
-   * @returns {string} display name
-   */
-  Device.myName = function() {
-    let name = Device.myNickname();
-    if (Chrome.Utils.isWhiteSpace(name)) {
-      name = Device.myUniqueName();
-    }
-    return name;
-  };
-
-  /**
-   * Get model name of our {@link Device}
-   * @returns {string} model name
-   */
-  Device.myModel = function() {
-    return 'Chrome';
-  };
-
-  /**
-   * Get serial number of our {@link Device}
-   * @returns {string} serial number
-   */
-  Device.mySN = function() {
-    return Chrome.Storage.get('deviceSN');
-  };
-
-  /**
-   * Get operating system of our {@link Device}
-   * @returns {string} operating system
-   */
-  Device.myOS = function() {
-    return Chrome.Storage.get('os');
-  };
-
-  /**
-   * Get os version of our {@link Device}
-   * @returns {string} operating system version
-   */
-  Device.myVersion = function() {
-    return Chrome.Utils.getChromeVersion();
-  };
-
-  /**
-   * Get nickname of our {@link Device}
-   * @returns {string} nickname
-   */
-  Device.myNickname = function() {
-    return Chrome.Storage.get('deviceNickname');
-  };
-
-  window.app = window.app || {};
-  window.app.Device = Device;
-})(window);
+})();
 </pre>
     </article>
 </section>
