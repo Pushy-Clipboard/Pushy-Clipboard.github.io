@@ -1,8 +1,10 @@
 com.weebly.opus1269.clipman.app
+com.weebly.opus1269.clipman.backup
 com.weebly.opus1269.clipman.db
 com.weebly.opus1269.clipman.model
 com.weebly.opus1269.clipman.msg
 com.weebly.opus1269.clipman.services
+com.weebly.opus1269.clipman.ui.backup
 com.weebly.opus1269.clipman.ui.base
 com.weebly.opus1269.clipman.ui.clips
 com.weebly.opus1269.clipman.ui.devices
