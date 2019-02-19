@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Source: pages/labels-page/labels-page.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.Alarm.html">app.Alarm</a></li><li><a href="app.Backup.html">app.Backup</a></li><li><a href="app.CB.html">app.CB</a></li><li><a href="app.ChromeMsg.html">app.ChromeMsg</a></li><li><a href="app.Data.html">app.Data</a></li><li><a href="app.DB.html">app.DB</a></li><li><a href="app.Devices.html">app.Devices</a></li><li><a href="app.Drive.html">app.Drive</a></li><li><a href="app.Fb.html">app.Fb</a></li><li><a href="app.GA.html">app.GA</a></li><li><a href="app.Gae.html">app.Gae</a></li><li><a href="app.Main.html">app.Main</a></li><li><a href="app.MergeDBData.html">app.MergeDBData</a></li><li><a href="app.Msg.html">app.Msg</a></li><li><a href="app.Notify.html">app.Notify</a></li><li><a href="app.Permissions.html">app.Permissions</a></li><li><a href="app.Reg.html">app.Reg</a></li><li><a href="app.SW.html">app.SW</a></li><li><a href="app.User.html">app.User</a></li><li><a href="app.Utils.html">app.Utils</a></li><li><a href="app.Zip.html">app.Zip</a></li><li><a href="Background.html">Background</a></li><li><a href="BackupPage.html">BackupPage</a></li><li><a href="BackupRow.html">BackupRow</a></li><li><a href="Chrome.Auth.html">Chrome.Auth</a></li><li><a href="Chrome.GA.html">Chrome.GA</a></li><li><a href="Chrome.Http.html">Chrome.Http</a></li><li><a href="Chrome.JSONUtils.html">Chrome.JSONUtils</a></li><li><a href="Chrome.Locale.html">Chrome.Locale</a></li><li><a href="Chrome.Log.html">Chrome.Log</a></li><li><a href="Chrome.Msg.html">Chrome.Msg</a></li><li><a href="Chrome.Storage.html">Chrome.Storage</a></li><li><a href="Chrome.Utils.html">Chrome.Utils</a></li><li><a href="ClipList.html">ClipList</a></li><li><a href="ClipRow.html">ClipRow</a></li><li><a href="ClipViewer.html">ClipViewer</a></li><li><a href="ConfirmDialog.html">ConfirmDialog</a></li><li><a href="ContentScript.html">ContentScript</a></li><li><a href="DevicesPage.html">DevicesPage</a></li><li><a href="ErrorDialog.html">ErrorDialog</a></li><li><a href="ErrorPage.html">ErrorPage</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="LabelsDialog.html">LabelsDialog</a></li><li><a href="LabelsPage.html">LabelsPage</a></li><li><a href="Locale.html">Locale</a></li><li><a href="LocalizeBehavior.html">LocalizeBehavior</a></li><li><a href="MainPage.html">MainPage</a></li><li><a href="ReceiveMsg.html">ReceiveMsg</a></li><li><a href="ServiceWorker.html">ServiceWorker</a></li><li><a href="SettingDropdown.html">SettingDropdown</a></li><li><a href="SettingLink.html">SettingLink</a></li><li><a href="SettingsPage.html">SettingsPage</a></li><li><a href="SettingText.html">SettingText</a></li><li><a href="SettingToggle.html">SettingToggle</a></li><li><a href="SignInPage.html">SignInPage</a></li><li><a href="WaiterElement.html">WaiterElement</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="app.BackupFile.html">app.BackupFile</a></li><li><a href="Chrome.Time.html">Chrome.Time</a></li><li><a href="ClipItem.html">ClipItem</a></li><li><a href="Device.html">Device</a></li><li><a href="ExceptionHandler.html">ExceptionHandler</a></li><li><a href="ExHandler.html">ExHandler</a></li><li><a href="Label.html">Label</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BackupRow.html#.event:change">BackupRow.event:change</a></li><li><a href="BackupRow.html#.event:delete">BackupRow.event:delete</a></li><li><a href="ClipList.html#.event:row-label-tap">ClipList.event:row-label-tap</a></li><li><a href="ClipList.html#.event:selected-clip-change">ClipList.event:selected-clip-change</a></li><li><a href="ClipRow.html#.event:label-tap">ClipRow.event:label-tap</a></li><li><a href="ClipViewer.html#.event:clip-add">ClipViewer.event:clip-add</a></li><li><a href="ClipViewer.html#.event:labels-tapped">ClipViewer.event:labels-tapped</a></li><li><a href="ClipViewer.html#.event:text-changed">ClipViewer.event:text-changed</a></li><li><a href="ConfirmDialog.html#.event:confirm-tap">ConfirmDialog.event:confirm-tap</a></li><li><a href="ErrorDialog.html#.event:confirm-tap">ErrorDialog.event:confirm-tap</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: pages/labels-page/labels-page.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/*
+  ~ Copyright (c) 2016-2017, Michael A. Updike All rights reserved.
+  ~ Licensed under Apache 2.0
+  ~ https://opensource.org/licenses/Apache-2.0
+  ~ https://goo.gl/wFvBM1
+  */
+import '/node_modules/@polymer/polymer/polymer-legacy.js';
+
+import '/node_modules/@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+import '/node_modules/@polymer/iron-icon/iron-icon.js';
+import '/node_modules/@polymer/paper-styles/typography.js';
+import '/node_modules/@polymer/paper-styles/color.js';
+import '/node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '/node_modules/@polymer/paper-material/paper-material.js';
+import '/node_modules/@polymer/paper-icon-button/paper-icon-button.js';
+import '/node_modules/@polymer/paper-input/paper-input.js';
+import '/elements/my_icons.js';
+import { Polymer } from '/node_modules/@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '/node_modules/@polymer/polymer/lib/utils/html-tag.js';
+
+import '/scripts/chrome-extension-utils/scripts/ex_handler.js';
+
+(function(window) {
+
+  window.app = window.app || {};
+
+  /**
+   * Polymer element to manage our {@link Label} objects
+   * @namespace LabelsPage
+   */
+  app.LabelsPageFactory = Polymer({
+    _template: html`
+    &lt;style include="iron-flex iron-flex-alignment">&lt;/style>
+    &lt;style include="shared-styles">&lt;/style>
+    &lt;style>
+      :host {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+      }
+      
+      .add-content {
+        margin: 0;
+        padding-top: 16px;
+        padding-left: 16px;
+        padding-right: 0;
+      }
+
+      .add-item {
+        padding: 16px 20px 16px 16px;
+        position: relative;
+        margin: 0;
+      }
+
+      .list-content {
+        overflow: hidden;
+        overflow-y: scroll;
+        margin: 0;
+        padding-left: 16px;
+      }
+
+      .list {
+        padding: 0;
+        margin: 0;
+      }
+
+      .list-item {
+        position: relative;
+        margin: 0;
+        padding: 16px;
+      }
+
+      .item .lead-icon {
+        margin-right: 16px;
+        color: var(--setting-item-color);
+      }
+
+      .item paper-icon-button {
+        margin-left: 16px;
+        color: var(--setting-item-color);
+      }
+    &lt;/style>
+
+    &lt;paper-material elevation="1" class="page-content vertical layout">
+
+      &lt;!-- Tool bar -->
+      &lt;paper-material elevation="1">
+        &lt;app-toolbar class="page-toolbar">
+          &lt;span class="space">&lt;/span>
+          &lt;div class="middle middle-container center horizontal layout flex">
+            &lt;div class="flex">Edit labels&lt;/div>
+          &lt;/div>
+        &lt;/app-toolbar>
+      &lt;/paper-material>
+
+      &lt;!-- Content -->
+      &lt;div class="body-content fit vertical layout">
+
+        &lt;div class="add-content">
+          &lt;div class="add-item item horizontal center layout">
+            &lt;iron-icon class="lead-icon" icon="myicons:add">&lt;/iron-icon>
+            &lt;div class="flex" tabindex="-1">
+              &lt;paper-input id="addInput" value="{{addText}}" label="Create new label" minlength="1" maxlength="32" tabindex="0" no-label-float="true" on-keyup="_onAddKeyUp">&lt;/paper-input>
+            &lt;/div>
+            &lt;paper-icon-button id="addButton" icon="myicons:check" disabled="" on-tap="_onAddTapped">&lt;/paper-icon-button>
+          &lt;/div>
+          &lt;hr>
+        &lt;/div>
+
+        &lt;div class="list-content flex">
+          &lt;div id="labelList" class="list">
+            &lt;template is="dom-repeat" id="listTemplate" items="{{items}}" as="item" sort="_sortByName">
+              &lt;div class="list-item item horizontal center layout" id="item[[index]]">
+                &lt;iron-icon class="lead-icon" icon="myicons:label">&lt;/iron-icon>
+                &lt;div class="flex" tabindex="-1">
+                  &lt;paper-input id="text[[index]]" value="{{item.newName}}" minlength="1" maxlength="32" tabindex="0" no-label-float="true" on-blur="_onListItemBlur" on-keyup="_onListItemKeyUp">
+                  &lt;/paper-input>
+                &lt;/div>
+                &lt;paper-icon-button id="delete[[index]]" icon="myicons:close" on-tap="_onDeleteTapped">&lt;/paper-icon-button>
+              &lt;/div>
+            &lt;/template>
+          &lt;/div>
+        &lt;/div>
+
+      &lt;/div>
+
+    &lt;/paper-material>
+`,
+
+    is: 'labels-page',
+
+    /**
+     * A list item
+     * @typedef {{}} LabelsPage.Item
+     * @property {Label} label
+     * @property {string} newName
+     * @memberOf LabelsPage
+     */
+
+    properties: {
+      /**
+       * The text in the Add textInput
+       * @memberOf LabelsPage
+       */
+      addText: {
+        type: String,
+        value: '',
+        notify: true,
+        observer: '_addTextChanged',
+      },
+
+      /**
+       * The Array of list objects
+       * @typedef {LabelsPage.Item[]} LabelsPage.Items
+       * @memberOf LabelsPage
+       */
+      items: {
+        type: Array,
+        value: [],
+        notify: true,
+      },
+    },
+
+    observers: [
+      '_itemsChanged(items.*)',
+    ],
+
+    /**
+     * We have animated in and are now the current page
+     * @memberOf LabelsPage
+     */
+    onCurrentPage: function() {
+      this.set('addText', '');
+      this._loadLabels();
+    },
+
+    /**
+     * Event: Add text button tapped
+     * @private
+     * @memberOf LabelsPage
+     */
+    _onAddTapped: function() {
+      this._addLabel();
+    },
+
+    /**
+     * Event: Add text key up
+     * @param {Event} event - key-up event
+     * @private
+     * @memberOf LabelsPage
+     */
+    _onAddKeyUp: function(event) {
+      if (event.keyCode === 13) {
+        // 'enter' was pressed
+        this._addLabel();
+      }
+    },
+
+    /**
+     * Event: Delete button tapped for a label
+     * @param {Event} event
+     * @param {{}} event.model
+     * @private
+     * @memberOf LabelsPage
+     */
+    _onDeleteTapped: function(event) {
+      Chrome.GA.event(Chrome.GA.EVENT.BUTTON, 'LabelsPage.delete');
+      const item = event.model.item;
+      item.label.delete().then(() => {
+        const idx = this.items.findIndex((itm) => {
+          return itm.label.name === item.label.name;
+        });
+        if (idx !== -1) {
+          this.splice('items', idx, 1);
+        }
+        return Promise.resolve();
+      }).catch((err) => {
+        Chrome.Log.error(err.message, 'LabelsPage._onDeleteTapped',
+            'Failed to delete label');
+      });
+    },
+
+    /**
+     * Event: Label input lost focus
+     * @param {Event} event
+     * @param {{}} event.model
+     * @private
+     * @memberOf LabelsPage
+     */
+    _onListItemBlur: function(event) {
+      this._updateListLabel(event.model.item);
+    },
+
+    /**
+     * Event: Label input key up
+     * @param {Event} event
+     * @param {{}} event.model
+     * @private
+     * @memberOf LabelsPage
+     */
+    _onListItemKeyUp: function(event) {
+      if (event.keyCode === 13) {
+        // 'enter' was pressed
+        this._updateListLabel(event.model.item);
+      }
+    },
+
+    /**
+     * Load the Labels from the database
+     * @private
+     * @memberOf LabelsPage
+     */
+    _loadLabels: function() {
+      // clear list
+      this.splice('items', 0, this.items.length);
+
+      // populate list
+      app.Label.loadAll().then((labels) => {
+        labels.forEach((label) => {
+          this.push('items', {
+            label: label,
+            newName: label.name,
+          });
+        });
+        return Promise.resolve();
+      }).catch((err) => {
+        Chrome.Log.error(err.message, 'LabelPage._loadLabels');
+      });
+    },
+
+    /**
+     * Sort filter for the Labels - alphabetical
+     * @param {LabelsPage.Item} a - first comparator
+     * @param {LabelsPage.Item} b - second comparator
+     * @returns {int}
+     * @private
+     * @memberOf LabelsPage
+     */
+    _sortByName: function(a, b) {
+      const aName = a.label.name.toLowerCase();
+      const bName = b.label.name.toLowerCase();
+      if (aName &lt; bName) {
+        return -1;
+      } else if (aName > bName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    },
+
+    /**
+     * Add a new label
+     * @private
+     * @memberOf LabelsPage
+     */
+    _addLabel() {
+      Chrome.GA.event(Chrome.GA.EVENT.BUTTON, 'LabelsPage._addLabel');
+      let name = this.addText;
+      name = name || '';
+      name = name.trim();
+      app.Label.add(name).then((label) => {
+        this.push('items', {
+          label: label,
+          newName: label.name,
+        });
+        this.set('addText', '');
+        return Promise.resolve();
+      }).catch((err) => {
+        if ((err.message !== app.Label.ERROR_EMPTY_TEXT) &amp;&amp;
+            (err.message !== app.Label.ERROR_EXISTS)) {
+          Chrome.Log.error(err.message, 'LabelsPage._onAddKeyUp',
+              'Failed to create label');
+        }
+      });
+    },
+
+    /**
+     * Update an exiting label
+     * @param {LabelsPage.Item} item
+     * @private
+     * @memberOf LabelsPage
+     */
+    _updateListLabel(item) {
+      Chrome.GA.event(Chrome.GA.EVENT.BUTTON, 'LabelsPage._updateListLabel');
+      let name = item.newName.trim();
+      name = name || '';
+      const idx = this.items.findIndex((el) => {
+        return el.label.name === item.label.name;
+      });
+      if (name.length) {
+        if (idx !== -1) {
+          this.set(`items.${idx}.label.name`, name);
+          this.set(`items.${idx}.newName`, name);
+        }
+        item.label.setName(name).catch((err) => {
+          Chrome.Log.error(err.message, 'LabelsPage._updateListLabel',
+              'Failed to update label name');
+        });
+      } else {
+        if (idx !== -1) {
+          this.set(`labels.${idx}.newName`, item.label.name);
+        }
+      }
+    },
+
+    /**
+     * Observer: {@link LabelsPage.addText} changed
+     * @private
+     * @memberOf LabelsPage
+     */
+    _addTextChanged() {
+      if (Chrome.Utils.isWhiteSpace(this.addText)) {
+        this.$.addButton.setAttribute('disabled', 'true');
+      } else {
+        this.$.addButton.removeAttribute('disabled');
+      }
+    },
+
+    /**
+     * Observer: {@link LabelsPage.items} changed
+     * @param {{}} changeRecord - details of change
+     * @private
+     * @memberOf LabelsPage
+     */
+    _itemsChanged(changeRecord) {
+      if (changeRecord) {
+        let path = changeRecord.path;
+        let base = changeRecord.base;
+        let itemPath;
+        // handle paths like 'users.#4.newName'
+        const newNameIdx = path.indexOf('.newName');
+        const labelNameIdx = path.indexOf('.label.name');
+        if (newNameIdx !== -1) {
+          itemPath = path.substring(0, newNameIdx);
+        } else if (labelNameIdx) {
+          itemPath = path.substring(0, labelNameIdx);
+        }
+        if (itemPath) {
+          const item = this.get(itemPath);
+          const index = base.indexOf(item);
+          const newName = base[index].newName;
+          const label = base[index].label;
+          const el = document.getElementById(`delete${index}`);
+          if (el &amp;&amp; (newName !== label.name)) {
+            el.setAttribute('disabled', 'true');
+          } else if (el) {
+            el.removeAttribute('disabled');
+          }
+        }
+      }
+    },
+  });
+})(window);
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on February 18th 2019, 10:25:27 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
