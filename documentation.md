@@ -12,5 +12,5 @@
 
 ### [Chrome Extension Source](https://github.com/Pushy-Clipboard/pushy-chrome-extension)
 
-### [JSDoc for Extension](jsdoc/index.html)
+### [TypeDoc for Extension](typedoc/index.html)
 
