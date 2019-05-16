@@ -113,7 +113,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L126">scripts/background/clipboard.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L116">scripts/background/clipboard.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -158,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">WAIT_<wbr>MILLIS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">250</span><span class="tsd-signature-symbol"> =&nbsp;250</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L30">scripts/background/clipboard.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L31">scripts/background/clipboard.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -174,13 +174,13 @@
 					<a name="addclipitemfromclipboard" class="tsd-anchor"></a>
 					<h3>add<wbr>Clip<wbr>Item<wbr>From<wbr>Clipboard</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Clip<wbr>Item<wbr>From<wbr>Clipboard<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Clip<wbr>Item<wbr>From<wbr>Clipboard<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L82">scripts/background/clipboard.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L73">scripts/background/clipboard.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -188,7 +188,7 @@
 									<p>Add a new <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a> from the Clipboard contents</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -202,7 +202,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L54">scripts/background/clipboard.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L47">scripts/background/clipboard.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -214,9 +214,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>text: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>text to copy</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -233,7 +230,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L37">scripts/background/clipboard.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L34">scripts/background/clipboard.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -242,7 +239,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>text from clipboard</p>
 						</li>
 					</ul>
 				</section>
@@ -250,30 +246,27 @@
 					<a name="sendlocalclipitem" class="tsd-anchor"></a>
 					<h3>send<wbr>Local<wbr>Clip<wbr>Item</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>Local<wbr>Clip<wbr>Item<span class="tsd-signature-symbol">(</span>clipItem<span class="tsd-signature-symbol">: </span><a href="../classes/scripts_clipitem.clipitem.html" class="tsd-signature-type">ClipItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Local<wbr>Clip<wbr>Item<span class="tsd-signature-symbol">(</span>clipItem<span class="tsd-signature-symbol">: </span><a href="../classes/scripts_clipitem.clipitem.html" class="tsd-signature-type">ClipItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/clipboard.ts#L72">scripts/background/clipboard.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/clipboard.ts#L61">scripts/background/clipboard.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Send local <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a> push notification if enabled</p>
+									<p>Push local <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a> if enabled</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>clipItem: <a href="../classes/scripts_clipitem.clipitem.html" class="tsd-signature-type">ClipItem</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p><a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a> to send</p>
-									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>scripts/bg/regEndpoint | Photo Screensaver</title>
+	<title>scripts/bg/regClient | Photo Screensaver</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="scripts_bg_regendpoint.html">scripts/bg/regEndpoint</a>
+					<a href="scripts_bg_regclient.html">scripts/bg/regClient</a>
 				</li>
 			</ul>
-			<h1>External module scripts/bg/regEndpoint</h1>
+			<h1>External module scripts/bg/regClient</h1>
 		</div>
 	</div>
 </header>
@@ -80,20 +80,20 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Events</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_regendpoint.html#onstoragechanged" class="tsd-kind-icon">on<wbr>Storage<wbr>Changed</a></li>
+								<li class="tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_regclient.html#onstoragechanged" class="tsd-kind-icon">on<wbr>Storage<wbr>Changed</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_regendpoint.html#url_base" class="tsd-kind-icon">URL_<wbr>BASE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_regclient.html#url_base" class="tsd-kind-icon">URL_<wbr>BASE</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_regendpoint.html#register" class="tsd-kind-icon">register</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_regendpoint.html#unregister" class="tsd-kind-icon">unregister</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_regclient.html#register" class="tsd-kind-icon">register</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_regclient.html#unregister" class="tsd-kind-icon">unregister</a></li>
 							</ul>
 						</section>
 					</div>
@@ -111,7 +111,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/registration_client.ts#L88">scripts/background/registration_client.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/registration_client.ts#L88">scripts/background/registration_client.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">URL_<wbr>BASE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;${Gae.GAE_ROOT}/registration/v1/&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/registration_client.ts#L31">scripts/background/registration_client.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/registration_client.ts#L31">scripts/background/registration_client.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,19 +155,24 @@
 					<a name="register" class="tsd-anchor"></a>
 					<h3>register</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>interactive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>interactive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/registration_client.ts#L38">scripts/background/registration_client.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/registration_client.ts#L39">scripts/background/registration_client.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Register our <a href="../classes/scripts_device.device.html">Device</a> with server</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>An error if register failed</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -178,7 +183,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -186,19 +191,24 @@
 					<a name="unregister" class="tsd-anchor"></a>
 					<h3>unregister</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">unregister<span class="tsd-signature-symbol">(</span>interactive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">unregister<span class="tsd-signature-symbol">(</span>interactive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/registration_client.ts#L62">scripts/background/registration_client.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/registration_client.ts#L63">scripts/background/registration_client.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Unregister our <a href="../classes/scripts_device.device.html">Device</a> with server</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>An error if unregister failed</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -209,7 +219,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -222,23 +232,23 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="scripts_bg_regendpoint.html">scripts/bg/reg<wbr>Endpoint</a>
+						<a href="scripts_bg_regclient.html">scripts/bg/reg<wbr>Client</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_regendpoint.html#onstoragechanged" class="tsd-kind-icon">on<wbr>Storage<wbr>Changed</a>
+						<a href="scripts_bg_regclient.html#onstoragechanged" class="tsd-kind-icon">on<wbr>Storage<wbr>Changed</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_regendpoint.html#url_base" class="tsd-kind-icon">URL_<wbr>BASE</a>
+						<a href="scripts_bg_regclient.html#url_base" class="tsd-kind-icon">URL_<wbr>BASE</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="scripts_bg_regendpoint.html#register" class="tsd-kind-icon">register</a>
+						<a href="scripts_bg_regclient.html#register" class="tsd-kind-icon">register</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="scripts_bg_regendpoint.html#unregister" class="tsd-kind-icon">unregister</a>
+						<a href="scripts_bg_regclient.html#unregister" class="tsd-kind-icon">unregister</a>
 					</li>
 				</ul>
 			</nav>

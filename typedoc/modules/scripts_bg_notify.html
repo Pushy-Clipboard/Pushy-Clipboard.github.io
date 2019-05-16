@@ -69,7 +69,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Manage the notifications</p>
+						<p>Manage the notifications that will be displayed to the user
+						<a href="https://developer.chrome.com/apps/notifications" class="external">https://developer.chrome.com/apps/notifications</a></p>
 					</div>
 				</div>
 			</section>
@@ -84,12 +85,19 @@
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-kind-icon">INotify<wbr>Type</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Events</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#onbuttonclicked" class="tsd-kind-icon">on<wbr>Button<wbr>Clicked</a></li>
+								<li class="tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#onnotificationclicked" class="tsd-kind-icon">on<wbr>Notification<wbr>Clicked</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#chromepromise" class="tsd-kind-icon">Chrome<wbr>Promise</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#error_no_notifications" class="tsd-kind-icon">ERROR_<wbr>NO_<wbr>NOTIFICATIONS</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#_icon_error" class="tsd-kind-icon">_ICON_<wbr>ERROR</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#icon_error" class="tsd-kind-icon">ICON_<wbr>ERROR</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#chromep" class="tsd-kind-icon">chromep</a></li>
 							</ul>
 						</section>
@@ -99,11 +107,9 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#getoptions" class="tsd-kind-icon">get<wbr>Options</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#hasnavigatorpermission" class="tsd-kind-icon">has<wbr>Navigator<wbr>Permission</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#onbuttonclicked" class="tsd-kind-icon">on<wbr>Button<wbr>Clicked</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#oncopy" class="tsd-kind-icon">on<wbr>Copy</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#onerror" class="tsd-kind-icon">on<wbr>Error</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#onnotificationclicked" class="tsd-kind-icon">on<wbr>Notification<wbr>Clicked</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#onsend" class="tsd-kind-icon">on<wbr>Send</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#oncopyenabled" class="tsd-kind-icon">on<wbr>Copy<wbr>Enabled</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#onerrorenabled" class="tsd-kind-icon">on<wbr>Error<wbr>Enabled</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="scripts_bg_notify.html#onsendenabled" class="tsd-kind-icon">on<wbr>Send<wbr>Enabled</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_notify.html#senderroremail" class="tsd-kind-icon">send<wbr>Error<wbr>Email</a></li>
 							</ul>
 						</section>
@@ -116,6 +122,79 @@
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Events</h2>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="onbuttonclicked" class="tsd-anchor"></a>
+					<h3>on<wbr>Button<wbr>Clicked</h3>
+					<ul class="tsd-signatures tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Button<wbr>Clicked<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, btnIdx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L319">scripts/background/notify.ts:319</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Fired when the user clicked on a button of the notification.
+									<a href="https://developer.chrome.com/apps/notifications#event-onClicked" class="external">https://developer.chrome.com/apps/notifications#event-onClicked</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>notification type</p>
+									</div>
+								</li>
+								<li>
+									<h5>btnIdx: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>index of clicked button</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="onnotificationclicked" class="tsd-anchor"></a>
+					<h3>on<wbr>Notification<wbr>Clicked</h3>
+					<ul class="tsd-signatures tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Notification<wbr>Clicked<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L295">scripts/background/notify.ts:295</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Fired when the user clicked in a non-button area of the notification.
+									<a href="https://developer.chrome.com/apps/notifications#event-onClicked" class="external">https://developer.chrome.com/apps/notifications#event-onClicked</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>notification type</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
@@ -124,7 +203,7 @@
 					<div class="tsd-signature tsd-kind-icon">Chrome<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L23">scripts/background/notify.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L24">scripts/background/notify.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -134,17 +213,17 @@
 					<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>NO_<wbr>NOTIFICATIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Display of notifications on received messages has been disabled."</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Display of notifications on received messages has been disabled.&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L28">scripts/background/notify.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L29">scripts/background/notify.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="_icon_error" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> _ICON_<wbr>ERROR</h3>
-					<div class="tsd-signature tsd-kind-icon">_ICON_<wbr>ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"/images/ic_email_black_48dp.png"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;/images/ic_email_black_48dp.png&quot;</span></div>
+					<a name="icon_error" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ICON_<wbr>ERROR</h3>
+					<div class="tsd-signature tsd-kind-icon">ICON_<wbr>ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"/images/ic_email_black_48dp.png"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;/images/ic_email_black_48dp.png&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L26">scripts/background/notify.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L27">scripts/background/notify.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,7 +233,7 @@
 					<div class="tsd-signature tsd-kind-icon">chromep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;new ChromePromise()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L24">scripts/background/notify.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L25">scripts/background/notify.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -165,13 +244,13 @@
 					<a name="create" class="tsd-anchor"></a>
 					<h3>create</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, lastError<span class="tsd-signature-symbol">?: </span><a href="../classes/scripts_chrome_last_error.chromelasterror.html" class="tsd-signature-type">ChromeLastError</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, lastError<span class="tsd-signature-symbol">?: </span><a href="../classes/scripts_chrome_last_error.chromelasterror.html" class="tsd-signature-type">ChromeLastError</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L180">scripts/background/notify.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L181">scripts/background/notify.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,7 +279,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -208,18 +287,18 @@
 					<a name="getoptions" class="tsd-anchor"></a>
 					<h3>get<wbr>Options</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Options<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Options<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NotificationOptions</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L263">scripts/background/notify.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L259">scripts/background/notify.ts:259</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the Notification options object</p>
+									<p>Get the Chrome Notification options object</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -237,7 +316,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NotificationOptions</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -245,13 +324,13 @@
 					<a name="hasnavigatorpermission" class="tsd-anchor"></a>
 					<h3>has<wbr>Navigator<wbr>Permission</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Navigator<wbr>Permission<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Navigator<wbr>Permission<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L246">scripts/background/notify.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L246">scripts/background/notify.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,61 +346,22 @@
 									</dd>
 								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>true if granted</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="onbuttonclicked" class="tsd-anchor"></a>
-					<h3>on<wbr>Button<wbr>Clicked</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Button<wbr>Clicked<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, btnIdx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L323">scripts/background/notify.ts:323</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Event: Fired when the user clicked on a button
-										of the notification.
-									<a href="https://developer.chrome.com/apps/notifications#event-onClicked" class="external">https://developer.chrome.com/apps/notifications#event-onClicked</a></p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>notification type</p>
-									</div>
-								</li>
-								<li>
-									<h5>btnIdx: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>index of clicked button</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="oncopy" class="tsd-anchor"></a>
-					<h3>on<wbr>Copy</h3>
+					<a name="oncopyenabled" class="tsd-anchor"></a>
+					<h3>on<wbr>Copy<wbr>Enabled</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Copy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Copy<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L218">scripts/background/notify.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L218">scripts/background/notify.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -334,16 +374,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="onerror" class="tsd-anchor"></a>
-					<h3>on<wbr>Error</h3>
+					<a name="onerrorenabled" class="tsd-anchor"></a>
+					<h3>on<wbr>Error<wbr>Enabled</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Error<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Error<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L230">scripts/background/notify.ts:230</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L230">scripts/background/notify.ts:230</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -355,50 +395,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="onnotificationclicked" class="tsd-anchor"></a>
-					<h3>on<wbr>Notification<wbr>Clicked</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Notification<wbr>Clicked<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L299">scripts/background/notify.ts:299</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Event: Fired when the user clicked in a non-button area
-										of the notification.
-									<a href="https://developer.chrome.com/apps/notifications#event-onClicked" class="external">https://developer.chrome.com/apps/notifications#event-onClicked</a></p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>notification type</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="onsend" class="tsd-anchor"></a>
-					<h3>on<wbr>Send</h3>
+					<a name="onsendenabled" class="tsd-anchor"></a>
+					<h3>on<wbr>Send<wbr>Enabled</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Send<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Send<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L224">scripts/background/notify.ts:224</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L224">scripts/background/notify.ts:224</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -420,7 +427,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L285">scripts/background/notify.ts:285</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L281">scripts/background/notify.ts:281</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -450,7 +457,7 @@
 					<div class="tsd-signature tsd-kind-icon">TYPE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L64">scripts/background/notify.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L65">scripts/background/notify.ts:65</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -464,7 +471,7 @@
 						<div class="tsd-signature tsd-kind-icon">CLIPBOARD_<wbr>CHANGED<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;localCopy&#x27;,title: &#x27;Clipboard change detected&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_local_copy.png&#x27;,isError: false,pageRoute: &#x27;page-main&#x27;,requireInteraction: false,hasButtons: false,buttons: [],buttonFunctions: [],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L66">scripts/background/notify.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L67">scripts/background/notify.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -479,7 +486,7 @@
 						<div class="tsd-signature tsd-kind-icon">DEVICE_<wbr>ADDED<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;added&#x27;,title: &#x27;Sent push message&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_add_device.png&#x27;,isError: false,pageRoute: &#x27;page-devices&#x27;,requireInteraction: false,hasButtons: false,buttons: [],buttonFunctions: [],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L92">scripts/background/notify.ts:92</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L93">scripts/background/notify.ts:93</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -494,7 +501,7 @@
 						<div class="tsd-signature tsd-kind-icon">DEVICE_<wbr>REMOVED<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;removed&#x27;,title: &#x27;Sent push message&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_remove_device.png&#x27;,isError: false,pageRoute: &#x27;page-main&#x27;,requireInteraction: false,hasButtons: false,buttons: [],buttonFunctions: [],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L105">scripts/background/notify.ts:105</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L106">scripts/background/notify.ts:106</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -506,20 +513,25 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="type.error_force_sign_out" class="tsd-anchor"></a>
 						<h3>ERROR_<wbr>FORCE_<wbr>SIGN_<wbr>OUT</h3>
-						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>FORCE_<wbr>SIGN_<wbr>OUT<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_force_sign_out&#x27;,title: &#x27;Forced to sign out of extension&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(_ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
+						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>FORCE_<wbr>SIGN_<wbr>OUT<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_force_sign_out&#x27;,title: &#x27;Forced to sign out of extension&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L154">scripts/background/notify.ts:154</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L155">scripts/background/notify.ts:155</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>error requiring sign out</p>
+							</div>
+						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="type.error_send" class="tsd-anchor"></a>
 						<h3>ERROR_<wbr>SEND</h3>
-						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>SEND<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_send&#x27;,title: &#x27;Failed to send message&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(_ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
+						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>SEND<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_send&#x27;,title: &#x27;Failed to send message&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L118">scripts/background/notify.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L119">scripts/background/notify.ts:119</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -531,10 +543,10 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="type.error_store_clip" class="tsd-anchor"></a>
 						<h3>ERROR_<wbr>STORE_<wbr>CLIP</h3>
-						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>STORE_<wbr>CLIP<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_store_clip&#x27;,title: &#x27;Failed to store clipboard contents&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(_ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
+						<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>STORE_<wbr>CLIP<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;error_store_clip&#x27;,title: &#x27;Failed to store clipboard contents&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_error.png&#x27;,isError: true,pageRoute: &#x27;page-error&#x27;,requireInteraction: true,hasButtons: true,buttons: [{title: &#x27;Contact support&#x27;,iconUrl: chrome.runtime.getURL(ICON_ERROR),},],buttonFunctions: [sendErrorEmail],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L136">scripts/background/notify.ts:136</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L137">scripts/background/notify.ts:137</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -549,7 +561,7 @@
 						<div class="tsd-signature tsd-kind-icon">MESSAGE_<wbr>SENT<span class="tsd-signature-symbol">:</span> <a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-signature-type">INotifyType</a><span class="tsd-signature-symbol"> =&nbsp;{id: &#x27;localCopy&#x27;,title: &#x27;Sent push message&#x27;,message: &#x27;Not set&#x27;,icon: &#x27;/images/ic_local_copy.png&#x27;,isError: false,pageRoute: &#x27;page-main&#x27;,requireInteraction: false,hasButtons: false,buttons: [],buttonFunctions: [],} as INotifyType</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/notify.ts#L79">scripts/background/notify.ts:79</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/notify.ts#L80">scripts/background/notify.ts:80</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -580,6 +592,12 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/scripts_bg_notify.inotifytype.html" class="tsd-kind-icon">INotify<wbr>Type</a>
 					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="scripts_bg_notify.html#onbuttonclicked" class="tsd-kind-icon">on<wbr>Button<wbr>Clicked</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="scripts_bg_notify.html#onnotificationclicked" class="tsd-kind-icon">on<wbr>Notification<wbr>Clicked</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_notify.html#chromepromise" class="tsd-kind-icon">Chrome<wbr>Promise</a>
 					</li>
@@ -587,7 +605,7 @@
 						<a href="scripts_bg_notify.html#error_no_notifications" class="tsd-kind-icon">ERROR_<wbr>NO_<wbr>NOTIFICATIONS</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_notify.html#_icon_error" class="tsd-kind-icon">_ICON_<wbr>ERROR</a>
+						<a href="scripts_bg_notify.html#icon_error" class="tsd-kind-icon">ICON_<wbr>ERROR</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_notify.html#chromep" class="tsd-kind-icon">chromep</a>
@@ -601,20 +619,14 @@
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="scripts_bg_notify.html#hasnavigatorpermission" class="tsd-kind-icon">has<wbr>Navigator<wbr>Permission</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_notify.html#onbuttonclicked" class="tsd-kind-icon">on<wbr>Button<wbr>Clicked</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="scripts_bg_notify.html#oncopyenabled" class="tsd-kind-icon">on<wbr>Copy<wbr>Enabled</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="scripts_bg_notify.html#oncopy" class="tsd-kind-icon">on<wbr>Copy</a>
+						<a href="scripts_bg_notify.html#onerrorenabled" class="tsd-kind-icon">on<wbr>Error<wbr>Enabled</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="scripts_bg_notify.html#onerror" class="tsd-kind-icon">on<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_notify.html#onnotificationclicked" class="tsd-kind-icon">on<wbr>Notification<wbr>Clicked</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="scripts_bg_notify.html#onsend" class="tsd-kind-icon">on<wbr>Send</a>
+						<a href="scripts_bg_notify.html#onsendenabled" class="tsd-kind-icon">on<wbr>Send<wbr>Enabled</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_notify.html#senderroremail" class="tsd-kind-icon">send<wbr>Error<wbr>Email</a>

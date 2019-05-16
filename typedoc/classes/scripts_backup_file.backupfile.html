@@ -74,35 +74,6 @@
 					<div class="lead">
 						<p>A backup file&#39;s metadata</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt>property</dt>
-						<dd><p>{string} id - Drive file id</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{boolean} isMine - true if backup from our device</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string} name - Drive filename</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string} model - model of backup device</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string} nickname - nickname of backup device</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string} sn - sn of backup device</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string} os - os of backup device</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{int} date - file modification date</p>
-						</dd>
-						<dt>alias</dt>
-						<dd><p>app.BackupFile</p>
-						</dd>
-					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -139,8 +110,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scripts_backup_file.backupfile.html#_ismyfile" class="tsd-kind-icon">_is<wbr>MyFile</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scripts_backup_file.backupfile.html#getappproperties" class="tsd-kind-icon">get<wbr>App<wbr>Properties</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="scripts_backup_file.backupfile.html#ismyfile" class="tsd-kind-icon">is<wbr>MyFile</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scripts_backup_file.backupfile.html#isnewer" class="tsd-kind-icon">is<wbr>Newer</a></li>
 							</ul>
 						</section>
@@ -159,17 +130,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L46">scripts/backup/file.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L43">scripts/backup/file.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Create a new BackupFile</p>
 								</div>
-								<dl class="tsd-comment-tags">
-									<dt>constructor</dt>
-									<dd></dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -195,9 +162,14 @@
 					<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L46">scripts/backup/file.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L43">scripts/backup/file.ts:43</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>File modification date</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="id" class="tsd-anchor"></a>
@@ -205,9 +177,14 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L32">scripts/backup/file.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L22">scripts/backup/file.ts:22</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Drive file id</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="ismine" class="tsd-anchor"></a>
@@ -215,9 +192,14 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Mine<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L36">scripts/backup/file.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L28">scripts/backup/file.ts:28</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Backup from our device state</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="model" class="tsd-anchor"></a>
@@ -225,9 +207,14 @@
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L38">scripts/backup/file.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L31">scripts/backup/file.ts:31</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Device model</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="name" class="tsd-anchor"></a>
@@ -235,9 +222,14 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L34">scripts/backup/file.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L25">scripts/backup/file.ts:25</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Drive filename</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="nickname" class="tsd-anchor"></a>
@@ -245,9 +237,14 @@
 					<div class="tsd-signature tsd-kind-icon">nickname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L40">scripts/backup/file.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L34">scripts/backup/file.ts:34</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Device nickname</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="os" class="tsd-anchor"></a>
@@ -255,9 +252,14 @@
 					<div class="tsd-signature tsd-kind-icon">os<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L44">scripts/backup/file.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L40">scripts/backup/file.ts:40</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Device operating system</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="sn" class="tsd-anchor"></a>
@@ -265,35 +267,18 @@
 					<div class="tsd-signature tsd-kind-icon">sn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L42">scripts/backup/file.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L37">scripts/backup/file.ts:37</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Device serial number</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="_ismyfile" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>MyFile</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">_is<wbr>MyFile<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L93">scripts/backup/file.ts:93</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Is this file for our device</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getappproperties" class="tsd-anchor"></a>
 					<h3>get<wbr>App<wbr>Properties</h3>
@@ -304,7 +289,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L70">scripts/backup/file.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L63">scripts/backup/file.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,7 +298,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
-							<p>key-value pairs</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
 									<h5>model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
@@ -331,6 +315,28 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="ismyfile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> is<wbr>MyFile</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>MyFile<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L78">scripts/backup/file.ts:78</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Is this file for our device</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="isnewer" class="tsd-anchor"></a>
 					<h3>is<wbr>Newer</h3>
@@ -341,7 +347,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/backup/file.ts#L84">scripts/backup/file.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/backup/file.ts#L73">scripts/backup/file.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -406,11 +412,11 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="scripts_backup_file.backupfile.html#sn" class="tsd-kind-icon">sn</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="scripts_backup_file.backupfile.html#_ismyfile" class="tsd-kind-icon">_is<wbr>MyFile</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="scripts_backup_file.backupfile.html#getappproperties" class="tsd-kind-icon">get<wbr>App<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="scripts_backup_file.backupfile.html#ismyfile" class="tsd-kind-icon">is<wbr>MyFile</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="scripts_backup_file.backupfile.html#isnewer" class="tsd-kind-icon">is<wbr>Newer</a>

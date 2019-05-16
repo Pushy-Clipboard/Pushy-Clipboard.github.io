@@ -89,7 +89,7 @@
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#error_init" class="tsd-kind-icon">ERROR_<wbr>INIT</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#example_label" class="tsd-kind-icon">EXAMPLE_<wbr>LABEL</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#item_txt" class="tsd-kind-icon">ITEM_<wbr>TXT</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#_version" class="tsd-kind-icon">_VERSION</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#version" class="tsd-kind-icon">VERSION</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -104,7 +104,7 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#_defaults" class="tsd-kind-icon">_DEFAULTS</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_appdata.html#defaults" class="tsd-kind-icon">DEFAULTS</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,21 +116,21 @@
 					<a name="onload" class="tsd-anchor"></a>
 					<h3>on<wbr>Load</h3>
 					<ul class="tsd-signatures tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Load<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Load<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L219">scripts/background/data.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L218">scripts/background/data.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Event: called when document and resources are loaded</p>
+									<p>Called when document and resources are loaded</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -143,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">ERROR_<wbr>INIT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Data initialization error."</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Data initialization error.&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L118">scripts/background/data.ts:118</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L119">scripts/background/data.ts:119</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -158,12 +158,12 @@
 					<div class="tsd-signature tsd-kind-icon">EXAMPLE_<wbr>LABEL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"You can label items to categorize them."</span><span class="tsd-signature-symbol"> =&nbsp;&quot;You can label items to categorize them.&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L115">scripts/background/data.ts:115</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L116">scripts/background/data.ts:116</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Initial <a href="../classes/scripts_label.label.html">Label</a> for  <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a></p>
+							<p>Initial <a href="../classes/scripts_label.label.html">Label</a> for <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a></p>
 						</div>
 					</div>
 				</section>
@@ -173,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">ITEM_<wbr>TXT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"A clipboard manager that can share with all your devices.https://pushy-clipboard.github.io/index.htmlPlease signin from the &quot;Manage Account&quot; page to share with your other devices.You can click on the toolbar icon at any time to send the current contents of the clipboard to all your other devices.Information you copy in most Chrome pages will automatically be sent if you have enabled that in &quot;Settings&quot;.You can display this page by right clicking on the toolbar icon and selecting &quot;Options&quot;.It is a good idea to go to the &quot;Settings&quot; page and enter a nickname for this device.Contact me for support or to provide feedback pushyclipboard@gmail.comI write free, open source software for fun and hope it benefits others.If you find the extension of value please rate it. Thanks."</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;A clipboard manager that can share with all your devices.https://pushy-clipboard.github.io/index.htmlPlease signin from the &quot;Manage Account&quot; page to share with your \other devices.You can click on the toolbar icon at any time to send the current \contents of the clipboard to all your other devices.Information you copy in most Chrome pages will \automatically be sent if you have enabled that in &quot;Settings&quot;.You can display this page by right clicking on the toolbar icon and \selecting &quot;Options&quot;.It is a good idea to go to the &quot;Settings&quot; page and enter a nickname \for this device.Contact me for support or to provide feedback pushyclipboard@gmail.comI write free, open source software for fun and hope it benefits others.If you find the extension of value please rate it. Thanks. \&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L88">scripts/background/data.ts:88</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L89">scripts/background/data.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -183,12 +183,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="_version" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> _VERSION</h3>
-					<div class="tsd-signature tsd-kind-icon">_VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">10</span><span class="tsd-signature-symbol"> =&nbsp;10</span></div>
+					<a name="version" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> VERSION</h3>
+					<div class="tsd-signature tsd-kind-icon">VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">10</span><span class="tsd-signature-symbol"> =&nbsp;10</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L33">scripts/background/data.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L34">scripts/background/data.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -210,12 +210,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L191">scripts/background/data.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L194">scripts/background/data.ts:194</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Save the [<em>DEFAULTS]{@link Data.</em>DEFAULTS} if they don&#39;t exist</p>
+									<p>Save the <a href="scripts_bg_appdata.html#defaults">DEFAULTS</a> if they don&#39;t exist</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -226,13 +226,13 @@
 					<a name="addlabelexample" class="tsd-anchor"></a>
 					<h3>add<wbr>Label<wbr>Example</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Label<wbr>Example<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Label<wbr>Example<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L204">scripts/background/data.ts:204</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L207">scripts/background/data.ts:207</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -240,7 +240,7 @@
 									<p>Add a <a href="../classes/scripts_clipitem.clipitem.html">ClipItem</a> with a <a href="../classes/scripts_label.label.html">Label</a></p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -248,13 +248,13 @@
 					<a name="initialize" class="tsd-anchor"></a>
 					<h3>initialize</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L121">scripts/background/data.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L122">scripts/background/data.ts:122</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -262,7 +262,7 @@
 									<p>Initialize the data saved in localStorage</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -276,7 +276,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L141">scripts/background/data.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L144">scripts/background/data.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -292,12 +292,12 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Object literals</h2>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="_defaults" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> _DEFAULTS</h3>
-					<div class="tsd-signature tsd-kind-icon">_DEFAULTS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="defaults" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULTS</h3>
+					<div class="tsd-signature tsd-kind-icon">DEFAULTS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L36">scripts/background/data.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L37">scripts/background/data.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -306,12 +306,12 @@
 						</div>
 					</div>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.allowpush" class="tsd-anchor"></a>
+						<a name="defaults.allowpush" class="tsd-anchor"></a>
 						<h3>allow<wbr>Push</h3>
 						<div class="tsd-signature tsd-kind-icon">allow<wbr>Push<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L42">scripts/background/data.ts:42</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L43">scripts/background/data.ts:43</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -321,12 +321,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.allowreceive" class="tsd-anchor"></a>
+						<a name="defaults.allowreceive" class="tsd-anchor"></a>
 						<h3>allow<wbr>Receive</h3>
 						<div class="tsd-signature tsd-kind-icon">allow<wbr>Receive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L46">scripts/background/data.ts:46</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L47">scripts/background/data.ts:47</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -336,12 +336,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.autobackup" class="tsd-anchor"></a>
+						<a name="defaults.autobackup" class="tsd-anchor"></a>
 						<h3>auto<wbr>Backup</h3>
 						<div class="tsd-signature tsd-kind-icon">auto<wbr>Backup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L62">scripts/background/data.ts:62</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L63">scripts/background/data.ts:63</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -351,12 +351,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.autosend" class="tsd-anchor"></a>
+						<a name="defaults.autosend" class="tsd-anchor"></a>
 						<h3>auto<wbr>Send</h3>
 						<div class="tsd-signature tsd-kind-icon">auto<wbr>Send<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L44">scripts/background/data.ts:44</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L45">scripts/background/data.ts:45</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -366,12 +366,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.darkmode" class="tsd-anchor"></a>
+						<a name="defaults.darkmode" class="tsd-anchor"></a>
 						<h3>dark<wbr>Mode</h3>
 						<div class="tsd-signature tsd-kind-icon">dark<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L84">scripts/background/data.ts:84</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L85">scripts/background/data.ts:85</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -381,12 +381,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.devicenickname" class="tsd-anchor"></a>
+						<a name="defaults.devicenickname" class="tsd-anchor"></a>
 						<h3>device<wbr>Nickname</h3>
 						<div class="tsd-signature tsd-kind-icon">device<wbr>Nickname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L64">scripts/background/data.ts:64</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L65">scripts/background/data.ts:65</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -396,12 +396,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.devices" class="tsd-anchor"></a>
+						<a name="defaults.devices" class="tsd-anchor"></a>
 						<h3>devices</h3>
 						<div class="tsd-signature tsd-kind-icon">devices<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L66">scripts/background/data.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L67">scripts/background/data.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -416,12 +416,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.email" class="tsd-anchor"></a>
+						<a name="defaults.email" class="tsd-anchor"></a>
 						<h3>email</h3>
 						<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L74">scripts/background/data.ts:74</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L75">scripts/background/data.ts:75</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -431,12 +431,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.highpriority" class="tsd-anchor"></a>
+						<a name="defaults.highpriority" class="tsd-anchor"></a>
 						<h3>high<wbr>Priority</h3>
 						<div class="tsd-signature tsd-kind-icon">high<wbr>Priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L60">scripts/background/data.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L61">scripts/background/data.ts:61</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -446,12 +446,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.monitorclipboard" class="tsd-anchor"></a>
+						<a name="defaults.monitorclipboard" class="tsd-anchor"></a>
 						<h3>monitor<wbr>Clipboard</h3>
 						<div class="tsd-signature tsd-kind-icon">monitor<wbr>Clipboard<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L40">scripts/background/data.ts:40</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L41">scripts/background/data.ts:41</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -461,12 +461,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.needscleanup" class="tsd-anchor"></a>
+						<a name="defaults.needscleanup" class="tsd-anchor"></a>
 						<h3>needs<wbr>Cleanup</h3>
 						<div class="tsd-signature tsd-kind-icon">needs<wbr>Cleanup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L72">scripts/background/data.ts:72</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L73">scripts/background/data.ts:73</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -476,12 +476,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.nodevicesct" class="tsd-anchor"></a>
+						<a name="defaults.nodevicesct" class="tsd-anchor"></a>
 						<h3>no<wbr>Devices<wbr>Ct</h3>
 						<div class="tsd-signature tsd-kind-icon">no<wbr>Devices<wbr>Ct<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L82">scripts/background/data.ts:82</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L83">scripts/background/data.ts:83</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -491,12 +491,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.notify" class="tsd-anchor"></a>
+						<a name="defaults.notify" class="tsd-anchor"></a>
 						<h3>notify</h3>
 						<div class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L52">scripts/background/data.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L53">scripts/background/data.ts:53</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -506,12 +506,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.notifyoncopy" class="tsd-anchor"></a>
+						<a name="defaults.notifyoncopy" class="tsd-anchor"></a>
 						<h3>notify<wbr>OnCopy</h3>
 						<div class="tsd-signature tsd-kind-icon">notify<wbr>OnCopy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L54">scripts/background/data.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L55">scripts/background/data.ts:55</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -521,12 +521,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.notifyonerror" class="tsd-anchor"></a>
+						<a name="defaults.notifyonerror" class="tsd-anchor"></a>
 						<h3>notify<wbr>OnError</h3>
 						<div class="tsd-signature tsd-kind-icon">notify<wbr>OnError<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L58">scripts/background/data.ts:58</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L59">scripts/background/data.ts:59</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -536,12 +536,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.notifyonsend" class="tsd-anchor"></a>
+						<a name="defaults.notifyonsend" class="tsd-anchor"></a>
 						<h3>notify<wbr>OnSend</h3>
 						<div class="tsd-signature tsd-kind-icon">notify<wbr>OnSend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L56">scripts/background/data.ts:56</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L57">scripts/background/data.ts:57</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -551,12 +551,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.permissions" class="tsd-anchor"></a>
+						<a name="defaults.permissions" class="tsd-anchor"></a>
 						<h3>permissions</h3>
 						<div class="tsd-signature tsd-kind-icon">permissions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;notSet&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L80">scripts/background/data.ts:80</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L81">scripts/background/data.ts:81</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -566,12 +566,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.photourl" class="tsd-anchor"></a>
+						<a name="defaults.photourl" class="tsd-anchor"></a>
 						<h3>photoURL</h3>
 						<div class="tsd-signature tsd-kind-icon">photoURL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L78">scripts/background/data.ts:78</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L79">scripts/background/data.ts:79</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -581,12 +581,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.pinfavs" class="tsd-anchor"></a>
+						<a name="defaults.pinfavs" class="tsd-anchor"></a>
 						<h3>pin<wbr>Favs</h3>
 						<div class="tsd-signature tsd-kind-icon">pin<wbr>Favs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L50">scripts/background/data.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L51">scripts/background/data.ts:51</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -596,12 +596,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.registered" class="tsd-anchor"></a>
+						<a name="defaults.registered" class="tsd-anchor"></a>
 						<h3>registered</h3>
 						<div class="tsd-signature tsd-kind-icon">registered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L70">scripts/background/data.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L71">scripts/background/data.ts:71</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -611,12 +611,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.signedin" class="tsd-anchor"></a>
+						<a name="defaults.signedin" class="tsd-anchor"></a>
 						<h3>signed<wbr>In</h3>
 						<div class="tsd-signature tsd-kind-icon">signed<wbr>In<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L68">scripts/background/data.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L69">scripts/background/data.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -626,12 +626,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.storageduration" class="tsd-anchor"></a>
+						<a name="defaults.storageduration" class="tsd-anchor"></a>
 						<h3>storage<wbr>Duration</h3>
-						<div class="tsd-signature tsd-kind-icon">storage<wbr>Duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;2</span></div>
+						<div class="tsd-signature tsd-kind-icon">storage<wbr>Duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L48">scripts/background/data.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L49">scripts/background/data.ts:49</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -641,12 +641,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.uid" class="tsd-anchor"></a>
+						<a name="defaults.uid" class="tsd-anchor"></a>
 						<h3>uid</h3>
 						<div class="tsd-signature tsd-kind-icon">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L76">scripts/background/data.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L77">scripts/background/data.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -656,12 +656,12 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="_defaults.version" class="tsd-anchor"></a>
+						<a name="defaults.version-1" class="tsd-anchor"></a>
 						<h3>version</h3>
-						<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;_VERSION</span></div>
+						<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;VERSION</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/5361181/app/scripts/background/data.ts#L38">scripts/background/data.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/570af9c/app/scripts/background/data.ts#L39">scripts/background/data.ts:39</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -699,7 +699,7 @@
 						<a href="scripts_bg_appdata.html#item_txt" class="tsd-kind-icon">ITEM_<wbr>TXT</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_appdata.html#_version" class="tsd-kind-icon">_VERSION</a>
+						<a href="scripts_bg_appdata.html#version" class="tsd-kind-icon">VERSION</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_appdata.html#adddefaults" class="tsd-kind-icon">add<wbr>Defaults</a>
@@ -714,7 +714,7 @@
 						<a href="scripts_bg_appdata.html#update" class="tsd-kind-icon">update</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_appdata.html#_defaults" class="tsd-kind-icon">_DEFAULTS</a>
+						<a href="scripts_bg_appdata.html#defaults" class="tsd-kind-icon">DEFAULTS</a>
 					</li>
 				</ul>
 			</nav>
