@@ -71,6 +71,11 @@
 					<div class="lead">
 						<p>Manage incoming push messages</p>
 					</div>
+					<dl class="tsd-comment-tags">
+						<dt>remarks</dt>
+						<dd><p>No exports - make sure to import file somewhere</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,12 +86,6 @@
 							<h3>Events</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_receivemsg.html#onwebrequestbefore" class="tsd-kind-icon">on<wbr>Web<wbr>Request<wbr>Before</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="scripts_bg_receivemsg.html#message_wait_millis" class="tsd-kind-icon">MESSAGE_<wbr>WAIT_<wbr>MILLIS</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
@@ -105,13 +104,13 @@
 					<a name="onwebrequestbefore" class="tsd-anchor"></a>
 					<h3>on<wbr>Web<wbr>Request<wbr>Before</h3>
 					<ul class="tsd-signatures tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Web<wbr>Request<wbr>Before<span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebRequestDetails</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Web<wbr>Request<wbr>Before<span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebRequestDetails</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/c10d879/app/scripts/background/receive_msg.ts#L107">scripts/background/receive_msg.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/7341b44/app/scripts/background/receive_msg.ts#L113">scripts/background/receive_msg.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -120,7 +119,8 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>remarks</dt>
-									<dd><p>Capture the Service Worker request and process messages
+									<dd><p>This is a blocking call</p>
+										<p>Capture the fake Service Worker request and process messages
 										<a href="https://goo.gl/4j4RtY" class="external">https://goo.gl/4j4RtY</a></p>
 									</dd>
 								</dl>
@@ -134,31 +134,10 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">object</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>cancel the request</p>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="message_wait_millis" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> MESSAGE_<wbr>WAIT_<wbr>MILLIS</h3>
-					<div class="tsd-signature tsd-kind-icon">MESSAGE_<wbr>WAIT_<wbr>MILLIS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">500</span><span class="tsd-signature-symbol"> =&nbsp;500</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/c10d879/app/scripts/background/receive_msg.ts#L32">scripts/background/receive_msg.ts:32</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Delay time for fcm message processing</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
@@ -173,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/c10d879/app/scripts/background/receive_msg.ts#L39">scripts/background/receive_msg.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/7341b44/app/scripts/background/receive_msg.ts#L40">scripts/background/receive_msg.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,13 +177,13 @@
 					<a name="process" class="tsd-anchor"></a>
 					<h3>process</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">process<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_msgclient.igaemsg.html" class="tsd-signature-type">IGaeMsg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">process<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../interfaces/scripts_bg_msgclient.igaemsg.html" class="tsd-signature-type">IGaeMsg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/c10d879/app/scripts/background/receive_msg.ts#L48">scripts/background/receive_msg.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/Pushy-Clipboard/pushy-chrome-extension/blob/7341b44/app/scripts/background/receive_msg.ts#L49">scripts/background/receive_msg.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -221,7 +200,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -242,9 +221,6 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-event tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_receivemsg.html#onwebrequestbefore" class="tsd-kind-icon">on<wbr>Web<wbr>Request<wbr>Before</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="scripts_bg_receivemsg.html#message_wait_millis" class="tsd-kind-icon">MESSAGE_<wbr>WAIT_<wbr>MILLIS</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="scripts_bg_receivemsg.html#getdevice" class="tsd-kind-icon">get<wbr>Device</a>
