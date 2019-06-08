@@ -1,9 +1,13 @@
 com.weebly.opus1269.clipman.app
 com.weebly.opus1269.clipman.backup
 com.weebly.opus1269.clipman.db
+com.weebly.opus1269.clipman.db.dao
+com.weebly.opus1269.clipman.db.entity
 com.weebly.opus1269.clipman.model
 com.weebly.opus1269.clipman.msg
+com.weebly.opus1269.clipman.repos
 com.weebly.opus1269.clipman.services
+com.weebly.opus1269.clipman.ui
 com.weebly.opus1269.clipman.ui.backup
 com.weebly.opus1269.clipman.ui.base
 com.weebly.opus1269.clipman.ui.clips
@@ -16,3 +20,4 @@ com.weebly.opus1269.clipman.ui.main
 com.weebly.opus1269.clipman.ui.settings
 com.weebly.opus1269.clipman.ui.signin
 com.weebly.opus1269.clipman.ui.views
+com.weebly.opus1269.clipman.viewmodel
